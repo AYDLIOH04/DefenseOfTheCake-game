@@ -1,7 +1,7 @@
 # Defens of the Cake - MonoGame C#
 
 ## Описание
-Игра от 3 лица жанров TowerDefence, Top Down Shooters, Файтинги
+Игра от 3 лица жанров [TowerDefence](https://ru.wikipedia.org/wiki/Tower_Defense), [Top Down Shooters](https://ru.wikipedia.org/wiki/Шутер), Файтинги
 
 Проект ["Defens of the Cake"](https://www.dota2.com/home) - это захватывающая игра, в которой вам предстоит защитить вкусный тортик от нашествия тараканов и мышей. В процессе игры вам придется использовать различные инструменты и оружие, чтобы остановить наступление врагов и защитить торт.
 

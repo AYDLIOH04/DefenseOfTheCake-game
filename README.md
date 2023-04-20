@@ -18,7 +18,7 @@
 
 ## Архитектура
 
-![Архитектура](https://raw.githubusercontent.com/AYDLIOH04/DefenseOfTheCake-game/master/Архитектура.png?token=GHSAT0AAAAAACAUTGBFHXGKTYC6QB7M6USEZCA45UQ)
+![Архитектура](https://psv4.userapi.com/c236331/u306402530/docs/d46/3646263fe7a5/Arkhitektura.png?extra=IrmctvJhQVzJX39tLGDfLYl1Xcg2LN4Oot9O1oshroAM_nAobADXDO-myQTrzNIJpYggzW4r3olTsDr8w90ECeU26QrZ03ZNPVB02TH4quSJxBDVQp66wCBmykbQGZTpEPlTLPWN6GbQL4N8wGiD)
 
 
 ## Техническое задание

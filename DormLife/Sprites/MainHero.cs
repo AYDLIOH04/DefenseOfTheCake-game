@@ -1,4 +1,5 @@
-﻿using DormLife.Models;
+﻿using DormLife.Managers;
+using DormLife.Models;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -14,6 +15,7 @@ namespace DormLife.Sprites
     {
         protected float Speed;
         protected Input Input;
+
         public MainHero(Texture2D texture, Vector2 position, Color color, float speed)
         : base(texture, position, color)
         {
@@ -27,13 +29,14 @@ namespace DormLife.Sprites
             };
         }
 
+
         public override void Update(GameTime gameTime, List<GameObject> sprites, List<Enemy> enemies)
         {
             Move();
 
             foreach (var sprite in sprites)
             {
-                if (sprite == this) continue;
+               if (sprite == this) continue;
                 FindCollision(sprite);
             }
 
@@ -42,14 +45,14 @@ namespace DormLife.Sprites
                 if(FindCollision(enemy)) enemy.IsRemoved = true;
             }
 
-            MoveInWalk();
+            MoveInWall();
 
             Position += Velocity;
 
             Velocity = Vector2.Zero;
         }
 
-        private void MoveInWalk()
+        private void MoveInWall()
         {
             if (Position.X + Velocity.X + _texture.Width >= Game1.Width
              || Position.X + Velocity.X < 0
@@ -62,17 +65,17 @@ namespace DormLife.Sprites
 
         private bool FindCollision(GameObject sprite)
         {
-            if ((this.Velocity.X > 0 && this.IsTouchingLeft(sprite)) ||
-                   (this.Velocity.X < 0 && this.IsTouchingRight(sprite)))
+            if ((Velocity.X > 0 && IsTouchingLeft(sprite)) ||
+                   (Velocity.X < 0 && IsTouchingRight(sprite)))
             {
-                this.Velocity.X = 0;
+                Velocity.X = 0;
                 return true;
             }
 
-            if ((this.Velocity.Y > 0 && this.IsTouchingTop(sprite)) ||
-                (this.Velocity.Y < 0 && this.IsTouchingBottom(sprite)))
+            if ((Velocity.Y > 0 && IsTouchingTop(sprite)) ||
+                (Velocity.Y < 0 && IsTouchingBottom(sprite)))
             {
-                this.Velocity.Y = 0;
+                Velocity.Y = 0;
                 return true;
             }
 

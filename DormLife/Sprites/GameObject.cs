@@ -6,17 +6,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DormLife.Managers;
 
 namespace DormLife.Sprites
 {
     public class GameObject
     {
+
+        protected AnimationManager _animationManager;
+
+        protected Dictionary<string, Animation> _animations;
+
+        protected Vector2 _position;
+
         protected Texture2D _texture;
 
-        protected Vector2 Position;
+
+
+        public Vector2 Position
+        {
+            get { return _position; }
+            set
+            {
+                _position = value;
+
+                if (_animationManager != null)
+                    _animationManager.Position = _position;
+            }
+        }
+
         protected Vector2 Velocity;
         protected Color Color = Color.White;
-        
+
 
         public Rectangle Rectangle
         {
@@ -26,10 +47,18 @@ namespace DormLife.Sprites
             }
         }
 
+        public GameObject(Dictionary<string, Animation> animations, Vector2 position, Color color)
+        {
+            _animations = animations;
+            _animationManager = new AnimationManager(_animations.First().Value);
+            Position = new Vector2(position.X - 300, position.Y - 300);
+            Color = color;
+        }
+
         public GameObject(Texture2D texture, Vector2 position, Color color)
         {
             _texture = texture;
-            Position = new Vector2(position.X - texture.Width/2, position.Y - texture.Height/2);
+            Position = new Vector2(position.X - texture.Width / 2, position.Y - texture.Height / 2);
             Color = color;
         }
 
@@ -38,10 +67,26 @@ namespace DormLife.Sprites
 
         }
 
+
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(_texture, Position, Color);
         }
+
+
+        protected virtual void SetAnimations()
+        {
+            if (Velocity.X > 0)
+                _animationManager.Play(_animations["WalkRight"]);
+            else if (Velocity.X < 0)
+                _animationManager.Play(_animations["WalkLeft"]);
+            else if (Velocity.Y > 0)
+                _animationManager.Play(_animations["WalkDown"]);
+            else if (Velocity.Y < 0)
+                _animationManager.Play(_animations["WalkUp"]);
+            else _animationManager.Stop();
+        }
+
 
         protected bool IsTouchingLeft(GameObject sprite)
         {

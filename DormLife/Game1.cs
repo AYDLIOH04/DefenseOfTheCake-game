@@ -51,43 +51,43 @@ namespace DormLife
             Width = _graphics.PreferredBackBufferWidth;
             Height = _graphics.PreferredBackBufferHeight;
 
-            var animations = new Dictionary<string, Animation>()
-            {
-                { "WalkUp", new Animation(Content.Load<Texture2D>("Player/WalkingUp"), 3) },
-                { "WalkDown", new Animation(Content.Load<Texture2D>("Player/WalkingDown"), 3) },
-                { "WalkLeft", new Animation(Content.Load<Texture2D>("Player/WalkingLeft"), 3) },
-                { "WalkRight", new Animation(Content.Load<Texture2D>("Player/WalkingRight"), 3) },
-            };
 
-            var playerTexture = Content.Load<Texture2D>("Block");
+            var playerTexture = Content.Load<Texture2D>("sprites/player");
+            var cakeTexture = Content.Load<Texture2D>("sprites/cake");
+            var enemyTexture = Content.Load<Texture2D>("sprites/monster");
+            var gorizontalWallTexture = Content.Load<Texture2D>("walls/gorizontal_wall");
+            var verticalWallTexture = Content.Load<Texture2D>("walls/vertical_wall");
 
-            hero = new MainHero(playerTexture, new Vector2(600, 300), Color.Blue, 7);
-            cake = new Cake(playerTexture, new Vector2(Width / 2, Height / 2), Color.Green);
+
+
+
+
+            hero = new MainHero(playerTexture, new Vector2(560, 300), 7);
+            cake = new Cake(cakeTexture, new Vector2(Width / 2, Height / 2 - 50));
             walls = new List<Wall>{
-                new Wall(playerTexture, new Vector2(250, 100), Color.Gray),
-                new Wall(playerTexture, new Vector2(300, 100), Color.Gray),
-                new Wall(playerTexture, new Vector2(350, 100), Color.Gray),
-                new Wall(playerTexture, new Vector2(400, 100), Color.Gray),
-                new Wall(playerTexture, new Vector2(450, 100), Color.Gray),
+                new Wall(gorizontalWallTexture, new Vector2(250, 100)),
+                new Wall(gorizontalWallTexture, new Vector2(300, 100)),
+                new Wall(gorizontalWallTexture, new Vector2(350, 100)),
+                new Wall(gorizontalWallTexture, new Vector2(400, 100)),
+                new Wall(gorizontalWallTexture, new Vector2(450, 100)),
 
 
 
-                new Wall(playerTexture, new Vector2(Width / 2 + 70, Height / 2 + 250), Color.Gray),
-                new Wall(playerTexture, new Vector2(Width / 2 + 70, Height / 2 + 200), Color.Gray),
-                new Wall(playerTexture, new Vector2(Width / 2 + 70, Height / 2 + 150), Color.Gray),
-                new Wall(playerTexture, new Vector2(Width / 2 + 70, Height / 2 + 110), Color.Gray),
-                new Wall(playerTexture, new Vector2(Width / 2 + 120, Height / 2 + 110), Color.Gray),
-                new Wall(playerTexture, new Vector2(Width / 2 + 170, Height / 2 + 110), Color.Gray),
-                new Wall(playerTexture, new Vector2(Width / 2 + 220, Height / 2 + 110), Color.Gray),
-                new Wall(playerTexture, new Vector2(Width / 2 + 270, Height / 2 + 110), Color.Gray),
-                new Wall(playerTexture, new Vector2(Width / 2 + 320, Height / 2 + 110), Color.Gray),
-                new Wall(playerTexture, new Vector2(Width / 2 + 320, Height / 2 + 80), Color.Gray),
-                new Wall(playerTexture, new Vector2(Width / 2 + 320, Height / 2 + 30), Color.Gray),
-                new Wall(playerTexture, new Vector2(Width / 2 + 320, Height / 2 + -20), Color.Gray),
-                new Wall(playerTexture, new Vector2(Width / 2 + 320, Height / 2 + -70), Color.Gray),
+                new Wall(verticalWallTexture, new Vector2(Width / 2 + 30, Height / 2 + 210)),
+                new Wall(verticalWallTexture, new Vector2(Width / 2 + 30, Height / 2 + 160)),
+
+                new Wall(gorizontalWallTexture, new Vector2(Width / 2 + 70, Height / 2 + 110)),
+                new Wall(gorizontalWallTexture, new Vector2(Width / 2 + 120, Height / 2 + 110)),
+                new Wall(gorizontalWallTexture, new Vector2(Width / 2 + 170, Height / 2 + 110)),
+                new Wall(gorizontalWallTexture, new Vector2(Width / 2 + 220, Height / 2 + 110)),
+                new Wall(gorizontalWallTexture, new Vector2(Width / 2 + 270, Height / 2 + 110)),
+                new Wall(gorizontalWallTexture, new Vector2(Width / 2 + 320, Height / 2 + 110)),
+
+                new Wall(verticalWallTexture, new Vector2(Width / 2 + 360, Height / 2 + 55)),
+                new Wall(verticalWallTexture, new Vector2(Width / 2 + 360, Height / 2)),
             };
 
-            enemies = new Enemies(playerTexture, 5);
+            enemies = new Enemies(enemyTexture, 5);
 
             sprites.Add(cake);
             sprites.AddRange(walls);

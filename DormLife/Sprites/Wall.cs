@@ -10,8 +10,8 @@ namespace DormLife.Sprites
 {
     public class Wall : GameObject
     {
-        public Wall(Texture2D texture, Vector2 position, Color color)
-        : base(texture, position, color)
+        public Wall(Texture2D texture, Vector2 position)
+        : base(texture, position)
         {
         }
 

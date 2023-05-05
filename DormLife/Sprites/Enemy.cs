@@ -21,7 +21,7 @@ namespace DormLife.Sprites
             texture = pt;
             list = new List<Enemy>();
             for (int i = 0; i < MaxCount; i++)
-                list.Add(new Enemy(texture, Enemy.GeneratePositionEnemy(pt), Color.Red, 2));
+                list.Add(new Enemy(texture, Enemy.GeneratePositionEnemy(pt), 2));
         }
 
         public void Update(GameTime gameTime)
@@ -34,7 +34,7 @@ namespace DormLife.Sprites
             if (Count == 0)
             {
                 for (int i = 0; i < MaxCount; i++)
-                    list.Add(new Enemy(texture, Enemy.GeneratePositionEnemy(texture), Color.Red, 2));
+                    list.Add(new Enemy(texture, Enemy.GeneratePositionEnemy(texture), 2));
             }
         }
 
@@ -55,8 +55,8 @@ namespace DormLife.Sprites
         protected float Speed;
         public bool IsRemoved;
 
-        public Enemy(Texture2D texture, Vector2 position, Color color, float speed)
-        : base(texture, position, color)
+        public Enemy(Texture2D texture, Vector2 position, float speed)
+        : base(texture, position)
         {
             Speed = speed;
         }

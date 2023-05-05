@@ -47,19 +47,17 @@ namespace DormLife.Sprites
             }
         }
 
-        public GameObject(Dictionary<string, Animation> animations, Vector2 position, Color color)
+        public GameObject(Dictionary<string, Animation> animations, Vector2 position)
         {
             _animations = animations;
             _animationManager = new AnimationManager(_animations.First().Value);
             Position = new Vector2(position.X - 300, position.Y - 300);
-            Color = color;
         }
 
-        public GameObject(Texture2D texture, Vector2 position, Color color)
+        public GameObject(Texture2D texture, Vector2 position)
         {
             _texture = texture;
             Position = new Vector2(position.X - texture.Width / 2, position.Y - texture.Height / 2);
-            Color = color;
         }
 
         public virtual void Update(GameTime gameTime, List<GameObject> sprites, List<Enemy> enemies)

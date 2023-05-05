@@ -12,8 +12,8 @@ namespace DormLife.Sprites
     {
 
         public int HP;
-        public Cake(Texture2D texture, Vector2 position, Color color)
-        : base(texture, position, color)
+        public Cake(Texture2D texture, Vector2 position)
+        : base(texture, position)
         {
             HP = 1000;
         }

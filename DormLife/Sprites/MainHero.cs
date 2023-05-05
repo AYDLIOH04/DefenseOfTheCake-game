@@ -16,8 +16,8 @@ namespace DormLife.Sprites
         protected float Speed;
         protected Input Input;
 
-        public MainHero(Texture2D texture, Vector2 position, Color color, float speed)
-        : base(texture, position, color)
+        public MainHero(Texture2D texture, Vector2 position, float speed)
+        : base(texture, position)
         {
             Speed = speed;
             Input = new Input()

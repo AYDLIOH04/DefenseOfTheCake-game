@@ -1,4 +1,5 @@
-﻿using DormLife.Managers;
+﻿using DormLife.GameObjects;
+using DormLife.Managers;
 using DormLife.Models;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -11,88 +12,53 @@ using System.Threading.Tasks;
 
 namespace DormLife.Sprites
 {
-    public class MainHero : GameObject
+    public class MainHero : Sprite
     {
-        protected float Speed;
-        protected Input Input;
-
-        public MainHero(Texture2D texture, Vector2 position, float speed)
-        : base(texture, position)
+        public MainHero(Texture2D texture, Vector2 position) : base(texture, position)
         {
-            Speed = speed;
-            Input = new Input()
-            {
-                Up = Keys.W,
-                Left = Keys.A,
-                Down = Keys.S,
-                Right = Keys.D
-            };
+            speed = 300;
         }
 
-
-        public override void Update(GameTime gameTime, List<GameObject> sprites, List<Enemy> enemies)
+        private void Fire()
         {
-            Move();
-
-            foreach (var sprite in sprites)
+            if (InputManager.MouseClicked)
             {
-               if (sprite == this) continue;
-                FindCollision(sprite);
+                ProjectileData pd = new()
+                {
+                    Position = position,
+                    Rotation = rotation,
+                    Lifespan = 2,
+                    Speed = 600,
+                };
+                ProjectileManager.AddProjectile(pd);
             }
-
-            foreach (var enemy in enemies)
-            {
-                if(FindCollision(enemy)) enemy.IsRemoved = true;
-            }
-
-            MoveInWall();
-
-            Position += Velocity;
-
-            Velocity = Vector2.Zero;
-        }
-
-        private void MoveInWall()
-        {
-            if (Position.X + Velocity.X + _texture.Width >= Game1.Width
-             || Position.X + Velocity.X < 0
-             || Position.Y + Velocity.Y + _texture.Height >= Game1.Height
-             || Position.Y + Velocity.Y < 0)
-            {
-                Velocity = Vector2.Zero;
-            }
-        }
-
-        private bool FindCollision(GameObject sprite)
-        {
-            if ((Velocity.X > 0 && IsTouchingLeft(sprite)) ||
-                   (Velocity.X < 0 && IsTouchingRight(sprite)))
-            {
-                Velocity.X = 0;
-                return true;
-            }
-
-            if ((Velocity.Y > 0 && IsTouchingTop(sprite)) ||
-                (Velocity.Y < 0 && IsTouchingBottom(sprite)))
-            {
-                Velocity.Y = 0;
-                return true;
-            }
-
-            return false;
         }
 
         private void Move()
         {
-            if (Keyboard.GetState().IsKeyDown(Input.Left))
-                Velocity.X = -Speed;
-            else if (Keyboard.GetState().IsKeyDown(Input.Right))
-                Velocity.X = Speed;
+            if (InputManager.Direction != Vector2.Zero)
+            {
+                var dir = Vector2.Normalize(InputManager.Direction);
+                position = new(
+                        MathHelper.Clamp(position.X + (dir.X * speed * Globals.TotalSeconds), 0, Globals.Bounds.X),
+                        MathHelper.Clamp(position.Y + (dir.Y * speed * Globals.TotalSeconds), 0, Globals.Bounds.Y)
+                    );
+            }
 
-            if (Keyboard.GetState().IsKeyDown(Input.Up))
-                Velocity.Y = -Speed;
-            else if (Keyboard.GetState().IsKeyDown(Input.Down))
-                Velocity.Y = Speed;
+            var toMouse = InputManager.MousePosition - position;
+            rotation = (float)Math.Atan2(toMouse.Y, toMouse.X);
+        }
+
+        private void MoveInWalk()
+        {
+            //TODO
+        }
+
+        public void Update()
+        {
+            MoveInWalk();
+            Move();
+            Fire();
         }
     }
 }

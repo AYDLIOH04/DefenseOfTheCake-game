@@ -1,127 +1,67 @@
-﻿using DormLife.Models;
-using DormLife.Sprites;
-using Microsoft.Xna.Framework;
+﻿using DormLife.Managers;
+using DormLife;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
+using Microsoft.Xna.Framework;
+using DormLife.GameObjects;
 using System.Collections.Generic;
-using System.Linq;
 
-namespace DormLife
+namespace DormLife;
+
+public class Game1 : Game
 {
-    public class Game1 : Game
+    private readonly GraphicsDeviceManager _graphics;
+    private SpriteBatch _spriteBatch;
+    private GameManager _gameManager;
+
+
+
+    public Game1()
     {
-        private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
+        _graphics = new GraphicsDeviceManager(this);
+        Content.RootDirectory = "Content";
+        IsMouseVisible = true;
+    }
 
-        public static int Width;
-        public static int Height;
+    protected override void Initialize()
+    {
 
+        Globals.Bounds = new(1536, 1024);
+        _graphics.PreferredBackBufferWidth = Globals.Bounds.X;
+        _graphics.PreferredBackBufferHeight = Globals.Bounds.Y;
+        _graphics.ApplyChanges();
 
-        private MainHero hero;
-        private Cake cake;
-        private List<Wall> walls;
+        Globals.Content = Content;
+        _gameManager = new();
 
-        private Enemies enemies;
+        base.Initialize();
+    }
 
+    protected override void LoadContent()
+    {
+        _spriteBatch = new SpriteBatch(GraphicsDevice);
+        Globals.SpriteBatch = _spriteBatch;
+    }
 
-        private List<GameObject> sprites;
+    protected override void Update(GameTime gameTime)
+    {
+        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            Exit();
 
-        public Game1()
-        {
-            _graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
-            IsMouseVisible = true;
-        }
+        Globals.Update(gameTime);
+        _gameManager.Update();
 
-        protected override void Initialize()
-        {
-            _graphics.PreferredBackBufferWidth = 1280;
-            _graphics.PreferredBackBufferHeight = 720;
-            _graphics.ApplyChanges();
+        base.Update(gameTime);
+    }
 
-            base.Initialize();
-        }
+    protected override void Draw(GameTime gameTime)
+    {
+        GraphicsDevice.Clear(Color.DarkGray);
 
-        protected override void LoadContent()
-        {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
-            sprites = new List<GameObject>();
+        _spriteBatch.Begin();
+        _gameManager.Draw();
+        _spriteBatch.End();
 
-            Width = _graphics.PreferredBackBufferWidth;
-            Height = _graphics.PreferredBackBufferHeight;
-
-
-            var playerTexture = Content.Load<Texture2D>("sprites/player");
-            var cakeTexture = Content.Load<Texture2D>("sprites/cake");
-            var enemyTexture = Content.Load<Texture2D>("sprites/monster");
-            var gorizontalWallTexture = Content.Load<Texture2D>("walls/gorizontal_wall");
-            var verticalWallTexture = Content.Load<Texture2D>("walls/vertical_wall");
-
-
-
-
-
-            hero = new MainHero(playerTexture, new Vector2(560, 300), 7);
-            cake = new Cake(cakeTexture, new Vector2(Width / 2, Height / 2 - 50));
-            walls = new List<Wall>{
-                new Wall(gorizontalWallTexture, new Vector2(250, 100)),
-                new Wall(gorizontalWallTexture, new Vector2(300, 100)),
-                new Wall(gorizontalWallTexture, new Vector2(350, 100)),
-                new Wall(gorizontalWallTexture, new Vector2(400, 100)),
-                new Wall(gorizontalWallTexture, new Vector2(450, 100)),
-
-
-
-                new Wall(verticalWallTexture, new Vector2(Width / 2 + 30, Height / 2 + 210)),
-                new Wall(verticalWallTexture, new Vector2(Width / 2 + 30, Height / 2 + 160)),
-
-                new Wall(gorizontalWallTexture, new Vector2(Width / 2 + 70, Height / 2 + 110)),
-                new Wall(gorizontalWallTexture, new Vector2(Width / 2 + 120, Height / 2 + 110)),
-                new Wall(gorizontalWallTexture, new Vector2(Width / 2 + 170, Height / 2 + 110)),
-                new Wall(gorizontalWallTexture, new Vector2(Width / 2 + 220, Height / 2 + 110)),
-                new Wall(gorizontalWallTexture, new Vector2(Width / 2 + 270, Height / 2 + 110)),
-                new Wall(gorizontalWallTexture, new Vector2(Width / 2 + 320, Height / 2 + 110)),
-
-                new Wall(verticalWallTexture, new Vector2(Width / 2 + 360, Height / 2 + 55)),
-                new Wall(verticalWallTexture, new Vector2(Width / 2 + 360, Height / 2)),
-            };
-
-            enemies = new Enemies(enemyTexture, 5);
-
-            sprites.Add(cake);
-            sprites.AddRange(walls);
-        }
-
-        protected override void Update(GameTime gameTime)
-        {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
-            hero.Update(gameTime, sprites, enemies.list);
-            cake.Update(gameTime);
-            foreach (var wall in walls)
-                wall.Update(gameTime);
-            enemies.Update(gameTime);
-
-            base.Update(gameTime);
-        }
-
-        
-
-        protected override void Draw(GameTime gameTime)
-        {
-            GraphicsDevice.Clear(Color.White);
-
-            _spriteBatch.Begin();
-            hero.Draw(_spriteBatch);
-            cake.Draw(_spriteBatch);
-            foreach (var wall in walls)
-                wall.Draw(_spriteBatch);
-            enemies.Draw(_spriteBatch);
-            _spriteBatch.End();
-
-            base.Draw(gameTime);
-        }
+        base.Draw(gameTime);
     }
 }

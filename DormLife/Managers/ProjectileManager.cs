@@ -31,7 +31,7 @@ namespace DormLife.Managers
             {
                 p.Update();
 
-                if ((p.position - cake.position).Length() < 40)
+                if ((p.position - cake.position).Length() < 30)
                 {
                     p.Destroy();
                 }

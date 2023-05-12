@@ -26,16 +26,40 @@ namespace DormLife.Sprites
             HP -= dmg;
         }
 
-        public void Update(Cake cake)
+        public void Update(Cake cake, List<Wall> walls, List<Enemy> enemies)
         {
-            var toPlayer = cake.position - position;
-            rotation = (float)Math.Atan2(toPlayer.X, toPlayer.Y);
 
-            if (toPlayer.Length() > 4)
+            foreach (Enemy otherEnemy in enemies)
             {
-                var dir = Vector2.Normalize(toPlayer);
-                position += dir * speed * Globals.TotalSeconds;
+                if (otherEnemy != this && CheckCollision(otherEnemy))
+                {
+                    Vector2 awayFromOtherEnemy = Vector2.Normalize(position - otherEnemy.position);
+                    position += awayFromOtherEnemy * speed * Globals.TotalSeconds;
+                }
             }
+
+            foreach (var wall in walls)
+            {
+                if ((position - wall.position).Length() < 50)
+                {
+                    var toPlayer = cake.position - position;
+                    rotation = (float)Math.Atan2(toPlayer.Y, toPlayer.X);
+
+
+                    var obstacleAvoidanceDir = new Vector2(-toPlayer.Y, toPlayer.X);
+                    obstacleAvoidanceDir.Normalize();
+
+                    position += obstacleAvoidanceDir * speed * Globals.TotalSeconds;
+                    return; 
+                }
+            }
+
+            var toCake = cake.position - position;
+            rotation = (float)Math.Atan2(toCake.Y, toCake.X);
+
+            toCake.Normalize();
+            position += toCake * speed * Globals.TotalSeconds;
         }
+
     }
 }

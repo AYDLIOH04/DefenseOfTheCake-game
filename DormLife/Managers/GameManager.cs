@@ -14,7 +14,6 @@ namespace DormLife.Managers
         private readonly MainHero _player;
 
         private Cake _cake;
-        private List<Wall> _wallList;
 
         public GameManager()
         {
@@ -30,9 +29,9 @@ namespace DormLife.Managers
         public void Update()
         {
             InputManager.Update();
-            _player.Update();
+            _player.Update(WallManager.Walls);
             ProjectileManager.Update(EnemyManager.Enemies, WallManager.Walls, _cake);
-            EnemyManager.Update(_cake);
+            EnemyManager.Update(_cake, WallManager.Walls);
         }
 
         public void Draw()

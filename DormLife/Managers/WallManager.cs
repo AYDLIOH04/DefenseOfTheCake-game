@@ -100,6 +100,11 @@ namespace DormLife.Managers
             for (int i = 0; i < 12; i++)
                 AddWall();
         }
+        public static void DeleteWalls()
+        {
+            Walls.Clear();
+        }
+
 
         public static void Draw()
         {

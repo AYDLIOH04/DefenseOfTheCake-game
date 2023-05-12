@@ -26,7 +26,7 @@ public class Game1 : Game
     protected override void Initialize()
     {
 
-        Globals.Bounds = new(1536, 1024);
+        Globals.Bounds = new(1920, 1024);
         _graphics.PreferredBackBufferWidth = Globals.Bounds.X;
         _graphics.PreferredBackBufferHeight = Globals.Bounds.Y;
         _graphics.ApplyChanges();
@@ -56,7 +56,7 @@ public class Game1 : Game
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(Color.DarkGray);
+        GraphicsDevice.Clear(Color.RosyBrown);
 
         _spriteBatch.Begin();
         _gameManager.Draw();

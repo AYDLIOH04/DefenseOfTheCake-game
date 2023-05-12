@@ -40,8 +40,8 @@ namespace DormLife.Sprites
             {
                 var dir = Vector2.Normalize(InputManager.Direction);
                 position = new(
-                        MathHelper.Clamp(position.X + (dir.X * speed * Globals.TotalSeconds), 0, Globals.Bounds.X),
-                        MathHelper.Clamp(position.Y + (dir.Y * speed * Globals.TotalSeconds), 0, Globals.Bounds.Y)
+                        MathHelper.Clamp(position.X + (dir.X * speed * Globals.TotalSeconds), 30, Globals.Bounds.X - 30),
+                        MathHelper.Clamp(position.Y + (dir.Y * speed * Globals.TotalSeconds), 30, Globals.Bounds.Y - 30)
                     );
             }
 
@@ -49,14 +49,18 @@ namespace DormLife.Sprites
             rotation = (float)Math.Atan2(toMouse.Y, toMouse.X);
         }
 
-        private void MoveInWalk()
+        private void MoveInWalk(List<Wall> walls)
         {
-            //TODO
+            
         }
 
-        public void Update()
+
+
+
+
+        public void Update(List<Wall> walls)
         {
-            MoveInWalk();
+            MoveInWalk(walls);
             Move();
             Fire();
         }

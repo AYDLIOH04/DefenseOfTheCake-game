@@ -54,18 +54,51 @@ namespace DormLife.Managers
             Enemies.Add(new(_texture, RandomPosition()));
         }
 
-        private static void GenerateWaveEnemy()
+        public static void GenerateWave()
         {
-            for (int i = 1; i <= Math.Min(10, _spawnCount); i++)
+            WallManager.DeleteWalls();
+            if (_spawnCount > 5)
+            {
+                WallManager.GenerateWalls();
+                WallManager.GenerateWalls();
+            }
+            else
+            {
+                WallManager.GenerateWalls();
+            }
+
+            for (int i = 1; i <= _spawnCount; i++)
             {
                 AddEnemy();
             }
 
-            _spawnCount++;
+            if (_spawnCount % 10 == 0)
+            {
+                // TODO Кибербосс
+            }
+
+            if (_spawnCount % 5 == 0)
+            {
+                // TODO здоровья тортику
+            }
+
+            _spawnCount += 2;
         }
 
-        public static void Update(Cake cake)
+        public static void Update(Cake cake, List<Wall> walls)
         {
+            /*
+            _spawnTime -= Globals.TotalSeconds;
+            while (_spawnTime <= 0)
+            {
+                _spawnTime += _spawnCooldown;
+                
+            }
+            */
+
+            if (Enemies.Count() == 0)
+                GenerateWave();
+
             foreach (var enemy in Enemies)
             {
                 if ((enemy.position - cake.position).Length() < 30)
@@ -73,22 +106,9 @@ namespace DormLife.Managers
                     enemy.TakeDamage(100);
                     cake.TakeDamage(5);
                 }
-            }
 
-            _spawnTime -= Globals.TotalSeconds;
-            while (_spawnTime <= 0)
-            {
-                _spawnTime += _spawnCooldown;
-                if (Enemies.Count() == 0)
-                    GenerateWaveEnemy();
-            }
+                enemy.Update(cake, walls, Enemies);
 
-            
-            
-
-            foreach (var enemy in Enemies)
-            {
-                enemy.Update(cake);
             }
 
             Enemies.RemoveAll((enemy) => enemy.HP <= 0);

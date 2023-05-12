@@ -39,38 +39,9 @@ namespace DormLife.Sprites
             Globals.SpriteBatch.Draw(texture, position, null, Color.White, rotation, origin, 1, SpriteEffects.None, 0);
         }
 
-        /*
-        protected bool IsTouchingLeft(GameObject sprite)
+        public bool CheckCollision(Sprite otherSprite)
         {
-            return this.Rectangle.Right > sprite.Rectangle.Left &&
-              this.Rectangle.Left < sprite.Rectangle.Left &&
-              this.Rectangle.Bottom > sprite.Rectangle.Top &&
-              this.Rectangle.Top < sprite.Rectangle.Bottom;
+            return Rectangle.Intersects(otherSprite.Rectangle);
         }
-
-        protected bool IsTouchingRight(GameObject sprite)
-        {
-            return this.Rectangle.Left < sprite.Rectangle.Right &&
-              this.Rectangle.Right > sprite.Rectangle.Right &&
-              this.Rectangle.Bottom > sprite.Rectangle.Top &&
-              this.Rectangle.Top < sprite.Rectangle.Bottom;
-        }
-
-        protected bool IsTouchingTop(GameObject sprite)
-        {
-            return this.Rectangle.Bottom > sprite.Rectangle.Top &&
-              this.Rectangle.Top < sprite.Rectangle.Top &&
-              this.Rectangle.Right > sprite.Rectangle.Left &&
-              this.Rectangle.Left < sprite.Rectangle.Right;
-        }
-
-        protected bool IsTouchingBottom(GameObject sprite)
-        {
-            return this.Rectangle.Top < sprite.Rectangle.Bottom &&
-              this.Rectangle.Bottom > sprite.Rectangle.Bottom &&
-              this.Rectangle.Right > sprite.Rectangle.Left &&
-              this.Rectangle.Left < sprite.Rectangle.Right;
-        }
-        */
     }
 }

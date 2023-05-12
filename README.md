@@ -18,10 +18,6 @@
 * Ловушки - у пользователя будет возможность установить ловушки.
 * Прокачка и покупка оружия за игровую валюту "R"
 
-## Архитектура
-
-![Архитектура](https://psv4.userapi.com/c236331/u306402530/docs/d46/3646263fe7a5/Arkhitektura.png?extra=IrmctvJhQVzJX39tLGDfLYl1Xcg2LN4Oot9O1oshroAM_nAobADXDO-myQTrzNIJpYggzW4r3olTsDr8w90ECeU26QrZ03ZNPVB02TH4quSJxBDVQp66wCBmykbQGZTpEPlTLPWN6GbQL4N8wGiD)
-
 
 ## Техническое задание
 * Есть карта, в центре тортик.

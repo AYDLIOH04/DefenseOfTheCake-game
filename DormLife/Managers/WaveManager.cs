@@ -25,6 +25,7 @@ namespace DormLife.Managers
 
         private static void WavesGenerator()
         {
+            ProjectileManager.DeleteTiles();
             WallManager.DeleteWalls();
 
 
@@ -41,6 +42,7 @@ namespace DormLife.Managers
                 FirstWavesGenerator();
             }
 
+            HardEnemyGenerator();
             AdditionalObjectsGenerator();
             EnemyGenerator();
         }
@@ -53,13 +55,19 @@ namespace DormLife.Managers
         private static void MoreFiveWavesGenerator()
         {
             for (int _ = 1; _ <= 2; _++)
-                WallManager.GenerateWalls();
+                WallManager.GenerateWalls(); 
         }
 
         private static void MoreTenWavesGenerator()
         {
             for (int _ = 1; _ <= 3; _++)
                 WallManager.GenerateWalls();
+        }
+
+        private static void HardEnemyGenerator()
+        {
+            for (int _ = 1; _ <= Math.Floor(_waveLevel / 3d); _++)
+                    EnemyManager.AddHardEnemy();
         }
 
         private static void EnemyGenerator()
@@ -70,12 +78,8 @@ namespace DormLife.Managers
 
         private static void AdditionalObjectsGenerator()
         {
-            if (_waveLevel % 10 == 0)
-            {
-                // TODO Кибербосс
-            }
 
-            if (_waveLevel % 5 == 0)
+            if (_waveLevel % 3 == 0)
             {
                 // TODO здоровья тортику
                 // Буду генерировать рандомную позицию для ботла с HP

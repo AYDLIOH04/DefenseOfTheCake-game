@@ -13,7 +13,9 @@ namespace DormLife.Managers
     public class EnemyManager
     {
         public static List<Enemy> Enemies { get; } = new();
-        private static Texture2D _texture;
+        private static Texture2D _enemyTexture;
+        private static Texture2D _hardEnemyTexture;
+
         private static float _spawnCooldown;
         private static float _spawnTime;
         private static Random _random;
@@ -21,11 +23,12 @@ namespace DormLife.Managers
 
         public static void Init()
         {
-            _texture = Globals.Content.Load<Texture2D>("sprites/monster");
+            _enemyTexture = Globals.Content.Load<Texture2D>("sprites/monster");
+            _hardEnemyTexture = Globals.Content.Load<Texture2D>("sprites/hardmonster");
             _spawnCooldown = 2f;
             _spawnTime = _spawnCooldown;
             _random = new();
-            _padding = _texture.Width / 2;
+            _padding = _enemyTexture.Width / 2;
         }
 
         private static Vector2 RandomPosition()
@@ -50,7 +53,12 @@ namespace DormLife.Managers
 
         public static void AddEnemy()
         {
-            Enemies.Add(new(_texture, RandomPosition()));
+            Enemies.Add(new(_enemyTexture, RandomPosition()));
+        }
+
+        public static void AddHardEnemy()
+        {
+            Enemies.Add(new(_hardEnemyTexture, RandomPosition(), 5, 20));
         }
 
         public static void Update(Cake cake, List<Wall> walls)
@@ -72,7 +80,7 @@ namespace DormLife.Managers
                 if ((enemy.position - cake.position).Length() < 30)
                 {
                     enemy.TakeDamage(100);
-                    cake.TakeDamage(5);
+                    cake.TakeDamage(enemy.Damage);
                 }
 
                 enemy.Update(cake, walls, Enemies);

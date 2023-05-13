@@ -61,6 +61,11 @@ namespace DormLife.Managers
             Projectiles.RemoveAll((p) => p.Lifespan <= 0);
         }
 
+        public static void DeleteTiles()
+        {
+            Projectiles.Clear();
+        }
+
         public static void Draw()
         {
             foreach (var p in Projectiles)

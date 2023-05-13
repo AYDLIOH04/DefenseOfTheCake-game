@@ -14,11 +14,13 @@ namespace DormLife.Sprites
     public class Enemy : Sprite
     {
         public int HP { get; private set; }
+        public int Damage;
 
-        public Enemy(Texture2D texture, Vector2 position) : base(texture, position)
+        public Enemy(Texture2D texture, Vector2 position, int hp = 1, int damage = 5) : base(texture, position)
         {
             speed = 100;
-            HP = 1;
+            HP = hp;
+            Damage = damage;
         }
 
         public void TakeDamage(int dmg)

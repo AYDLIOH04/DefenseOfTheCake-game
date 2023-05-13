@@ -16,7 +16,6 @@ namespace DormLife.Managers
         private static Texture2D _texture;
         private static float _spawnCooldown;
         private static float _spawnTime;
-        private static int _spawnCount = 1;
         private static Random _random;
         private static int _padding;
 
@@ -54,39 +53,11 @@ namespace DormLife.Managers
             Enemies.Add(new(_texture, RandomPosition()));
         }
 
-        public static void GenerateWave()
-        {
-            WallManager.DeleteWalls();
-            if (_spawnCount > 5)
-            {
-                WallManager.GenerateWalls();
-                WallManager.GenerateWalls();
-            }
-            else
-            {
-                WallManager.GenerateWalls();
-            }
-
-            for (int i = 1; i <= _spawnCount; i++)
-            {
-                AddEnemy();
-            }
-
-            if (_spawnCount % 10 == 0)
-            {
-                // TODO Кибербосс
-            }
-
-            if (_spawnCount % 5 == 0)
-            {
-                // TODO здоровья тортику
-            }
-
-            _spawnCount += 2;
-        }
-
         public static void Update(Cake cake, List<Wall> walls)
         {
+            if (Enemies.Count() == 0)
+                WaveManager.GenerateWave();
+
             /*
             _spawnTime -= Globals.TotalSeconds;
             while (_spawnTime <= 0)
@@ -95,9 +66,6 @@ namespace DormLife.Managers
                 
             }
             */
-
-            if (Enemies.Count() == 0)
-                GenerateWave();
 
             foreach (var enemy in Enemies)
             {

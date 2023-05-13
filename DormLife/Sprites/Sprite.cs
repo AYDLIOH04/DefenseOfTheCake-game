@@ -22,7 +22,7 @@ namespace DormLife.Sprites
         {
             get
             {
-                return new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
+                return new Rectangle((int)position.X - texture.Width / 2, (int)position.Y - texture.Height / 2, texture.Width, texture.Height);
             }
         }
 

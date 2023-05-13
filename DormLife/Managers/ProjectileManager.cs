@@ -38,10 +38,11 @@ namespace DormLife.Managers
 
                 foreach (var wall in walls)
                 {
-                    if ((p.position - wall.position).Length() < 40)
+                    if (p.CheckCollision(wall))
                     {
                         p.Destroy();
-                    } 
+
+                    }
                 } 
 
                 foreach (var enemy in enemies)

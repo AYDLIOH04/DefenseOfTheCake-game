@@ -51,12 +51,8 @@ namespace DormLife.Sprites
 
         private void MoveInWalk(List<Wall> walls)
         {
-            
+            //  Спасите помогите! Зачем я использую менеджеры?... Чтобы страдать
         }
-
-
-
-
 
         public void Update(List<Wall> walls)
         {

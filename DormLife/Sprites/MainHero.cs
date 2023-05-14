@@ -14,10 +14,8 @@ namespace DormLife.Sprites
 {
     public class MainHero : Sprite
     {
-        public MainHero(Texture2D texture, Vector2 position) : base(texture, position)
-        {
-            speed = 300;
-        }
+        public MainHero(Texture2D texture, Vector2 position, float speed) : base(texture, position, speed)
+        { }
 
         private void Fire()
         {

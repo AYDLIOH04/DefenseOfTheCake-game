@@ -45,8 +45,8 @@ namespace DormLife.GameObjects
             DamageTrigger();
         }
 
-        public Cake(Texture2D texture, Vector2 position)
-        : base(texture, position)
+        public Cake(Texture2D texture, Vector2 position, float speed = 0)
+        : base(texture, position, speed)
         {
             HP = 100;
         }

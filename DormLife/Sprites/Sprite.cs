@@ -26,8 +26,9 @@ namespace DormLife.Sprites
             }
         }
 
-        public Sprite(Texture2D texture, Vector2 position)
+        public Sprite(Texture2D texture, Vector2 position, float speed)
         {
+            this.speed = speed;
             this.texture = texture;
             this.origin = new Vector2(texture.Width / 2, texture.Height / 2);
             this.position = new Vector2(position.X - texture.Width / 2, position.Y - texture.Height / 2);

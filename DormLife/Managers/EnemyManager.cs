@@ -12,7 +12,7 @@ namespace DormLife.Managers
 {
     public class EnemyManager
     {
-        public static List<Enemy> Enemies { get; } = new();
+        public static List<Enemy> Enemies { get; private set; }
         private static Texture2D _enemyTexture;
         private static Texture2D _hardEnemyTexture;
 
@@ -29,6 +29,8 @@ namespace DormLife.Managers
             _spawnTime = _spawnCooldown;
             _random = new();
             _padding = _enemyTexture.Width / 2;
+
+            Enemies = new();
         }
 
         private static Vector2 RandomPosition()
@@ -53,12 +55,12 @@ namespace DormLife.Managers
 
         public static void AddEnemy()
         {
-            Enemies.Add(new(_enemyTexture, RandomPosition()));
+            Enemies.Add(new(_enemyTexture, RandomPosition(), 100, 1, 5));
         }
 
         public static void AddHardEnemy()
         {
-            Enemies.Add(new(_hardEnemyTexture, RandomPosition(), 5, 20));
+            Enemies.Add(new(_hardEnemyTexture, RandomPosition(), 50, 5, 20));
         }
 
         public static void Update(Cake cake, List<Wall> walls)
@@ -96,6 +98,11 @@ namespace DormLife.Managers
             {
                 enemy.Draw();
             }
+        }
+
+        public static void DeleteEnemies()
+        {
+            Enemies.Clear();
         }
     }
 }

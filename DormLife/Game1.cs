@@ -1,10 +1,11 @@
-﻿using DormLife.Managers;
-using DormLife;
+﻿using DormLife;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 using DormLife.GameObjects;
 using System.Collections.Generic;
+using DormLife.State;
+using DormLife.Managers;
 
 namespace DormLife;
 
@@ -12,9 +13,12 @@ public class Game1 : Game
 {
     private readonly GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
-    private GameManager _gameManager;
 
+    private BaseState _currentState;
 
+    private GameState _gameState;
+    private MenuState _menuState;
+    private PauseState _pauseState;
 
     public Game1()
     {
@@ -30,9 +34,13 @@ public class Game1 : Game
         _graphics.PreferredBackBufferWidth = Globals.Bounds.X;
         _graphics.PreferredBackBufferHeight = Globals.Bounds.Y;
         _graphics.ApplyChanges();
-
         Globals.Content = Content;
-        _gameManager = new();
+
+        _gameState = new GameState();
+        _menuState = new MenuState();
+        _pauseState = new PauseState();
+
+        _currentState = _menuState;
 
         base.Initialize();
     }
@@ -45,11 +53,11 @@ public class Game1 : Game
 
     protected override void Update(GameTime gameTime)
     {
-        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
             Exit();
-
         Globals.Update(gameTime);
-        _gameManager.Update();
+
+        StateManager.Update(ref _currentState, _gameState, _menuState, _pauseState);
 
         base.Update(gameTime);
     }
@@ -59,7 +67,9 @@ public class Game1 : Game
         GraphicsDevice.Clear(Color.RosyBrown);
 
         _spriteBatch.Begin();
-        _gameManager.Draw();
+
+        _currentState.Draw();
+
         _spriteBatch.End();
 
         base.Draw(gameTime);

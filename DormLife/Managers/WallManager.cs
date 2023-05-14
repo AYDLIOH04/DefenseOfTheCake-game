@@ -21,13 +21,15 @@ namespace DormLife.Managers
         private static float w = Globals.Bounds.X;
         private static float h = Globals.Bounds.Y;
 
-        public static List<Wall> Walls { get; } = new();
+        public static List<Wall> Walls { get; private set;  }
 
         public static void Init()
         {
             _textureGorizontal = Globals.Content.Load<Texture2D>("walls/gorizontal_wall");
             _textureVertical = Globals.Content.Load<Texture2D>("walls/vertical_wall");
             _random = new();
+
+            Walls = new();
         }
 
         private static Vector2 SetPositionGorizontal()
@@ -104,7 +106,6 @@ namespace DormLife.Managers
         {
             Walls.Clear();
         }
-
 
         public static void Draw()
         {

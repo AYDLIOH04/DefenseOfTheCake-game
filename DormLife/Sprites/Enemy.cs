@@ -16,9 +16,9 @@ namespace DormLife.Sprites
         public int HP { get; private set; }
         public int Damage;
 
-        public Enemy(Texture2D texture, Vector2 position, int hp = 1, int damage = 5) : base(texture, position)
+        public Enemy(Texture2D texture, Vector2 position, float speed, int hp, int damage) : base(texture, position, speed)
         {
-            speed = 100;
+            this.speed = speed;
             HP = hp;
             Damage = damage;
         }

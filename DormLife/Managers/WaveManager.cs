@@ -21,6 +21,12 @@ namespace DormLife.Managers
             _waveLevel++;
         }
 
+        public static void NewWaves()
+        {
+            _spawnCount = 1;
+            _waveLevel = 1;
+        }
+
         #region WavesGenerator
 
         private static void WavesGenerator()

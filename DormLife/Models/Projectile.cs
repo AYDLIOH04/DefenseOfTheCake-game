@@ -14,9 +14,9 @@ namespace DormLife.Models
         public Vector2 Direction { get; set; }
         public float Lifespan { get; set; }
         
-        public Projectile(Texture2D texture, ProjectileData data) : base(texture, new Vector2(data.Position.X + 24, data.Position.Y + 17))
+        public Projectile(Texture2D texture, ProjectileData data, float speed = 0) : base(texture, new Vector2(data.Position.X + 24, data.Position.Y + 17), speed)
         {
-            speed = data.Speed;
+            this.speed = data.Speed;
             rotation = data.Rotation;
             Direction = new((float)Math.Cos(rotation), (float)Math.Sin(rotation));
             Lifespan = data.Lifespan;

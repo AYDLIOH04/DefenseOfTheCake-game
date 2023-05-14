@@ -13,11 +13,13 @@ namespace DormLife.Managers
     public class ProjectileManager
     {
         private static Texture2D texture;
-        public static List<Projectile> Projectiles { get; } = new();
+        public static List<Projectile> Projectiles { get; private set; }
 
         public static void Init()
         {
             texture = Globals.Content.Load<Texture2D>("arms/range_arm");
+
+            Projectiles = new(); 
         }
 
         public static void AddProjectile(ProjectileData data)

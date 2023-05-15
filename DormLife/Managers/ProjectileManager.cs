@@ -1,6 +1,7 @@
 ﻿using DormLife.GameObjects;
 using DormLife.Models;
 using DormLife.Sprites;
+using DormLife.State;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -53,6 +54,10 @@ namespace DormLife.Managers
                     
                     if ((p.position - enemy.position).Length() < 32)
                     {
+                        if (enemy.HP == 1)
+                        {
+                            GameState._enemyKills.IncrementScore(1);
+                        }
                         enemy.TakeDamage(1);
                         p.Destroy();
                         break;

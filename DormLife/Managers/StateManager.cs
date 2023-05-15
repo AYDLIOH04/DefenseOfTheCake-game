@@ -17,6 +17,8 @@ namespace DormLife.Managers
         {
             currentState.Update();
 
+            CheckGameOver(ref currentState, menuState);
+
             if (Keyboard.GetState().IsKeyDown(Keys.Enter) && currentState is MenuState)
             {
                 gameState.NewGame();
@@ -36,5 +38,15 @@ namespace DormLife.Managers
             }
         }
 
+        public static void CheckGameOver(ref BaseState currentState, MenuState menuState)
+        {
+            if (currentState is GameState)
+            {
+                if ((currentState as GameState)._cake.HP <= 0)
+                {
+                    currentState = menuState;
+                }
+            }
+        }
     }
 }

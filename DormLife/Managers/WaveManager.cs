@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DormLife.Components.GameState;
+using DormLife.State;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DormLife.Managers
 {
-    public class WaveManager
+    public static class WaveManager
     {
         private static int _spawnCount = 1;
         private static int _waveLevel = 1;
@@ -27,10 +29,20 @@ namespace DormLife.Managers
             _waveLevel = 1;
         }
 
-        #region WavesGenerator
+        private static void ScoreChanger()
+        {
+            GameState._scoreWave.IncrementScore(1);
+            if (GameState._highscoreWave.GetScore < GameState._scoreWave.GetScore)
+            {
+                GameState._highscoreWave.IncrementScore(1);
+            }
+        }
 
+        #region WavesGenerator
         private static void WavesGenerator()
         {
+            ScoreChanger();
+
             ProjectileManager.DeleteTiles();
             WallManager.DeleteWalls();
 

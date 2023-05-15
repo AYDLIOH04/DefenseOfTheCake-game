@@ -1,5 +1,6 @@
 ﻿using DormLife.GameObjects;
 using DormLife.Sprites;
+using DormLife.State;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -83,6 +84,7 @@ namespace DormLife.Managers
                 {
                     enemy.TakeDamage(100);
                     cake.TakeDamage(enemy.Damage);
+                    GameState._cakeHP.DecrementScore(enemy.Damage);
                 }
 
                 enemy.Update(cake, walls, Enemies);

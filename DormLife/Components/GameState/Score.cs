@@ -23,7 +23,7 @@ namespace DormLife.Components.GameState
             _text = text;
             _position = position;
             _score = score;
-            _font = Globals.Content.Load<SpriteFont>("File1");
+            _font = Globals.Content.Load<SpriteFont>("Font");
         }
 
         public void IncrementScore(int amount)

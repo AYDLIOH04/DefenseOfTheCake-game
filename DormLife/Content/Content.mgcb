@@ -73,7 +73,7 @@
 /processorParam:TextureFormat=Color
 /build:arms/melee_arm.png
 
-#begin Block.png
+#begin button.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -83,21 +83,14 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Block.png
+/build:button.png
 
 #begin File.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:File.spritefont;Font.spritefont
-
-#begin File1.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:File1.spritefont
+/build:File.spritefont
 
 #begin Font.spritefont
 /importer:FontDescriptionImporter

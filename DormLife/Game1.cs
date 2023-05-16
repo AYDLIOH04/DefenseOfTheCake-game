@@ -14,11 +14,11 @@ public class Game1 : Game
     private readonly GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
 
-    private BaseState _currentState;
+    public static BaseState currentState;
 
-    private GameState _gameState;
-    private MenuState _menuState;
-    private PauseState _pauseState;
+    public static GameState gameState;
+    public static MenuState menuState;
+    public static PauseState pauseState;
 
     public Game1()
     {
@@ -36,11 +36,11 @@ public class Game1 : Game
         _graphics.ApplyChanges();
         Globals.Content = Content;
 
-        _gameState = new GameState();
-        _menuState = new MenuState();
-        _pauseState = new PauseState();
+        gameState = new GameState();
+        menuState = new MenuState();
+        pauseState = new PauseState();
 
-        _currentState = _menuState;
+        currentState = menuState;
 
         base.Initialize();
     }
@@ -57,7 +57,7 @@ public class Game1 : Game
             Exit();
         Globals.Update(gameTime);
 
-        StateManager.Update(ref _currentState, _gameState, _menuState, _pauseState);
+        StateManager.Update();
 
         base.Update(gameTime);
     }
@@ -67,7 +67,7 @@ public class Game1 : Game
         GraphicsDevice.Clear(Color.RosyBrown);
 
         _spriteBatch.Begin();
-        _currentState.Draw();
+        currentState.Draw();
         _spriteBatch.End();
 
         base.Draw(gameTime);

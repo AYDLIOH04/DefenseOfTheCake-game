@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Formats.Asn1.AsnWriter;
 
-namespace DormLife.Components.GameState
+namespace DormLife.Components
 {
     public class Score
     {

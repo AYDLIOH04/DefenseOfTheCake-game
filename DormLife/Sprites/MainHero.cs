@@ -32,11 +32,12 @@ namespace DormLife.Sprites
             }
         }
 
-        private void Move()
+        private void Move(List<Wall> walls, Cake cake)
         {
             if (InputManager.Direction != Vector2.Zero)
             {
-                var dir = Vector2.Normalize(InputManager.Direction);
+                var dir = CheckCollisionAndCreateDir(walls, cake);
+
                 position = new(
                         MathHelper.Clamp(position.X + (dir.X * speed * Globals.TotalSeconds), 30, Globals.Bounds.X - 30),
                         MathHelper.Clamp(position.Y + (dir.Y * speed * Globals.TotalSeconds), 30, Globals.Bounds.Y - 30)
@@ -47,15 +48,35 @@ namespace DormLife.Sprites
             rotation = (float)Math.Atan2(toMouse.Y, toMouse.X);
         }
 
-        private void MoveInWalk(List<Wall> walls)
+        private Vector2 CheckCollisionAndCreateDir(List<Wall> walls, Cake cake)
         {
-            //  Спасите помогите! Зачем я использую менеджеры?... Чтобы страдать
+            var dir = Vector2.Normalize(InputManager.Direction);
+
+            if ((dir.X > 0 && IsTouchingLeft(cake, dir)) ||
+               (dir.X < 0 && IsTouchingRight(cake, dir)))
+                dir.X = 0;
+
+            if ((dir.Y > 0 && IsTouchingTop(cake, dir)) ||
+                (dir.Y < 0 && IsTouchingBottom(cake, dir)))
+                dir.Y = 0;
+                                                      
+            foreach (var wall in walls)
+            {
+                if ((dir.X > 0 && IsTouchingLeft(wall, dir)) ||
+               (dir.X < 0 && IsTouchingRight(wall, dir)))
+                    dir.X = 0;
+
+                if ((dir.Y > 0 && IsTouchingTop(wall, dir)) ||
+                    (dir.Y < 0 && IsTouchingBottom(wall, dir)))
+                    dir.Y = 0;
+            }
+
+            return dir;
         }
 
-        public void Update(List<Wall> walls)
+        public void Update(List<Wall> walls, Cake cake)
         {
-            MoveInWalk(walls);
-            Move();
+            Move(walls, cake);
             Fire();
         }
     }

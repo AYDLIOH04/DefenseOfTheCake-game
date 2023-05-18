@@ -5,8 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DormLife.Components.MenuState;
 using DormLife.Managers;
+using DormLife.Components;
 
 namespace DormLife.State
 {
@@ -16,7 +16,7 @@ namespace DormLife.State
         private Button _newGameButton;
         public MenuState()
         {
-            _newGameButton = new Button("New game", new(Globals.Bounds.X / 2, Globals.Bounds.Y / 2));
+            _newGameButton = new Button("New Game", new(Globals.Bounds.X / 2, Globals.Bounds.Y / 2));
             _newGameButton.Clicked += StateManager.CreateGame;
         }
 
@@ -25,8 +25,10 @@ namespace DormLife.State
             _newGameButton.Update();
         }
 
-        public override void Draw()
+        public override void Draw(GraphicsDevice graphicsDevice)
         {
+            graphicsDevice.Clear(Color.RoyalBlue);
+
             _newGameButton.Draw();
         }
     }

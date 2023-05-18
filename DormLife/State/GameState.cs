@@ -1,7 +1,8 @@
-﻿using DormLife.Components.GameState;
+﻿using DormLife.Components;
 using DormLife.GameObjects;
 using DormLife.Managers;
 using DormLife.Sprites;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -14,19 +15,19 @@ namespace DormLife.State
 {
     public class GameState : BaseState
     {
-        private MainHero _player;
-        public Cake _cake;
+        public static MainHero player;
+        public Cake cake;
 
-        public static Score _scoreWave;
-        public static Score _highscoreWave = new Score("Highscore", new (10, 10)) ;
-        public static Score _cakeHP;
-        public static Score _enemyKills;
+        public static Score scoreWave;
+        public static Score highscoreWave = new Score("Highscore", new (10, 10)) ;
+        public static Score cakeHP;
+        public static Score enemyKills;
 
 
         public void NewGame()
         {
-            _scoreWave = new Score("Wave", new(10, 30));
-            _enemyKills = new Score("Kills", new(Globals.Bounds.X - 100, Globals.Bounds.Y - 30), 0);
+            scoreWave = new Score("Wave", new(10, 30));
+            enemyKills = new Score("Kills", new(Globals.Bounds.X - 100, Globals.Bounds.Y - 30), 0);
 
 
             WaveManager.NewWaves();
@@ -35,9 +36,9 @@ namespace DormLife.State
             EnemyManager.Init();
             WallManager.Init();
 
-            _player = new(Globals.Content.Load<Texture2D>("sprites/player"), new(200, 200), 300);
-            _cake = new(Globals.Content.Load<Texture2D>("sprites/cake"), new(Globals.Bounds.X / 2, Globals.Bounds.Y / 2));
-            _cakeHP = new Score("Cake HP", new(Globals.Bounds.X - 250, Globals.Bounds.Y - 30), _cake.HP);
+            player = new(Globals.Content.Load<Texture2D>("sprites/player"), new(200, 200), 300);
+            cake = new(Globals.Content.Load<Texture2D>("sprites/cake"), new(Globals.Bounds.X / 2, Globals.Bounds.Y / 2));
+            cakeHP = new Score("Cake HP", new(Globals.Bounds.X - 250, Globals.Bounds.Y - 30), cake.HP);
         }
 
         public void ContinueGame()
@@ -48,22 +49,24 @@ namespace DormLife.State
         public override void Update()
         {
             InputManager.Update();
-            _player.Update(WallManager.Walls);
+            player.Update(WallManager.Walls, cake);
 
-            ProjectileManager.Update(EnemyManager.Enemies, WallManager.Walls, _cake);
-            EnemyManager.Update(_cake, WallManager.Walls);
+            ProjectileManager.Update(EnemyManager.Enemies, WallManager.Walls, cake);
+            EnemyManager.Update(cake, WallManager.Walls);
         }
 
-        public override void Draw()
+        public override void Draw(GraphicsDevice graphicsDevice)
         {
-            _player.Draw();
-            _cake.Draw();
+            graphicsDevice.Clear(Color.RosyBrown);
 
-            _scoreWave.Draw();
-            _highscoreWave.Draw();
+            player.Draw();
+            cake.Draw();
 
-            _cakeHP.Draw();
-            _enemyKills.Draw();
+            scoreWave.Draw();
+            highscoreWave.Draw();
+
+            cakeHP.Draw();
+            enemyKills.Draw();
 
             ProjectileManager.Draw();
             EnemyManager.Draw();

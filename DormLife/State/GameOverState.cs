@@ -10,31 +10,30 @@ using System.Threading.Tasks;
 
 namespace DormLife.State
 {
-    public class PauseState : BaseState
+    public class GameOverState : BaseState
     {
-        private Button _continueGameButton;
+        private Button _restartGameButton;
         private Button _menuButton;
-
-        public PauseState()
+        public GameOverState()
         {
-            _continueGameButton = new Button("Continue Game", new(Globals.Bounds.X / 2, Globals.Bounds.Y / 2 + 30));
+            _restartGameButton = new Button("Restart Game", new(Globals.Bounds.X / 2, Globals.Bounds.Y / 2 + 30));
             _menuButton = new Button("Menu", new(Globals.Bounds.X / 2, Globals.Bounds.Y / 2 - 50));
 
-            _continueGameButton.Clicked += StateManager.BackToGame;
+            _restartGameButton.Clicked += StateManager.CreateGame;
             _menuButton.Clicked += StateManager.GoToMenu;
-
         }
+
+
         public override void Update()
         {
-            _continueGameButton.Update();
+            _restartGameButton.Update();
             _menuButton.Update();
         }
-
         public override void Draw(GraphicsDevice graphicsDevice)
         {
             graphicsDevice.Clear(Color.LightSkyBlue);
 
-            _continueGameButton.Draw();
+            _restartGameButton.Draw();
             _menuButton.Draw();
         }
     }

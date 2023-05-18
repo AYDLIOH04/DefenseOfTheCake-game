@@ -25,7 +25,7 @@ namespace DormLife.Managers
             {
                 SetPause();
             }
-            else if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+            else if (Keyboard.GetState().IsKeyDown(Keys.Enter) && Game1.currentState is PauseState)
             {
                 BackToGame();
             }
@@ -57,9 +57,9 @@ namespace DormLife.Managers
         {
             if (Game1.currentState is GameState)
             {
-                if ((Game1.currentState as GameState)._cake.HP <= 0)
+                if ((Game1.currentState as GameState).cake.HP <= 0)
                 {
-                    Game1.currentState = Game1.menuState;
+                    Game1.currentState = Game1.gameOverState;
                 }
             }
         }

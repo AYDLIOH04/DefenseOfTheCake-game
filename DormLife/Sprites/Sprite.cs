@@ -40,9 +40,44 @@ namespace DormLife.Sprites
             Globals.SpriteBatch.Draw(texture, position, null, Color.White, rotation, origin, 1, SpriteEffects.None, 0);
         }
 
+        #region Collision
         public bool CheckCollision(Sprite otherSprite)
         {
             return Rectangle.Intersects(otherSprite.Rectangle);
         }
+
+        protected bool IsTouchingLeft(Sprite sprite, Vector2 Velocity)
+        {
+            return this.Rectangle.Right + 5 * Velocity.X > sprite.Rectangle.Left &&
+              this.Rectangle.Left < sprite.Rectangle.Left &&
+              this.Rectangle.Bottom > sprite.Rectangle.Top &&
+              this.Rectangle.Top < sprite.Rectangle.Bottom;
+        }
+
+        protected bool IsTouchingRight(Sprite sprite, Vector2 Velocity)
+        {
+            return this.Rectangle.Left + 5 * Velocity.X < sprite.Rectangle.Right &&
+              this.Rectangle.Right > sprite.Rectangle.Right &&
+              this.Rectangle.Bottom > sprite.Rectangle.Top &&
+              this.Rectangle.Top < sprite.Rectangle.Bottom;
+        }
+
+        protected bool IsTouchingTop(Sprite sprite, Vector2 Velocity)
+        {
+            return this.Rectangle.Bottom + 5 * Velocity.Y > sprite.Rectangle.Top &&
+              this.Rectangle.Top < sprite.Rectangle.Top &&
+              this.Rectangle.Right > sprite.Rectangle.Left &&
+              this.Rectangle.Left < sprite.Rectangle.Right;
+        }
+
+        protected bool IsTouchingBottom(Sprite sprite, Vector2 Velocity)
+        {
+            return this.Rectangle.Top + 5 * Velocity.Y < sprite.Rectangle.Bottom &&
+              this.Rectangle.Bottom > sprite.Rectangle.Bottom &&
+              this.Rectangle.Right > sprite.Rectangle.Left &&
+              this.Rectangle.Left < sprite.Rectangle.Right;
+        }
+
+        #endregion
     }
 }

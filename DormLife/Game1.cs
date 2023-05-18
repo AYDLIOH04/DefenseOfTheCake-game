@@ -19,6 +19,8 @@ public class Game1 : Game
     public static GameState gameState;
     public static MenuState menuState;
     public static PauseState pauseState;
+    public static GameOverState gameOverState;
+
 
     public Game1()
     {
@@ -39,6 +41,7 @@ public class Game1 : Game
         gameState = new GameState();
         menuState = new MenuState();
         pauseState = new PauseState();
+        gameOverState = new GameOverState();
 
         currentState = menuState;
 
@@ -67,7 +70,7 @@ public class Game1 : Game
         GraphicsDevice.Clear(Color.RosyBrown);
 
         _spriteBatch.Begin();
-        currentState.Draw();
+        currentState.Draw(GraphicsDevice);
         _spriteBatch.End();
 
         base.Draw(gameTime);

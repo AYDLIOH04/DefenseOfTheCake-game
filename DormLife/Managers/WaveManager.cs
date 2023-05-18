@@ -1,4 +1,4 @@
-﻿using DormLife.Components.GameState;
+﻿using DormLife.Components;
 using DormLife.State;
 using System;
 using System.Collections.Generic;
@@ -31,10 +31,10 @@ namespace DormLife.Managers
 
         private static void ScoreChanger()
         {
-            GameState._scoreWave.IncrementScore(1);
-            if (GameState._highscoreWave.GetScore < GameState._scoreWave.GetScore)
+            GameState.scoreWave.IncrementScore(1);
+            if (GameState.highscoreWave.GetScore < GameState.scoreWave.GetScore)
             {
-                GameState._highscoreWave.IncrementScore(1);
+                GameState.highscoreWave.IncrementScore(1);
             }
         }
 

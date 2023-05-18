@@ -84,7 +84,7 @@ namespace DormLife.Managers
                 {
                     enemy.TakeDamage(100);
                     cake.TakeDamage(enemy.Damage);
-                    GameState._cakeHP.DecrementScore(enemy.Damage);
+                    GameState.cakeHP.DecrementScore(enemy.Damage);
                 }
 
                 enemy.Update(cake, walls, Enemies);

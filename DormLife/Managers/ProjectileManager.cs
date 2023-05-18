@@ -56,7 +56,7 @@ namespace DormLife.Managers
                     {
                         if (enemy.HP == 1)
                         {
-                            GameState._enemyKills.IncrementScore(1);
+                            GameState.enemyKills.IncrementScore(1);
                         }
                         enemy.TakeDamage(1);
                         p.Destroy();

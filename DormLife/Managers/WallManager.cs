@@ -1,4 +1,5 @@
 ﻿using DormLife.GameObjects;
+using DormLife.State;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -100,7 +101,14 @@ namespace DormLife.Managers
         public static void GenerateWalls()
         {
             for (int i = 0; i < 12; i++)
+            {
                 AddWall();
+
+                if (GameState.player.CheckCollision(Walls[Walls.Count - 1]))
+                {
+                    Walls.RemoveAt(Walls.Count - 1);
+                }
+            }
         }
         public static void DeleteWalls()
         {

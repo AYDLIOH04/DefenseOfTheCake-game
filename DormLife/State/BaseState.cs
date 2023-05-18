@@ -12,6 +12,6 @@ namespace DormLife.State
     {
         public abstract void Update();
 
-        public abstract void Draw();
+        public abstract void Draw(GraphicsDevice graphicsDevice);
     }
 }

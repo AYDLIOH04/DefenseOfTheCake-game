@@ -105,9 +105,7 @@ namespace DormLife.Managers
                 AddWall();
 
                 if (GameState.player.CheckCollision(Walls[Walls.Count - 1]))
-                {
                     Walls.RemoveAt(Walls.Count - 1);
-                }
             }
         }
         public static void DeleteWalls()

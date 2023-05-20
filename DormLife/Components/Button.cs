@@ -16,12 +16,13 @@ namespace DormLife.Components
         private SpriteFont _font;
         private string _text;
 
+
         public event EventHandler Clicked;
 
-        public Button(string text, Vector2 position)
+        public Button(string text, Vector2 position, string texture = "button")
         {
-            _text = text;
-            _texture = Globals.Content.Load<Texture2D>("button");
+            _text = "";
+            _texture = Globals.Content.Load<Texture2D>(texture);
             _position = new(position.X - _texture.Width / 2, position.Y - _texture.Height / 2);
             _font = Globals.Content.Load<SpriteFont>("Font");
         }

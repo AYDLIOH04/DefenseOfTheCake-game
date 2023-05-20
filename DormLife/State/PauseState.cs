@@ -17,8 +17,8 @@ namespace DormLife.State
 
         public PauseState()
         {
-            _continueGameButton = new Button("Continue Game", new(Globals.Bounds.X / 2, Globals.Bounds.Y / 2 + 30));
-            _menuButton = new Button("Menu", new(Globals.Bounds.X / 2, Globals.Bounds.Y / 2 - 50));
+            _continueGameButton = new Button("Continue Game", new(Globals.Bounds.X / 2, Globals.Bounds.Y / 2 + 30), "btn/btn-continue");
+            _menuButton = new Button("Menu", new(Globals.Bounds.X / 2, Globals.Bounds.Y / 2 - 80), "btn/btn-menu");
 
             _continueGameButton.Clicked += StateManager.BackToGame;
             _menuButton.Clicked += StateManager.GoToMenu;

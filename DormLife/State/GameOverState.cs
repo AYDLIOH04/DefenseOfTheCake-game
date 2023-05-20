@@ -16,8 +16,8 @@ namespace DormLife.State
         private Button _menuButton;
         public GameOverState()
         {
-            _restartGameButton = new Button("Restart Game", new(Globals.Bounds.X / 2, Globals.Bounds.Y / 2 + 30));
-            _menuButton = new Button("Menu", new(Globals.Bounds.X / 2, Globals.Bounds.Y / 2 - 50));
+            _restartGameButton = new Button("Restart Game", new(Globals.Bounds.X / 2, Globals.Bounds.Y / 2 + 30), "btn/btn-newgame");
+            _menuButton = new Button("Menu", new(Globals.Bounds.X / 2, Globals.Bounds.Y / 2 - 80), "btn/btn-menu");
 
             _restartGameButton.Clicked += StateManager.CreateGame;
             _menuButton.Clicked += StateManager.GoToMenu;

@@ -23,22 +23,25 @@ namespace DormLife.State
         public static Score cakeHP;
         public static Score enemyKills;
 
+        public static Score countUlt;
+
 
         public void NewGame()
         {
             scoreWave = new Score("Wave", new(10, 30));
             enemyKills = new Score("Kills", new(Globals.Bounds.X - 100, Globals.Bounds.Y - 30), 0);
 
-
             WaveManager.NewWaves();
 
             ProjectileManager.Init();
+            BonusManager.Init();
             EnemyManager.Init();
             WallManager.Init();
 
-            player = new(Globals.Content.Load<Texture2D>("sprites/player"), new(200, 200), 300);
             cake = new(Globals.Content.Load<Texture2D>("sprites/cake"), new(Globals.Bounds.X / 2, Globals.Bounds.Y / 2));
-            cakeHP = new Score("Cake HP", new(Globals.Bounds.X - 250, Globals.Bounds.Y - 30), cake.HP);
+            player = new(Globals.Content.Load<Texture2D>("sprites/player"), new(cake.position.X - 200, cake.position.Y), 300);
+            cakeHP = new("Cake HP", new(Globals.Bounds.X - 250, Globals.Bounds.Y - 30), cake.HP);
+            countUlt = new("Ultimatum Projectiles", new(Globals.Bounds.X - 450, Globals.Bounds.Y - 30), 5);
         }
 
         public void ContinueGame()
@@ -51,8 +54,13 @@ namespace DormLife.State
             InputManager.Update();
             player.Update(WallManager.Walls, cake);
 
+            WaveManager.GenerateWave();
+
             ProjectileManager.Update(EnemyManager.Enemies, WallManager.Walls, cake);
             EnemyManager.Update(cake, WallManager.Walls);
+            BonusManager.Update(player, cake);
+
+            cakeHP.SetScore(cake.HP);
         }
 
         public override void Draw(GraphicsDevice graphicsDevice)
@@ -61,16 +69,20 @@ namespace DormLife.State
 
             player.Draw();
             cake.Draw();
-
             scoreWave.Draw();
             highscoreWave.Draw();
-
             cakeHP.Draw();
             enemyKills.Draw();
 
             ProjectileManager.Draw();
+            BonusManager.Draw();
             EnemyManager.Draw();
             WallManager.Draw();
+
+            if (ProjectileManager.IsUlt)
+            {
+                countUlt.Draw();
+            }
         }
     }
 }

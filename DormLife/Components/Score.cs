@@ -36,6 +36,11 @@ namespace DormLife.Components
             _score -= amount;
         }
 
+        public void SetScore(int score)
+        {
+            _score = score;
+        }
+
         public void ResetScore()
         {
             _score = 0;

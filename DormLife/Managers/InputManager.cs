@@ -13,12 +13,15 @@ namespace DormLife.Managers
     public static class InputManager
     {
         private static MouseState _lastMouseState;
+
         public static Vector2 _direction;
         public static Vector2 Direction => _direction;
         public static Vector2 MousePosition => Mouse.GetState().Position.ToVector2();
-        public static bool MouseClicked { get; private set; }
+        public static bool MouseLeftClicked { get; private set; }
         public static bool MouseRightClicked { get; private set; }
         public static bool MouseLeftDown { get; private set; }
+        public static bool MouseRightDown { get; private set; }
+
 
         public static void Update()
         {
@@ -32,9 +35,16 @@ namespace DormLife.Managers
             if (keyboardState.IsKeyDown(Keys.D)) _direction.X++;
 
             MouseLeftDown = Mouse.GetState().LeftButton == ButtonState.Pressed;
-            MouseClicked = MouseLeftDown && (_lastMouseState.LeftButton == ButtonState.Released);
-            MouseClicked = (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            MouseRightDown = Mouse.GetState().RightButton == ButtonState.Pressed;
+
+
+            MouseLeftClicked = MouseLeftDown && (_lastMouseState.LeftButton == ButtonState.Released);
+            MouseLeftClicked = (Mouse.GetState().LeftButton == ButtonState.Pressed)
                         && (_lastMouseState.LeftButton == ButtonState.Released);
+
+            MouseRightClicked = MouseRightDown && (_lastMouseState.RightButton == ButtonState.Released);
+            MouseRightClicked = (Mouse.GetState().RightButton == ButtonState.Pressed)
+                        && (_lastMouseState.RightButton == ButtonState.Released);
 
             _lastMouseState = Mouse.GetState();
         }

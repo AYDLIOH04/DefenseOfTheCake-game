@@ -19,7 +19,7 @@ namespace DormLife.Sprites
 
         private void Fire()
         {
-            if (InputManager.MouseClicked)
+            if (InputManager.MouseLeftClicked)
             {
                 ProjectileData pd = new()
                 {
@@ -29,6 +29,18 @@ namespace DormLife.Sprites
                     Speed = 600,
                 };
                 ProjectileManager.AddProjectile(pd);
+            } 
+
+            if (InputManager.MouseRightClicked)
+            {
+                ProjectileData pd = new()
+                {
+                    Position = position,
+                    Rotation = rotation,
+                    Lifespan = 2,
+                    Speed = 800,
+                };
+                ProjectileManager.AddUltProjectile(pd);
             }
         }
 

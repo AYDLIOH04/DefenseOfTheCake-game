@@ -17,8 +17,6 @@ namespace DormLife.Managers
         private static Texture2D _enemyTexture;
         private static Texture2D _hardEnemyTexture;
 
-        private static float _spawnCooldown;
-        private static float _spawnTime;
         private static Random _random;
         private static int _padding;
 
@@ -26,8 +24,6 @@ namespace DormLife.Managers
         {
             _enemyTexture = Globals.Content.Load<Texture2D>("sprites/monster");
             _hardEnemyTexture = Globals.Content.Load<Texture2D>("sprites/hardmonster");
-            _spawnCooldown = 2f;
-            _spawnTime = _spawnCooldown;
             _random = new();
             _padding = _enemyTexture.Width / 2;
 
@@ -36,9 +32,9 @@ namespace DormLife.Managers
 
         private static Vector2 RandomPosition()
         {
-            float w = Globals.Bounds.X;
-            float h = Globals.Bounds.Y;
-            Vector2 pos = new();
+            var w = Globals.Bounds.X;
+            var h = Globals.Bounds.Y;
+            var pos = new Vector2();
 
             if (_random.NextDouble() < w / (w + h))
             {
@@ -56,35 +52,24 @@ namespace DormLife.Managers
 
         public static void AddEnemy()
         {
-            Enemies.Add(new(_enemyTexture, RandomPosition(), 100, 1, 5));
+            var speed = _random.Next(60, 120);
+            Enemies.Add(new(_enemyTexture, RandomPosition(), speed, 1, 5));
         }
 
         public static void AddHardEnemy()
         {
-            Enemies.Add(new(_hardEnemyTexture, RandomPosition(), 50, 5, 20));
+            var speed = _random.Next(40, 60);
+            Enemies.Add(new(_hardEnemyTexture, RandomPosition(), speed, 5, 20));
         }
 
         public static void Update(Cake cake, List<Wall> walls)
         {
-            if (Enemies.Count() == 0)
-                WaveManager.GenerateWave();
-
-            /*
-            _spawnTime -= Globals.TotalSeconds;
-            while (_spawnTime <= 0)
-            {
-                _spawnTime += _spawnCooldown;
-                
-            }
-            */
-
             foreach (var enemy in Enemies)
             {
                 if ((enemy.position - cake.position).Length() < 30)
                 {
                     enemy.TakeDamage(100);
                     cake.TakeDamage(enemy.Damage);
-                    GameState.cakeHP.DecrementScore(enemy.Damage);
                 }
 
                 enemy.Update(cake, walls, Enemies);

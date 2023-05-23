@@ -14,35 +14,20 @@ namespace DormLife.GameObjects
         public int HP { get; private set; }
         private static Random random = new();
 
-        public void GameOver()
+        public void ChangePosition()
         {
-            // Конец игры
-        }
-
-        private void DamageTrigger()
-        {
-            float x = 0;
-            float y = 0;
-
-            if (random.Next(0, 2) == 1)
-            {
-                x = position.X + random.Next(0, 2) * 10;
-                y = position.Y + random.Next(0, 2) * 10;
-            }
-            else
-            {
-                x = position.X - random.Next(0, 2) * 10;
-                y = position.Y - random.Next(0, 2) * 10;
-            }
-
-            position = new(x, y);
+            // TODO Спасаем торик
+            position = new(position.X, position.Y);
         }
 
         public void TakeDamage(int dmg)
         {
             HP -= dmg;
+        }
 
-            DamageTrigger();
+        public void GetHP(int hp)
+        {
+            HP += hp;
         }
 
         public Cake(Texture2D texture, Vector2 position, float speed = 0)

@@ -12,15 +12,19 @@ namespace DormLife.Managers
     {
         private static int _spawnCount = 1;
         private static int _waveLevel = 1;
+        private static Random _random = new Random();
 
         public static int GetWaveLevel() => _waveLevel;
 
         public static void GenerateWave()
         {
-            WavesGenerator();
+            if (EnemyManager.Enemies.Count() == 0)
+            {
+                WavesGenerator();
             
-            _spawnCount += 2;
-            _waveLevel++;
+                _spawnCount += 2;
+                _waveLevel++;
+            }
         }
 
         public static void NewWaves()
@@ -41,8 +45,10 @@ namespace DormLife.Managers
         #region WavesGenerator
         private static void WavesGenerator()
         {
+
             ScoreChanger();
 
+            EnemyManager.DeleteEnemies();
             ProjectileManager.DeleteTiles();
             WallManager.DeleteWalls();
 
@@ -97,10 +103,9 @@ namespace DormLife.Managers
         private static void AdditionalObjectsGenerator()
         {
 
-            if (_waveLevel % 3 == 0)
+            if (_waveLevel > 3)
             {
-                // TODO здоровья тортику
-                // Буду генерировать рандомную позицию для ботла с HP
+                BonusManager.CreateBonus(new(_random.Next(100, Globals.Bounds.X), _random.Next(100, Globals.Bounds.Y)));
             }
         }
 

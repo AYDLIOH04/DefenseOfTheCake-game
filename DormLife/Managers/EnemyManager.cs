@@ -32,32 +32,13 @@ namespace DormLife.Managers
 
         private static Vector2 RandomPosition()
         {
-            /*
-            var w = Globals.Bounds.X;
-            var h = Globals.Bounds.Y;
-            var pos = new Vector2();
-
-            if (_random.NextDouble() < w / (w + h))
-            {
-                pos.X = (int)(_random.NextDouble() * w);
-                pos.Y = (int)(_random.NextDouble() < 0.5 ? -_padding : h + _padding);
-            }
-            else
-            {
-                pos.X = (int)(_random.NextDouble() * h);
-                pos.Y = (int)(_random.NextDouble() < 0.5 ? -_padding : w + _padding);
-            }
-
-            return pos;
-            */
-
             var random = new Random();
             var side = new Random().Next(0, 4);
 
-            if (side == 0) return new Vector2(random.Next(10, Globals.Bounds.X) - 10, _enemyTexture.Height);
-            if (side == 1) return new Vector2(Globals.Bounds.X - _enemyTexture.Width, random.Next(10, Globals.Bounds.Y) - 10);
-            if (side == 2) return new Vector2(random.Next(10, Globals.Bounds.X) - 10, Globals.Bounds.Y - _enemyTexture.Height);
-            return new Vector2(_enemyTexture.Width, random.Next(10, Globals.Bounds.Y) - 10);
+            if (side == 0) return new Vector2(random.Next(-10, Globals.Bounds.X), 0);
+            if (side == 1) return new Vector2(Globals.Bounds.X, random.Next(-10, Globals.Bounds.Y));
+            if (side == 2) return new Vector2(random.Next(-10, Globals.Bounds.X), Globals.Bounds.Y);
+            return new Vector2(0, random.Next(-10, Globals.Bounds.Y));
         }
 
         public static void AddEnemy()
@@ -66,10 +47,22 @@ namespace DormLife.Managers
             Enemies.Add(new(_enemyTexture, RandomPosition(), speed, 1, 5));
         }
 
+        public static void AddNeighborEnemy(Vector2 position)
+        {
+            var speed = _random.Next(60, 120);
+            Enemies.Add(new(_enemyTexture, position, speed, 1, 5));
+        }
+
         public static void AddHardEnemy()
         {
             var speed = _random.Next(40, 60);
             Enemies.Add(new(_hardEnemyTexture, RandomPosition(), speed, 5, 20));
+        }
+
+        public static void AddNeighborHardEnemy(Vector2 position)
+        {
+            var speed = _random.Next(40, 60);
+            Enemies.Add(new(_hardEnemyTexture, position, speed, 5, 20));
         }
 
         public static void Update(Cake cake, List<Wall> walls)

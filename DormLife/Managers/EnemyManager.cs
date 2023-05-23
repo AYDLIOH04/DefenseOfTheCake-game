@@ -32,6 +32,7 @@ namespace DormLife.Managers
 
         private static Vector2 RandomPosition()
         {
+            /*
             var w = Globals.Bounds.X;
             var h = Globals.Bounds.Y;
             var pos = new Vector2();
@@ -48,6 +49,15 @@ namespace DormLife.Managers
             }
 
             return pos;
+            */
+
+            var random = new Random();
+            var side = new Random().Next(0, 4);
+
+            if (side == 0) return new Vector2(random.Next(10, Globals.Bounds.X) - 10, _enemyTexture.Height);
+            if (side == 1) return new Vector2(Globals.Bounds.X - _enemyTexture.Width, random.Next(10, Globals.Bounds.Y) - 10);
+            if (side == 2) return new Vector2(random.Next(10, Globals.Bounds.X) - 10, Globals.Bounds.Y - _enemyTexture.Height);
+            return new Vector2(_enemyTexture.Width, random.Next(10, Globals.Bounds.Y) - 10);
         }
 
         public static void AddEnemy()

@@ -1,4 +1,6 @@
 ﻿using DormLife.State;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
@@ -12,6 +14,8 @@ namespace DormLife.Managers
     public static class StateManager
     {
         private static bool isEscapePressed = false;
+        private static bool isTabPressed = false;
+
         public static void Update()
         {
             Game1.currentState.Update();
@@ -19,36 +23,42 @@ namespace DormLife.Managers
             KeyboardState keyboardState = Keyboard.GetState();
             CheckGameOver();
 
-            if (keyboardState.IsKeyDown(Keys.Enter) && Game1.currentState is MenuState)
+            if (keyboardState.IsKeyDown(Keys.Space) && Game1.currentState is MenuState)
             {
                 CreateGame();
             }
-            else if (keyboardState.IsKeyDown(Keys.Enter) && Game1.currentState is PauseState)
+            else if (keyboardState.IsKeyDown(Keys.Space) && Game1.currentState is PauseState)
             {
                 BackToGame();
             }
+
+            if (keyboardState.IsKeyDown(Keys.Tab))
+            {
+                if (!isTabPressed)
+                {
+                    isTabPressed = true;
+
+                    if (Game1.currentState is GameState) GoToShop();
+                    else if (Game1.currentState is ShopState) BackToGame();
+                }
+            }
+            else isTabPressed = false;
+
             if (keyboardState.IsKeyDown(Keys.Escape))
             {
                 if (!isEscapePressed)
                 {
                     isEscapePressed = true;
 
-                    if (Game1.currentState is GameState)
-                    {
-                        SetPause();
-                    }
-                    else if (Game1.currentState is PauseState || Game1.currentState is GameOverState)
-                    {
-                        GoToMenu();
-                    }
+                    if (Game1.currentState is GameState) SetPause();
+                    else if (Game1.currentState is PauseState) BackToGame();
                 }
             }
-            else
-            {
-                isEscapePressed = false;
-            }
+            else isEscapePressed = false;
         }
+    
 
+        #region State Button Methods
         public static void CreateGame(object sender = null, EventArgs e = null)
         {
             Game1.gameState.NewGame();
@@ -69,12 +79,16 @@ namespace DormLife.Managers
         {
             Game1.currentState = Game1.menuState;
         }
+        public static void GoToShop(object sender = null, EventArgs e = null)
+        {
+            Game1.currentState = Game1.shopState;
+        }
 
         public static void ExitGame(object sender = null, EventArgs e = null)
         {
             Game1.GameRef.Exit();
         }
-
+        #endregion
 
 
         public static void CheckGameOver()

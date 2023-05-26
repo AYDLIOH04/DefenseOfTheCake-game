@@ -18,12 +18,16 @@ public class Game1 : Game
     private readonly GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
 
+
+    #region States
     public static BaseState currentState;
 
     public static GameState gameState;
     public static MenuState menuState;
     public static PauseState pauseState;
     public static GameOverState gameOverState;
+    public static ShopState shopState;
+    #endregion
 
     public Game1()
     {
@@ -42,11 +46,13 @@ public class Game1 : Game
         _graphics.PreferredBackBufferHeight = Globals.Bounds.Y;
         _graphics.ApplyChanges();
         Globals.Content = Content;
+        Globals.Graphics = GraphicsDevice;
 
         gameState = new GameState();
         menuState = new MenuState();
         pauseState = new PauseState();
         gameOverState = new GameOverState();
+        shopState = new ShopState();
 
         currentState = menuState;
 

@@ -17,19 +17,62 @@ namespace DormLife.Managers
         private static Texture2D _enemyTexture;
         private static Texture2D _hardEnemyTexture;
 
-        private static Random _random;
-        private static int _padding;
+        #region Enemy Params
+        private static int _speedEnemy;
+        private static int _damageEnemy;
+        private static int _hpEnemy;
 
+        private static int _speedHardEnemy;
+        private static int _damageHardEnemy;
+        private static int _hpHardEnemy;
+        #endregion
+
+        private static Random _random;
+
+        #region Init
         public static void Init()
         {
             _enemyTexture = Globals.Content.Load<Texture2D>("sprites/monster");
             _hardEnemyTexture = Globals.Content.Load<Texture2D>("sprites/hardmonster");
             _random = new();
-            _padding = _enemyTexture.Width / 2;
-
             Enemies = new();
+
+            InitEnemyParam();
         }
 
+        private static void InitEnemyParam()
+        {
+            _speedEnemy = 0;
+            _speedHardEnemy = 0;
+
+            _damageEnemy = 5;
+            _damageHardEnemy = 15;
+
+            _hpEnemy = 1;
+            _hpHardEnemy = 5;
+        }
+        #endregion
+
+        #region Buffs
+        public static void BuffHP()
+        {
+            Buff();
+
+            _hpEnemy += 1;
+            _hpHardEnemy += 3;
+        }
+
+        public static void Buff()
+        {
+            _speedEnemy += 5;
+            _speedHardEnemy += 5;
+
+            _damageEnemy += 1;
+            _damageHardEnemy += 2;
+        }
+        #endregion
+
+        #region Random Position
         private static Vector2 RandomPosition()
         {
             var random = new Random();
@@ -40,30 +83,33 @@ namespace DormLife.Managers
             if (side == 2) return new Vector2(random.Next(-10, Globals.Bounds.X), Globals.Bounds.Y);
             return new Vector2(0, random.Next(-10, Globals.Bounds.Y));
         }
+        #endregion
 
+        #region Add Enemies
         public static void AddEnemy()
         {
-            var speed = _random.Next(60, 120);
-            Enemies.Add(new(_enemyTexture, RandomPosition(), speed, 1, 5));
+            var rndSpeedBuf = _random.Next(60, 125);
+            Enemies.Add(new(_enemyTexture, RandomPosition(), rndSpeedBuf + _speedEnemy, _hpEnemy, _damageEnemy));
         }
 
         public static void AddNeighborEnemy(Vector2 position)
         {
-            var speed = _random.Next(60, 120);
-            Enemies.Add(new(_enemyTexture, position, speed, 1, 5));
+            var rndSpeedBuf = _random.Next(60, 125);
+            Enemies.Add(new(_enemyTexture, position, rndSpeedBuf + _speedEnemy, _hpEnemy, _damageEnemy));
         }
 
         public static void AddHardEnemy()
         {
-            var speed = _random.Next(40, 60);
-            Enemies.Add(new(_hardEnemyTexture, RandomPosition(), speed, 5, 20));
+            var rndSpeedBuf = _random.Next(40, 75);
+            Enemies.Add(new(_hardEnemyTexture, RandomPosition(), rndSpeedBuf + _speedHardEnemy, _hpHardEnemy, _damageHardEnemy));
         }
 
         public static void AddNeighborHardEnemy(Vector2 position)
         {
-            var speed = _random.Next(40, 60);
-            Enemies.Add(new(_hardEnemyTexture, position, speed, 5, 20));
+            var rndSpeedBuf = _random.Next(40, 75);
+            Enemies.Add(new(_hardEnemyTexture, position, rndSpeedBuf + _speedHardEnemy, _hpHardEnemy, _damageHardEnemy));
         }
+        #endregion
 
         public static void Update(Cake cake, List<Wall> walls)
         {

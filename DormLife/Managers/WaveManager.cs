@@ -15,7 +15,7 @@ namespace DormLife.Managers
     {
         private static int _spawnCount = -1;
         private static int _count = 0;
-        private static int _waveLevel = 1;
+        private static int _waveLevel = 0;
         private static Random _random = new();
 
         private static float enemyTimer = 0;
@@ -29,7 +29,7 @@ namespace DormLife.Managers
             enemyTimer = 0;
             _spawnCount = -1;
             _count = 0;
-            _waveLevel = 1;
+            _waveLevel = 0;
             isGenerating = false;
         }
 
@@ -112,6 +112,20 @@ namespace DormLife.Managers
                 _count = 0;
                 _spawnCount += 2;
                 _waveLevel++;
+
+                if (_waveLevel != 0 && _waveLevel % 4 == 0)
+                {
+                    EnemyManager.Buff();
+                }
+                else if (_waveLevel != 0 && _waveLevel % 6 == 0)
+                {
+                    EnemyManager.Buff();
+                } 
+                else if (_waveLevel % 10 == 0)
+                {
+                   EnemyManager.BuffHP();
+                }
+
                 isGenerating = true;
             }
         }
@@ -119,9 +133,9 @@ namespace DormLife.Managers
         private static void ScoreChanger()
         {
             GameState.scoreWave.IncrementScore(1);
-            if (GameState.highscoreWave.GetScore < GameState.scoreWave.GetScore)
+            if (GameState.scoreHighWave.GetScore < GameState.scoreWave.GetScore)
             {
-                GameState.highscoreWave.IncrementScore(1);
+                GameState.scoreHighWave.IncrementScore(1);
             }
         }
 
@@ -132,7 +146,6 @@ namespace DormLife.Managers
             EnemyManager.DeleteEnemies();
             ProjectileManager.DeleteTiles();
             WallManager.DeleteWalls();
-
 
             for (int i = 0; i < Math.Min((_waveLevel / 5) + 1, 4); i++)
                 WallManager.GenerateWalls();

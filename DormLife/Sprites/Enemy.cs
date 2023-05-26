@@ -15,12 +15,15 @@ namespace DormLife.Sprites
     {
         public int HP { get; private set; }
         public int Damage;
+        public bool Buff;
+
 
         public Enemy(Texture2D texture, Vector2 position, float speed, int hp, int damage) : base(texture, position, speed)
         {
             this.speed = speed;
             HP = hp;
             Damage = damage;
+            Buff = false;
         }
 
         public void TakeDamage(int dmg)

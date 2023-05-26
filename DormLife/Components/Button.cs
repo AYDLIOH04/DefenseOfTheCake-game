@@ -16,6 +16,8 @@ namespace DormLife.Components
         private SpriteFont _font;
         private string _text;
 
+        private static float eventTimer = 0;
+
 
         public event EventHandler Clicked;
 
@@ -37,9 +39,12 @@ namespace DormLife.Components
 
         public void Update()
         {
-            if (_rectangle.Contains(Mouse.GetState().Position) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+            eventTimer += Globals.TotalSeconds;
+
+            if (eventTimer > 1 && _rectangle.Contains(Mouse.GetState().Position) && Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
                 Clicked?.Invoke(this, EventArgs.Empty);
+                eventTimer = 0;
             }
         }
 

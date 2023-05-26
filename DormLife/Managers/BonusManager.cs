@@ -15,7 +15,6 @@ namespace DormLife.Managers
         private static Texture2D _textureBonusHP;
         private static Texture2D _textureBonusULT;
 
-        private static float _timer;
         private static Random _random;
 
         public static List<Bonus> Bonuses;
@@ -50,7 +49,7 @@ namespace DormLife.Managers
 
         private static void GiveHP(Cake cake)
         {
-            cake.GetHP(20);
+            cake.GetHP(25);
         }
 
         private static void GiveULT()

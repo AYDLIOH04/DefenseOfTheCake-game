@@ -20,28 +20,45 @@ namespace DormLife.Managers
         public static bool IsUlt { get; private set; }
         public static int CountUlt { get; private set; }
 
+        private static int _damage;
+        private static int _shootingSpeed;
+
 
         public static void Init()
         {
             _texture = Globals.Content.Load<Texture2D>("arms/range_arm");
-
             _textureUlt = Globals.Content.Load<Texture2D>("arms/melee_arm");
+
             IsUlt = false;
             CountUlt = 0;
             Projectiles = new(); 
             UltProjectiles = new();
+
+            _damage = 1;
+            _shootingSpeed = 0;
+        }
+
+        public static void ShootingDamageBuff()
+        {
+            _damage += 1;
+        }
+
+        public static void ShootingSpeedBuff()
+        {
+            _shootingSpeed += 50;
         }
 
         public static void SetUltProjectiles()
         {
             IsUlt = true;
             CountUlt += 5;
-            GameState.countUlt.SetScore(CountUlt);
+            GameState.scoreCountUlt.SetScore(CountUlt);
         }
 
         public static void AddProjectile(ProjectileData data)
         {
-            Projectiles.Add(new(_texture, data));
+            data.Speed += _shootingSpeed;
+            Projectiles.Add(new(_texture, data, _damage));
         }
 
         public static void AddUltProjectile(ProjectileData data)
@@ -49,8 +66,8 @@ namespace DormLife.Managers
             if (IsUlt)
             {
                 CountUlt--;
-                GameState.countUlt.SetScore(CountUlt);
-                UltProjectiles.Add(new(_textureUlt, data));
+                GameState.scoreCountUlt.SetScore(CountUlt);
+                UltProjectiles.Add(new(_textureUlt, data, 1000));
             }
         }
 
@@ -85,9 +102,12 @@ namespace DormLife.Managers
                     
                     if ((p.position - enemy.position).Length() < 32)
                     {
-                        enemy.TakeDamage(1);
+                        enemy.TakeDamage(p.Damage);
                         if (enemy.HP < 1)
-                            GameState.enemyKills.IncrementScore(1);
+                        {
+                            GameState.scoreEnemyKills.IncrementScore(1);
+                            TokenManager.CreateBonus(enemy.position);
+                        }
 
                         p.Destroy();
                         break;
@@ -127,9 +147,12 @@ namespace DormLife.Managers
 
                     if ((up.position - enemy.position).Length() < 45)
                     {
-                        enemy.TakeDamage(10);
+                        enemy.TakeDamage(up.Damage);
                         if (enemy.HP < 1)
-                            GameState.enemyKills.IncrementScore(1);
+                        {
+                            TokenManager.CreateBonus(enemy.position);
+                            GameState.scoreEnemyKills.IncrementScore(1);
+                        }
                     }
                 }
             }

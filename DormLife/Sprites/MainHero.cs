@@ -25,7 +25,7 @@ namespace DormLife.Sprites
                 {
                     Position = position,
                     Rotation = rotation,
-                    Lifespan = 2,
+                    Lifespan = 3,
                     Speed = 600,
                 };
                 ProjectileManager.AddProjectile(pd);
@@ -37,7 +37,7 @@ namespace DormLife.Sprites
                 {
                     Position = position,
                     Rotation = rotation,
-                    Lifespan = 2,
+                    Lifespan = 3,
                     Speed = 800,
                 };
                 ProjectileManager.AddUltProjectile(pd);

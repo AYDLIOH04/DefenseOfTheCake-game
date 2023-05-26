@@ -18,30 +18,42 @@ namespace DormLife.State
         public static MainHero player;
         public Cake cake;
 
+        #region Score
         public static Score scoreWave;
-        public static Score highscoreWave = new Score("Highscore", new (10, 10)) ;
-        public static Score cakeHP;
-        public static Score enemyKills;
+        public static Score scoreHighWave = new Score("Highscore", new (10, 10)) ;
+        public static Score scoreCakeHP;
+        public static Score scoreEnemyKills;
+        public static Score scoreCountUlt;
+        public static Score scoreTokens;
+        #endregion
 
-        public static Score countUlt;
-
+        private static Button _shopButton;
 
         public void NewGame()
         {
-            scoreWave = new Score("Wave", new(10, 30));
-            enemyKills = new Score("Kills", new(Globals.Bounds.X - 100, Globals.Bounds.Y - 30), 0);
-
-            WaveManager.NewWaves();
-
-            ProjectileManager.Init();
-            BonusManager.Init();
-            EnemyManager.Init();
-            WallManager.Init();
-
             cake = new(Globals.Content.Load<Texture2D>("sprites/cake"), new(Globals.Bounds.X / 2, Globals.Bounds.Y / 2));
             player = new(Globals.Content.Load<Texture2D>("sprites/player"), new(cake.position.X - 200, cake.position.Y), 300);
-            cakeHP = new("Cake HP", new(Globals.Bounds.X - 250, Globals.Bounds.Y - 30), cake.HP);
-            countUlt = new("Ultimatum Projectiles", new(Globals.Bounds.X - 450, Globals.Bounds.Y - 30), 5);
+
+            #region Managers Init
+            WaveManager.NewWaves();
+            ProjectileManager.Init();                               
+            BonusManager.Init();
+            TokenManager.Init();
+            EnemyManager.Init();
+            WallManager.Init();
+            ShopManager.Init();
+            #endregion
+
+            #region Scores + Buttons Init
+            scoreWave = new Score("Wave", new(10, 30));
+            scoreEnemyKills = new Score("Kills", new(Globals.Bounds.X - 100, Globals.Bounds.Y - 30), 0);
+            scoreCakeHP = new("Cake HP", new(Globals.Bounds.X - 250, Globals.Bounds.Y - 30), cake.HP);
+            scoreCountUlt = new("Ultimatum Projectiles", new(Globals.Bounds.X - 450, Globals.Bounds.Y - 30), 5);
+            scoreTokens = new("Tokens", new(Globals.Bounds.X - 350, Globals.Bounds.Y - 100), 0);
+
+            _shopButton = new Button("Shop", new(Globals.Bounds.X - 150, Globals.Bounds.Y - 100), "btn/btn-shop");
+            _shopButton.Clicked += StateManager.GoToShop;
+            #endregion
         }
 
         public void ContinueGame()
@@ -55,12 +67,15 @@ namespace DormLife.State
             player.Update(WallManager.Walls, cake);
 
             WaveManager.GenerateWave();
-
             ProjectileManager.Update(EnemyManager.Enemies, WallManager.Walls, cake);
             EnemyManager.Update(cake, WallManager.Walls);
             BonusManager.Update(player, cake);
+            TokenManager.Update(player);
 
-            cakeHP.SetScore(cake.HP);
+            scoreCakeHP.SetScore(cake.HP);
+            scoreTokens.SetScore(ShopManager.Tokens);
+
+            _shopButton.Update();
         }
 
         public override void Draw(GraphicsDevice graphicsDevice)
@@ -69,19 +84,27 @@ namespace DormLife.State
 
             player.Draw();
             cake.Draw();
-            scoreWave.Draw();
-            highscoreWave.Draw();
-            cakeHP.Draw();
-            enemyKills.Draw();
 
+            #region Scores + Button Draw
+            scoreWave.Draw();
+            scoreHighWave.Draw();
+            scoreCakeHP.Draw();
+            scoreEnemyKills.Draw();
+            scoreTokens.Draw();
+            _shopButton.Draw();
+            #endregion
+
+            #region Managers Draw
             ProjectileManager.Draw();
             BonusManager.Draw();
+            TokenManager.Draw();
             EnemyManager.Draw();
             WallManager.Draw();
+            #endregion
 
             if (ProjectileManager.IsUlt)
             {
-                countUlt.Draw();
+                scoreCountUlt.Draw();
             }
         }
     }

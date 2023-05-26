@@ -26,8 +26,11 @@ namespace DormLife.Managers
 
         public static void NewWaves()
         {
+            enemyTimer = 0;
             _spawnCount = -1;
+            _count = 0;
             _waveLevel = 1;
+            isGenerating = false;
         }
 
         public static int GetWaveLevel() => _waveLevel;

@@ -6,11 +6,15 @@ using DormLife.GameObjects;
 using System.Collections.Generic;
 using DormLife.State;
 using DormLife.Managers;
+using System;
 
 namespace DormLife;
 
 public class Game1 : Game
 {
+    private static Game1 _gameRef; 
+    public static Game1 GameRef => _gameRef;
+
     private readonly GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
 
@@ -21,18 +25,19 @@ public class Game1 : Game
     public static PauseState pauseState;
     public static GameOverState gameOverState;
 
-
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
+        _graphics.IsFullScreen = true;
+
+        _gameRef = this;
     }
 
     protected override void Initialize()
     {
-
-        Globals.Bounds = new(1500, 900);
+        Globals.Bounds = new(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
         _graphics.PreferredBackBufferWidth = Globals.Bounds.X;
         _graphics.PreferredBackBufferHeight = Globals.Bounds.Y;
         _graphics.ApplyChanges();
@@ -56,10 +61,9 @@ public class Game1 : Game
 
     protected override void Update(GameTime gameTime)
     {
-        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-            Exit();
-        Globals.Update(gameTime);
+        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed) Exit();
 
+        Globals.Update(gameTime);
         StateManager.Update();
 
         base.Update(gameTime);

@@ -11,23 +11,41 @@ namespace DormLife.Managers
 {
     public static class StateManager
     {
+        private static bool isEscapePressed = false;
         public static void Update()
         {
             Game1.currentState.Update();
 
+            KeyboardState keyboardState = Keyboard.GetState();
             CheckGameOver();
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Enter) && Game1.currentState is MenuState)
+            if (keyboardState.IsKeyDown(Keys.Enter) && Game1.currentState is MenuState)
             {
                 CreateGame();
             }
-            else if (Keyboard.GetState().IsKeyDown(Keys.Escape) && Game1.currentState is GameState)
-            {
-                SetPause();
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.Enter) && Game1.currentState is PauseState)
+            else if (keyboardState.IsKeyDown(Keys.Enter) && Game1.currentState is PauseState)
             {
                 BackToGame();
+            }
+            if (keyboardState.IsKeyDown(Keys.Escape))
+            {
+                if (!isEscapePressed)
+                {
+                    isEscapePressed = true;
+
+                    if (Game1.currentState is GameState)
+                    {
+                        SetPause();
+                    }
+                    else if (Game1.currentState is PauseState || Game1.currentState is GameOverState)
+                    {
+                        GoToMenu();
+                    }
+                }
+            }
+            else
+            {
+                isEscapePressed = false;
             }
         }
 
@@ -51,6 +69,12 @@ namespace DormLife.Managers
         {
             Game1.currentState = Game1.menuState;
         }
+
+        public static void ExitGame(object sender = null, EventArgs e = null)
+        {
+            Game1.GameRef.Exit();
+        }
+
 
 
         public static void CheckGameOver()

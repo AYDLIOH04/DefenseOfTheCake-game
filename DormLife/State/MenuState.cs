@@ -14,22 +14,28 @@ namespace DormLife.State
     {
 
         private Button _newGameButton;
+        private Button _exitButton;
+
         public MenuState()
         {
             _newGameButton = new Button("Play", new(Globals.Bounds.X / 2, Globals.Bounds.Y / 2), "btn/btn-play");
             _newGameButton.Clicked += StateManager.CreateGame;
+
+            _exitButton = new Button("Exit", new(Globals.Bounds.X - 70, 70), "btn/btn-exit");
+            _exitButton.Clicked += StateManager.ExitGame;
         }
 
         public override void Update()
         {
+            _exitButton.Update();
             _newGameButton.Update();
         }
 
         public override void Draw(GraphicsDevice graphicsDevice)
         {
-            graphicsDevice.Clear(Color.RosyBrown);
+            graphicsDevice.Clear(Color.LightSkyBlue);
 
-
+            _exitButton.Draw();
             _newGameButton.Draw();
         }
     }

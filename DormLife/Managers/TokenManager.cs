@@ -27,7 +27,7 @@ namespace DormLife.Managers
 
         public static void CreateBonus(Vector2 position)
         {
-            var rnd = _random.Next(0, 2);
+            var rnd = _random.Next(0, 5);
 
             if (rnd == 1)
             {
@@ -40,7 +40,7 @@ namespace DormLife.Managers
         {
             foreach (var token in Tokens)
             {
-                if ((token.position - player.position).Length() < 70)
+                if (token.CheckVectorCollision(player, 70))
                 {
                     ShopManager.IncrementTokens();
                     token.IsTaken = true;

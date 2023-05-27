@@ -36,7 +36,7 @@ namespace DormLife.Sprites
 
             foreach (Enemy otherEnemy in enemies)
             {
-                if (otherEnemy != this && CheckCollision(otherEnemy))
+                if (otherEnemy != this && CheckRectangleCollision(otherEnemy))
                 {
                     Vector2 awayFromOtherEnemy = Vector2.Normalize(position - otherEnemy.position);
                     position += awayFromOtherEnemy * speed * Globals.TotalSeconds;
@@ -45,7 +45,7 @@ namespace DormLife.Sprites
 
             foreach (var wall in walls)
             {
-                if ((position - wall.position).Length() < 50)
+                if (CheckVectorCollision(wall, 50))
                 {
                     var toPlayer = cake.position - position;
                     rotation = (float)Math.Atan2(toPlayer.Y, toPlayer.X);

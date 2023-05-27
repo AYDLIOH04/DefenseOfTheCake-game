@@ -15,7 +15,7 @@ namespace DormLife.Managers
 
         public static void Init()
         {
-             _tokens = 100;
+             _tokens = 0;
         }
 
         public static void IncrementTokens()

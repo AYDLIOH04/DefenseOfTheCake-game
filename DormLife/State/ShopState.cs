@@ -15,32 +15,28 @@ namespace DormLife.State
         private Button _exitButton;
         public static Score scoreTokens;
 
-        private Button _speedBuffButton;
-        private Button _damageBuffButton;
-        private Button _shootingSpeedBuffButton;
+        private ShopComponent _speedBuff;
+        private ShopComponent _damageBuff;
+        private ShopComponent _shootingBuff;
 
         public ShopState()
         {
             _exitButton = new Button("Exit", new(Globals.Bounds.X - 70, 70), "btn/btn-exit");
             _exitButton.Clicked += StateManager.BackToGame;
 
-            _speedBuffButton = new Button("Speed Buff", new(Globals.Bounds.X / 2, Globals.Bounds.Y / 2), "btn/btn-speedbuff");
-            _speedBuffButton.Clicked += ShopManager.GetSpeedBuff;
-
-            _damageBuffButton = new Button("Damage Buff", new(Globals.Bounds.X / 2, Globals.Bounds.Y / 2 - 110), "btn/btn-damagebuff");
-            _damageBuffButton.Clicked += ShopManager.GetDamageBuff;
-
-            _shootingSpeedBuffButton = new Button("Shooting Speed", new(Globals.Bounds.X / 2, Globals.Bounds.Y / 2 + 110), "btn/btn-shotspeedbuff");
-            _shootingSpeedBuffButton.Clicked += ShopManager.GetShootingSpeedSpeedBuff;
+            _damageBuff = new ShopComponent("10 tokens", ShopManager.GetDamageBuff, new(Globals.Bounds.X / 2, Globals.Bounds.Y / 2 - 110), "btn/btn-damagebuff");
+            _speedBuff = new ShopComponent("5 tokens", ShopManager.GetSpeedBuff, new(Globals.Bounds.X / 2, Globals.Bounds.Y / 2), "btn/btn-speedbuff");
+            _shootingBuff = new ShopComponent("5 tokens", ShopManager.GetShootingSpeedSpeedBuff, new(Globals.Bounds.X / 2, Globals.Bounds.Y / 2 + 110), "btn/btn-shotspeedbuff");
 
             scoreTokens = new("Tokens", new(Globals.Bounds.X - 350, Globals.Bounds.Y - 100), 0);
         }
         public override void Update()
         {
             _exitButton.Update();
-            _speedBuffButton.Update();
-            _damageBuffButton.Update();
-            _shootingSpeedBuffButton.Update();
+
+            _damageBuff.Update();
+            _speedBuff.Update();
+            _shootingBuff.Update();
 
             scoreTokens.SetScore(ShopManager.Tokens);
         }
@@ -48,11 +44,11 @@ namespace DormLife.State
         public override void Draw(GraphicsDevice graphicsDevice)
         {
             graphicsDevice.Clear(Color.RosyBrown);
-
             _exitButton.Draw();
-            _speedBuffButton.Draw();
-            _damageBuffButton.Draw();
-            _shootingSpeedBuffButton.Draw();
+
+            _damageBuff.Draw();
+            _speedBuff.Draw();
+            _shootingBuff.Draw();
 
             scoreTokens.Draw();
         }

@@ -21,6 +21,8 @@ namespace DormLife.Components
 
         public event EventHandler Clicked;
 
+        public Texture2D Texture => _texture;
+
         public Button(string text, Vector2 position, string texture = "button")
         {
             _text = "";

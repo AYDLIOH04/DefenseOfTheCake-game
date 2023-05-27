@@ -62,7 +62,7 @@ namespace DormLife.Managers
         {
             foreach (var bonus in Bonuses)
             {
-                if ((bonus.position - player.position).Length() < 50)
+                if (bonus.CheckVectorCollision(player, 50))
                 {
                     if (bonus.Type == Bonus.BonusType.BottleHP)
                     {

@@ -14,30 +14,63 @@ namespace DormLife.Sprites
 {
     public class MainHero : Sprite
     {
+        private float _eventTimer;
+        private float _shootingDelay;
+        private bool _isShooting;
+
         public MainHero(Texture2D texture, Vector2 position, float speed) : base(texture, position, speed)
-        { }
+        {
+            _eventTimer = 0;
+            _shootingDelay = 0.3f;
+            _isShooting = false;
+        }
+
+        public void IncrementShootingDelay()
+        {
+            _shootingDelay -= 0.04f;
+        }
 
         private void Fire()
         {
-            if (InputManager.MouseLeftClicked)
+            ProjectileData pd = new ProjectileData()
             {
-                ProjectileData pd = new()
-                {
-                    Position = position,
-                    Rotation = rotation,
-                    Lifespan = 3,
-                    Speed = 600,
-                };
-                ProjectileManager.AddProjectile(pd);
-            } 
+                Position = position,
+                Rotation = rotation,
+                Lifespan = 3.5f,
+                Speed = 600,
+            };
 
+            _eventTimer += Globals.TotalSeconds;
+
+            if (InputManager.MouseLeftPressed)
+            {
+                if (!_isShooting && _eventTimer > _shootingDelay)
+                {
+                    ProjectileManager.AddProjectile(pd);
+                    _isShooting = true;
+                    _eventTimer = 0;
+                }
+                else if (_isShooting && _eventTimer > _shootingDelay)
+                {
+                    ProjectileManager.AddProjectile(pd);
+                    _eventTimer = 0;
+                }
+            }
+            else
+            {
+                _isShooting = false;
+            }
+        }
+
+        private void FireUlt()
+        {
             if (InputManager.MouseRightClicked)
             {
                 ProjectileData pd = new()
                 {
                     Position = position,
                     Rotation = rotation,
-                    Lifespan = 3,
+                    Lifespan = 3.5f,
                     Speed = 800,
                 };
                 ProjectileManager.AddUltProjectile(pd);
@@ -90,6 +123,7 @@ namespace DormLife.Sprites
         {
             Move(walls, cake);
             Fire();
+            FireUlt();
         }
     }
 }

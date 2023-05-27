@@ -18,6 +18,8 @@ namespace DormLife.Managers
         public static Vector2 Direction => _direction;
         public static Vector2 MousePosition => Mouse.GetState().Position.ToVector2();
         public static bool MouseLeftClicked { get; private set; }
+        public static bool MouseLeftPressed { get; private set; }
+
         public static bool MouseRightClicked { get; private set; }
         public static bool MouseLeftDown { get; private set; }
         public static bool MouseRightDown { get; private set; }
@@ -37,6 +39,7 @@ namespace DormLife.Managers
             MouseLeftDown = Mouse.GetState().LeftButton == ButtonState.Pressed;
             MouseRightDown = Mouse.GetState().RightButton == ButtonState.Pressed;
 
+            MouseLeftPressed = (Mouse.GetState().LeftButton == ButtonState.Pressed);
 
             MouseLeftClicked = MouseLeftDown && (_lastMouseState.LeftButton == ButtonState.Released);
             MouseLeftClicked = (Mouse.GetState().LeftButton == ButtonState.Pressed)

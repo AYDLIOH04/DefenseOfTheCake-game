@@ -41,9 +41,14 @@ namespace DormLife.Sprites
         }
 
         #region Collision
-        public bool CheckCollision(Sprite otherSprite)
+        public bool CheckRectangleCollision(Sprite otherSprite)
         {
             return Rectangle.Intersects(otherSprite.Rectangle);
+        }
+
+        public bool CheckVectorCollision(Sprite otherSprite, int diff)
+        {
+            return (position - otherSprite.position).Length() < diff;
         }
 
         protected bool IsTouchingLeft(Sprite sprite, Vector2 Velocity)

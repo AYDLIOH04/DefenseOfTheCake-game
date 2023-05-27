@@ -45,7 +45,8 @@ namespace DormLife.Managers
 
         public static void ShootingSpeedBuff()
         {
-            _shootingSpeed += 50;
+            _shootingSpeed += 25;
+            GameState.player.IncrementShootingDelay();
         }
 
         public static void SetUltProjectiles()
@@ -86,7 +87,7 @@ namespace DormLife.Managers
                 var isRemove = false;
                 foreach (var wall in walls)
                 {
-                    if (p.CheckCollision(wall))
+                    if (p.CheckRectangleCollision(wall))
                     {
                         p.Destroy();
                         isRemove = true;
@@ -120,7 +121,7 @@ namespace DormLife.Managers
                 up.Update();
 
 
-                if ((up.position - cake.position).Length() < 30)
+                if (up.CheckVectorCollision(cake, 30))
                 {
                     up.Destroy();
                     continue;
@@ -130,7 +131,7 @@ namespace DormLife.Managers
 
                 foreach (var wall in walls)
                 {
-                    if (up.CheckCollision(wall))
+                    if (up.CheckRectangleCollision(wall))
                     {
                         up.Destroy();
                         isRemove = true;
@@ -145,7 +146,7 @@ namespace DormLife.Managers
                 {
                     if (enemy.HP <= 0) continue;
 
-                    if ((up.position - enemy.position).Length() < 45)
+                    if (up.CheckVectorCollision(enemy, 45))
                     {
                         enemy.TakeDamage(up.Damage);
                         if (enemy.HP < 1)

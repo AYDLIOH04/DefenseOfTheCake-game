@@ -25,7 +25,7 @@ namespace DormLife.State
         public static Score scoreCakeHP;
         public static Score scoreEnemyKills;
         public static Score scoreTokens;
-        public static Score scoreUltCount;
+        public static Score scoreUltCount;                         
         public static Score scoreTrapCount;
         #endregion
 

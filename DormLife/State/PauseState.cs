@@ -16,6 +16,7 @@ namespace DormLife.State
         private Button _menuButton;
         private Button _exitButton;
 
+        private TextureContent _textureContent;
 
         public PauseState()
         {
@@ -27,6 +28,8 @@ namespace DormLife.State
 
             _exitButton = new Button("Exit", new(Globals.Bounds.X - 70, 70), "btn/btn-exit");
             _exitButton.Clicked += StateManager.ExitGame;
+
+            _textureContent = new TextureContent(new(Globals.Bounds.X / 2 - 156, 320), "BackgroundContent/pause");
         }
         public override void Update()
         {
@@ -42,6 +45,8 @@ namespace DormLife.State
             _continueGameButton.Draw();
             _menuButton.Draw();
             _exitButton.Draw();
+
+            _textureContent.Draw();
         }
     }
 }

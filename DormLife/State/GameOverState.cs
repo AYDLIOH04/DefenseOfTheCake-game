@@ -14,7 +14,9 @@ namespace DormLife.State
     {
         private Button _restartGameButton;
         private Button _menuButton;
-        private Button _exitButton; 
+        private Button _exitButton;
+
+        private TextureContent _textureContent;
 
         public GameOverState()
         {
@@ -26,6 +28,8 @@ namespace DormLife.State
 
             _exitButton = new Button("Exit", new(Globals.Bounds.X - 70, 70), "btn/btn-exit");
             _exitButton.Clicked += StateManager.ExitGame;
+
+            _textureContent = new TextureContent(new(Globals.Bounds.X / 2 - 250, 320), "BackgroundContent/gameover");
         }
 
         public override void Update()
@@ -41,6 +45,8 @@ namespace DormLife.State
             _restartGameButton.Draw();
             _menuButton.Draw();
             _exitButton.Draw();
+
+            _textureContent.Draw();
         }
     }
 }

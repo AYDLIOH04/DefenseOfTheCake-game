@@ -37,6 +37,18 @@
 /processorParam:TextureFormat=Color
 /build:../../../../../Desktop/DOTC sprites/kills.png;scores/kills.png
 
+#begin ../../../../../Desktop/DOTC sprites/menu.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../../../../../Desktop/DOTC sprites/menu.png;BackgroundContent/menu.png
+
 #begin ../../../../../Desktop/DOTC sprites/monster.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -48,6 +60,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:../../../../../Desktop/DOTC sprites/monster.png;sprites/monster.png
+
+#begin ../../../../../Desktop/DOTC sprites/pause.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../../../../../Desktop/DOTC sprites/pause.png;BackgroundContent/pause.png
 
 #begin ../../../../../Desktop/DOTC sprites/player.png
 /importer:TextureImporter
@@ -108,6 +132,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:arms/ult.png
+
+#begin BackgroundContent/gameover.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BackgroundContent/gameover.png
 
 #begin bonus/hp.png
 /importer:TextureImporter

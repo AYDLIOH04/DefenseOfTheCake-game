@@ -16,15 +16,17 @@ namespace DormLife.State
     public class GameState : BaseState
     {
         public static MainHero player;
-        public Cake cake;
+        public static Cake cake;
+
 
         #region Score
         public static Score scoreWave;
         public static Score scoreHighWave = new Score("Highscore", new (10, 10)) ;
         public static Score scoreCakeHP;
         public static Score scoreEnemyKills;
-        public static Score scoreCountUlt;
         public static Score scoreTokens;
+        public static Score scoreUltCount;
+        public static Score scoreTrapCount;
         #endregion
 
         private static Button _shopButton;
@@ -42,14 +44,17 @@ namespace DormLife.State
             EnemyManager.Init();
             WallManager.Init();
             ShopManager.Init();
+            TrapManager.Init();
             #endregion
 
             #region Scores + Buttons Init
             scoreWave = new Score("Wave", new(10, 30));
-            scoreEnemyKills = new Score("Kills", new(Globals.Bounds.X - 100, Globals.Bounds.Y - 30), 0);
+            scoreEnemyKills = new Score("Kills", new(Globals.Bounds.X - 100, Globals.Bounds.Y - 30));
             scoreCakeHP = new("Cake HP", new(Globals.Bounds.X - 250, Globals.Bounds.Y - 30), cake.HP);
-            scoreCountUlt = new("Ultimatum Projectiles", new(Globals.Bounds.X - 450, Globals.Bounds.Y - 30), 5);
-            scoreTokens = new("Tokens", new(Globals.Bounds.X - 350, Globals.Bounds.Y - 100), 0);
+            scoreTokens = new("Tokens", new(Globals.Bounds.X - 350, Globals.Bounds.Y - 100));
+            scoreUltCount = new("Ultimatum Projectiles", new(Globals.Bounds.X - 450, Globals.Bounds.Y - 30), 5);
+            scoreTrapCount = new("You have traps", new(Globals.Bounds.X - 650, Globals.Bounds.Y - 30));
+
 
             _shopButton = new Button("Shop", new(Globals.Bounds.X - 150, Globals.Bounds.Y - 100), "btn/btn-shop");
             _shopButton.Clicked += StateManager.GoToShop;
@@ -68,12 +73,14 @@ namespace DormLife.State
 
             WaveManager.GenerateWave();
             ProjectileManager.Update(EnemyManager.Enemies, WallManager.Walls, cake);
-            EnemyManager.Update(cake, WallManager.Walls);
+            EnemyManager.Update(cake, WallManager.Walls, TrapManager.Traps);
+            TrapManager.Update();
             BonusManager.Update(player, cake);
             TokenManager.Update(player);
 
             scoreCakeHP.SetScore(cake.HP);
             scoreTokens.SetScore(ShopManager.Tokens);
+            scoreTrapCount.SetScore(TrapManager.currentHaveCount);
 
             _shopButton.Update();
         }
@@ -100,11 +107,17 @@ namespace DormLife.State
             TokenManager.Draw();
             EnemyManager.Draw();
             WallManager.Draw();
+            TrapManager.Draw();
             #endregion
 
             if (ProjectileManager.IsUlt)
             {
-                scoreCountUlt.Draw();
+                scoreUltCount.Draw();
+            }
+
+            if (TrapManager.currentHaveCount > 0)
+            {
+                scoreTrapCount.Draw();
             }
         }
     }

@@ -23,6 +23,12 @@ namespace DormLife.Managers
         private static int _damage;
         private static int _shootingSpeed;
 
+        public static int ShootingBuffCount { get; private set; }
+        public readonly static int ShootingBuffLimit = 5;
+
+        public static int DamageBuffCount { get; private set; }
+        public readonly static int DamageBuffLimit = 6;
+
 
         public static void Init()
         {
@@ -36,24 +42,41 @@ namespace DormLife.Managers
 
             _damage = 1;
             _shootingSpeed = 0;
+
+            ShootingBuffCount = 0;
+            DamageBuffCount = 0;
         }
 
-        public static void ShootingDamageBuff()
+        public static bool ShootingDamageBuff()
         {
-            _damage += 1;
+            if (DamageBuffCount < DamageBuffLimit)
+            {
+                _damage += 1;
+                DamageBuffCount++;
+                return true;
+            }
+
+            return false;
         }
 
-        public static void ShootingSpeedBuff()
+        public static bool ShootingSpeedBuff()
         {
-            _shootingSpeed += 25;
-            GameState.player.IncrementShootingDelay();
+            if (ShootingBuffCount < ShootingBuffLimit)
+            {
+                _shootingSpeed += 25;
+                GameState.player.IncrementShootingDelay();
+                ShootingBuffCount++;
+                return true;
+            }
+
+            return false;
         }
 
         public static void SetUltProjectiles()
         {
             IsUlt = true;
             CountUlt += 5;
-            GameState.scoreCountUlt.SetScore(CountUlt);
+            GameState.scoreUltCount.SetScore(CountUlt);
         }
 
         public static void AddProjectile(ProjectileData data)
@@ -67,7 +90,7 @@ namespace DormLife.Managers
             if (IsUlt)
             {
                 CountUlt--;
-                GameState.scoreCountUlt.SetScore(CountUlt);
+                GameState.scoreUltCount.SetScore(CountUlt);
                 UltProjectiles.Add(new(_textureUlt, data, 1000));
             }
         }

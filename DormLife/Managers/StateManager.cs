@@ -95,7 +95,7 @@ namespace DormLife.Managers
         {
             if (Game1.currentState is GameState)
             {
-                if ((Game1.currentState as GameState).cake.HP <= 0)
+                if (GameState.cake.HP <= 0)
                 {
                     Game1.currentState = Game1.gameOverState;
                 }

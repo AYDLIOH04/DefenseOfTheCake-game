@@ -9,45 +9,67 @@ namespace DormLife.Managers
 {
     public class ShopManager
     {
-
-        private static int _tokens;
-        public static int Tokens => _tokens;
+        public static int Tokens { get; private set; }
 
         public static void Init()
         {
-             _tokens = 0;
+            Tokens = 1000;
         }
 
         public static void IncrementTokens()
         {
-            _tokens++;
+            Tokens++;
         }
         
+        public static void GetTrap(object sender = null, EventArgs e = null)
+        {
+            if (Tokens >= 10)
+            {
+                if (TrapManager.currentHaveCount + TrapManager.Traps.Count < TrapManager.Limit) 
+                {
+                    TrapManager.currentHaveCount++;
+                    Tokens -= 10;
+                }
+            }
+        }
 
         public static void GetSpeedBuff(object sender = null, EventArgs e = null)
         {
-            if (_tokens >= 5)
+            if (Tokens >= 5)
             {
-                _tokens -= 5;
+                Tokens -= 5;
                 GameState.player.speed += 25;
+            }
+        }
+
+        public static void GetHpCake(object sender = null, EventArgs e = null)
+        {
+            if (Tokens >= 5)
+            {
+                Tokens -= 5;
+                GameState.cake.GetHP(25);
             }
         }
 
         public static void GetShootingSpeedSpeedBuff(object sender = null, EventArgs e = null)
         {
-            if (_tokens >= 5)
+            if (Tokens >= 5)
             {
-                _tokens -= 5;
-                ProjectileManager.ShootingSpeedBuff();
+                if (ProjectileManager.ShootingSpeedBuff())
+                {
+                    Tokens -= 5;
+                }
             }
         }
 
         public static void GetDamageBuff(object sender = null, EventArgs e = null)
         {
-            if (_tokens >= 10)
+            if (Tokens >= 10)
             {
-                _tokens -= 10;
-                ProjectileManager.ShootingDamageBuff();
+                if (ProjectileManager.ShootingDamageBuff())
+                {
+                    Tokens -= 10;
+                }
             }
         }
     }

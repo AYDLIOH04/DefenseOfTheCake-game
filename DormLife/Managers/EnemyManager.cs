@@ -111,10 +111,19 @@ namespace DormLife.Managers
         }
         #endregion
 
-        public static void Update(Cake cake, List<Wall> walls)
+        public static void Update(Cake cake, List<Wall> walls, List<Trap> traps)
         {
             foreach (var enemy in Enemies)
             {
+                foreach (var trap in traps)
+                {
+                    if (trap.CheckRectangleCollision(enemy))
+                    {
+                        trap.TakeDamage(1);
+                        enemy.TakeDamage(100);
+                    }
+                }
+
                 if ((enemy.position - cake.position).Length() < 30)
                 {
                     enemy.TakeDamage(100);

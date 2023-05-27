@@ -27,7 +27,7 @@ namespace DormLife.Managers
 
         public static void CreateBonus(Vector2 position)
         {
-            var rnd = _random.Next(0, 5);
+            var rnd = _random.Next(0, 2);
 
             if (rnd == 1)
             {

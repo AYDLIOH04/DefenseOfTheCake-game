@@ -1,6 +1,7 @@
 ﻿using DormLife.GameObjects;
 using DormLife.Managers;
 using DormLife.Models;
+using DormLife.State;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -16,18 +17,38 @@ namespace DormLife.Sprites
     {
         private float _eventTimer;
         private float _shootingDelay;
+        private float _trapDelay;
+
         private bool _isShooting;
+
 
         public MainHero(Texture2D texture, Vector2 position, float speed) : base(texture, position, speed)
         {
             _eventTimer = 0;
             _shootingDelay = 0.3f;
+            _trapDelay = 0.3f;
             _isShooting = false;
+
         }
 
         public void IncrementShootingDelay()
         {
-            _shootingDelay -= 0.04f;
+             _shootingDelay -= 0.04f;
+        }
+
+        private void CreateTrap()
+        {
+            KeyboardState keyboardState = Keyboard.GetState();
+
+            if (_eventTimer > _trapDelay && keyboardState.IsKeyDown(Keys.Space))
+            {
+                if (TrapManager.currentHaveCount > 0)
+                {
+                    GameState.scoreTrapCount.DecrementScore(1);
+                    TrapManager.AddTrap(new(position.X + texture.Width / 2, position.Y + texture.Height / 2), rotation);
+                }
+                _eventTimer = 0;
+            }
         }
 
         private void Fire()
@@ -39,8 +60,6 @@ namespace DormLife.Sprites
                 Lifespan = 3.5f,
                 Speed = 600,
             };
-
-            _eventTimer += Globals.TotalSeconds;
 
             if (InputManager.MouseLeftPressed)
             {
@@ -121,6 +140,8 @@ namespace DormLife.Sprites
 
         public void Update(List<Wall> walls, Cake cake)
         {
+            _eventTimer += Globals.TotalSeconds;
+            CreateTrap();
             Move(walls, cake);
             Fire();
             FireUlt();

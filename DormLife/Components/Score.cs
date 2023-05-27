@@ -18,10 +18,19 @@ namespace DormLife.Components
         private string _text;
         public int GetScore => _score;
 
-        public Score(string text, Vector2 position, int score = 0)
+        private Texture2D _texture;
+        private Vector2 _texturePosition;
+
+
+        public Score(string text, Vector2 position, string texture = "", int score = 0)
         {
             _text = text;
             _position = position;
+            if (!string.IsNullOrEmpty(texture))
+            {
+                _texture = Globals.Content.Load<Texture2D>(texture);
+            }
+            _texturePosition = new(position.X - 35, position.Y - 2);
             _score = score;
             _font = Globals.Content.Load<SpriteFont>("Font");
         }
@@ -48,9 +57,15 @@ namespace DormLife.Components
 
         public void Draw()
         {
-            string scoreText = $"{_text}: {_score}";
+            string scoreText = $"{_text} : {_score}";
 
+            if (_texture != null)
+            {
+                scoreText = $"{_score}";
+                Globals.SpriteBatch.Draw(_texture, _texturePosition, _color);
+            }
             Globals.SpriteBatch.DrawString(_font, scoreText, _position, _color);
+
         }
     }
 }

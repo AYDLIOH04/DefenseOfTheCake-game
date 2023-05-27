@@ -33,7 +33,7 @@ namespace DormLife.Managers
         public static void Init()
         {
             _texture = Globals.Content.Load<Texture2D>("arms/range_arm");
-            _textureUlt = Globals.Content.Load<Texture2D>("arms/melee_arm");
+            _textureUlt = Globals.Content.Load<Texture2D>("arms/ult");
 
             IsUlt = false;
             CountUlt = 0;

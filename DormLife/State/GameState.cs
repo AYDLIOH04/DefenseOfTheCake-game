@@ -21,7 +21,7 @@ namespace DormLife.State
 
         #region Score
         public static Score scoreWave;
-        public static Score scoreHighWave = new Score("Highscore", new (10, 10)) ;
+        public static Score scoreHighWave = new Score("Highscore", new (10, 10));
         public static Score scoreCakeHP;
         public static Score scoreEnemyKills;
         public static Score scoreTokens;
@@ -49,11 +49,11 @@ namespace DormLife.State
 
             #region Scores + Buttons Init
             scoreWave = new Score("Wave", new(10, 30));
-            scoreEnemyKills = new Score("Kills", new(Globals.Bounds.X - 100, Globals.Bounds.Y - 30));
-            scoreCakeHP = new("Cake HP", new(Globals.Bounds.X - 250, Globals.Bounds.Y - 30), cake.HP);
-            scoreTokens = new("Tokens", new(Globals.Bounds.X - 350, Globals.Bounds.Y - 100));
-            scoreUltCount = new("Ultimatum Projectiles", new(Globals.Bounds.X - 450, Globals.Bounds.Y - 30), 5);
-            scoreTrapCount = new("You have traps", new(Globals.Bounds.X - 650, Globals.Bounds.Y - 30));
+            scoreEnemyKills = new Score("Kills", new(Globals.Bounds.X - 100, Globals.Bounds.Y - 30), "scores/kills");
+            scoreCakeHP = new("Cake HP", new(Globals.Bounds.X - 200, Globals.Bounds.Y - 30), "scores/cakehp", cake.HP);
+            scoreTokens = new("Tokens", new(Globals.Bounds.X - 300, Globals.Bounds.Y - 110), "scores/coin");
+            scoreUltCount = new("Ultimatum Projectiles", new(Globals.Bounds.X - 320, Globals.Bounds.Y - 30), "arms/ult", 5);
+            scoreTrapCount = new("You have traps", new(Globals.Bounds.X - 420, Globals.Bounds.Y - 30), "scores/scoretrap");
 
 
             _shopButton = new Button("Shop", new(Globals.Bounds.X - 150, Globals.Bounds.Y - 100), "btn/btn-shop");

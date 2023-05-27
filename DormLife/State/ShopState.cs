@@ -40,9 +40,9 @@ namespace DormLife.State
             _trap = new ShopComponent("10 tokens", ShopManager.GetTrap, new(Globals.Bounds.X / 2 - 320, Globals.Bounds.Y / 2), "btn/btn-buytrap", TrapManager.currentHaveCount, TrapManager.Limit);
             _turret = new ShopComponent("25 tokens", ShopManager.GetHpCake, new(Globals.Bounds.X / 2 - 320, Globals.Bounds.Y / 2 - 110), "btn/btn-buyturret");
 
-            scoreTrapCount = new("You have traps", new(Globals.Bounds.X - 650, Globals.Bounds.Y - 30));
-            scoreCakeHP = new("Cake HP", new(Globals.Bounds.X - 250, Globals.Bounds.Y - 30), Cake.CakeHP);
-            scoreTokens = new("Tokens", new(Globals.Bounds.X - 350, Globals.Bounds.Y - 100), 0);
+            scoreTrapCount = new("You have traps", new(Globals.Bounds.X - 420, Globals.Bounds.Y - 30), "scores/scoretrap");
+            scoreCakeHP = new("Cake HP", new(Globals.Bounds.X - 200, Globals.Bounds.Y - 30), "scores/cakehp", Cake.CakeHP);
+            scoreTokens = new("Tokens", new(Globals.Bounds.X - 300, Globals.Bounds.Y - 110), "scores/coin", 0);
         }
 
         public override void Update()

@@ -339,6 +339,30 @@
 /processorParam:TextureFormat=Compressed
 /build:Font.spritefont
 
+#begin Music/game1.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Music/game1.mp3;Music/game.mp3
+
+#begin Music/gameover.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Music/gameover.mp3
+
+#begin Music/menu.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Music/menu.mp3
+
+#begin Music/shop.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Music/shop.mp3
+
 #begin scores/cakehp.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -374,6 +398,78 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:scores/scoretrap.png
+
+#begin Sounds/buff.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/buff.wav
+
+#begin Sounds/cakedamage.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/cakedamage.wav
+
+#begin Sounds/catchtrap.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/catchtrap.wav
+
+#begin Sounds/death.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/death.wav
+
+#begin Sounds/explodetrap.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/explodetrap.wav
+
+#begin Sounds/gameover.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/gameover.wav
+
+#begin Sounds/healbottle.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/healbottle.wav
+
+#begin Sounds/moneyspend.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/moneyspend.wav
+
+#begin Sounds/settrap.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/settrap.wav
+
+#begin Sounds/shootend.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/shootend.wav
+
+#begin Sounds/shootstart.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/shootstart.wav
+
+#begin Sounds/ultbottle.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/ultbottle.wav
 
 #begin sprites/cake.png
 /importer:TextureImporter

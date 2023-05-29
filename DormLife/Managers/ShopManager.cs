@@ -20,13 +20,19 @@ namespace DormLife.Managers
         {
             Tokens++;
         }
-        
+
+        public static void GetTurret(object sender = null, EventArgs e = null)
+        {
+            SoundManager.PlaySoundEffect("moneyspend");
+        }
+
         public static void GetTrap(object sender = null, EventArgs e = null)
         {
             if (Tokens >= 10)
             {
                 if (TrapManager.currentHaveCount + TrapManager.Traps.Count < TrapManager.Limit) 
                 {
+                    SoundManager.PlaySoundEffect("moneyspend");
                     TrapManager.currentHaveCount++;
                     Tokens -= 10;
                 }
@@ -38,7 +44,8 @@ namespace DormLife.Managers
             if (Tokens >= 5)
             {
                 Tokens -= 5;
-                GameState.player.speed += 25;
+                SoundManager.PlaySoundEffect("buff");
+                GameState.gameManager.player.speed += 25;
             }
         }
 
@@ -47,7 +54,8 @@ namespace DormLife.Managers
             if (Tokens >= 5)
             {
                 Tokens -= 5;
-                GameState.cake.GetHP(25);
+                SoundManager.PlaySoundEffect("buff");
+                GameState.gameManager.cake.GetHP(25);
             }
         }
 
@@ -57,6 +65,7 @@ namespace DormLife.Managers
             {
                 if (ProjectileManager.ShootingSpeedBuff())
                 {
+                    SoundManager.PlaySoundEffect("buff");
                     Tokens -= 5;
                 }
             }
@@ -68,6 +77,7 @@ namespace DormLife.Managers
             {
                 if (ProjectileManager.ShootingDamageBuff())
                 {
+                    SoundManager.PlaySoundEffect("buff");
                     Tokens -= 10;
                 }
             }

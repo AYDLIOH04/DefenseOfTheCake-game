@@ -128,13 +128,22 @@ namespace DormLife.Managers
                 {
                     enemy.TakeDamage(100);
                     cake.TakeDamage(enemy.Damage);
+                    SoundManager.PlaySoundEffect("cakedamage");
                 }
 
                 enemy.Update(cake, walls, Enemies);
 
             }
 
-            Enemies.RemoveAll((enemy) => enemy.HP <= 0);
+            Enemies.RemoveAll(enemy =>
+            {
+                if (enemy.HP <= 0)
+                {
+                    SoundManager.PlaySoundEffect("death");
+                    return true;
+                }
+                return false;
+            });
         }
 
         public static void Draw()

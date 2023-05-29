@@ -20,13 +20,16 @@ namespace DormLife.State
 
         public MenuState()
         {
-            _newGameButton = new Button("Play", new(Globals.Bounds.X / 2, Globals.Bounds.Y / 2), "btn/btn-play");
+            SoundManager.LoadContent();
+            SoundManager.PlayBasedBackgroundMusic();
+
+            _newGameButton = new Button("Play", new(Globals.Bounds.X / 2, Globals.Bounds.Y / 2 + 70), "btn/btn-play");
             _newGameButton.Clicked += StateManager.CreateGame;
 
             _exitButton = new Button("Exit", new(Globals.Bounds.X - 70, 70), "btn/btn-exit");
             _exitButton.Clicked += StateManager.ExitGame;
 
-            _textureContent = new TextureContent(new(Globals.Bounds.X / 2 - 250, 70), "BackgroundContent/menu");
+            _textureContent = new TextureContent(new(Globals.Bounds.X / 2 - 250, 20), "BackgroundContent/menu");
         }
 
         public override void Update()

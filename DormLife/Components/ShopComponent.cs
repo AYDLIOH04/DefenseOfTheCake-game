@@ -20,7 +20,7 @@ namespace DormLife.Components
             Button = new Button("", position, textureRef);
             Button.Clicked += callback;
 
-            var textPosition = new Vector2(position.X - Button.Texture.Width + 60, position.Y - 10);
+            var textPosition = new Vector2(position.X - Button.Texture.Width + 45, position.Y - 10);
             Text = new TextContent(text, textPosition);
 
             if (Limit != -1)

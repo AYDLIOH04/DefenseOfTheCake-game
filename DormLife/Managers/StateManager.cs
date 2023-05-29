@@ -61,26 +61,33 @@ namespace DormLife.Managers
         #region State Button Methods
         public static void CreateGame(object sender = null, EventArgs e = null)
         {
+            SoundManager.PlayGameBackgroundMusic();
             Game1.gameState.NewGame();
             Game1.currentState = Game1.gameState;
         }
 
         public static void BackToGame(object sender = null, EventArgs e = null)
         {
+            SoundManager.ResumeGameMusic();
             Game1.currentState = Game1.gameState;
         }
 
         public static void SetPause(object sender = null, EventArgs e = null)
         {
+            SoundManager.PauseGameMusic();
+            SoundManager.PlayBasedBackgroundMusic();
             Game1.currentState = Game1.pauseState;
         }
 
         public static void GoToMenu(object sender = null, EventArgs e = null)
         {
-            Game1.currentState = Game1.menuState;
+            SoundManager.PlayBasedBackgroundMusic();
+            Game1.currentState = Game1.menuState;       
         }
         public static void GoToShop(object sender = null, EventArgs e = null)
         {
+            SoundManager.PauseGameMusic();
+            SoundManager.PlayShopBackgroundMusic();
             Game1.currentState = Game1.shopState;
         }
 
@@ -95,9 +102,11 @@ namespace DormLife.Managers
         {
             if (Game1.currentState is GameState)
             {
-                if (GameState.cake.HP <= 0)
+                if (GameState.gameManager.cake.HP <= 0)
                 {
                     Game1.currentState = Game1.gameOverState;
+                    SoundManager.PlayBasedBackgroundMusic();
+                    SoundManager.PlaySoundEffect("gameover");
                 }
             }
         }

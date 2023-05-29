@@ -27,7 +27,7 @@ namespace DormLife.Managers
         public readonly static int ShootingBuffLimit = 5;
 
         public static int DamageBuffCount { get; private set; }
-        public readonly static int DamageBuffLimit = 6;
+        public readonly static int DamageBuffLimit = 10;
 
 
         public static void Init()
@@ -64,7 +64,7 @@ namespace DormLife.Managers
             if (ShootingBuffCount < ShootingBuffLimit)
             {
                 _shootingSpeed += 25;
-                GameState.player.IncrementShootingDelay();
+                GameState.gameManager.player.IncrementShootingDelay();
                 ShootingBuffCount++;
                 return true;
             }
@@ -83,12 +83,14 @@ namespace DormLife.Managers
         {
             data.Speed += _shootingSpeed;
             Projectiles.Add(new(_texture, data, _damage));
+            SoundManager.PlaySoundEffect("shoot");
         }
 
         public static void AddUltProjectile(ProjectileData data)
         {
             if (IsUlt)
             {
+                SoundManager.PlaySoundEffect("shoot");
                 CountUlt--;
                 GameState.scoreUltCount.SetScore(CountUlt);
                 UltProjectiles.Add(new(_textureUlt, data, 1000));
@@ -127,10 +129,11 @@ namespace DormLife.Managers
                     if ((p.position - enemy.position).Length() < 32)
                     {
                         enemy.TakeDamage(p.Damage);
+                        SoundManager.PlaySoundEffect("nomissed");
                         if (enemy.HP < 1)
                         {
                             GameState.scoreEnemyKills.IncrementScore(1);
-                            TokenManager.CreateBonus(enemy.position);
+                            TokenManager.CreateToken(enemy.position);
                         }
 
                         p.Destroy();
@@ -174,7 +177,7 @@ namespace DormLife.Managers
                         enemy.TakeDamage(up.Damage);
                         if (enemy.HP < 1)
                         {
-                            TokenManager.CreateBonus(enemy.position);
+                            TokenManager.CreateToken(enemy.position);
                             GameState.scoreEnemyKills.IncrementScore(1);
                         }
                     }

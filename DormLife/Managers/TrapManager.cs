@@ -29,6 +29,7 @@ namespace DormLife.Managers
 
         public static void AddTrap(Vector2 position, float rotation)
         {
+            SoundManager.PlaySoundEffect("trapspawn");
             currentHaveCount--;
             Traps.Add(new(_textureTrap, position, rotation));
         }
@@ -36,7 +37,16 @@ namespace DormLife.Managers
 
         public static void Update()
         {
-            Traps.RemoveAll(trap => trap.HP <= 0);
+            Traps.RemoveAll(trap =>
+            {
+                if (trap.HP <= 0)
+                {
+                    SoundManager.PlaySoundEffect("trapexp");
+                    return true;
+                }
+                return false;
+            });
+
         }
 
         public static void Draw()

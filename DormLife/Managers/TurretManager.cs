@@ -8,5 +8,6 @@ namespace DormLife.Managers
 {
     public class TurretManager
     {
+
     }
 }

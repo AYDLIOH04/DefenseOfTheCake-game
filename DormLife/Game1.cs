@@ -41,6 +41,7 @@ public class Game1 : Game
 
     protected override void Initialize()
     {
+
         Globals.Bounds = new(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
         _graphics.PreferredBackBufferWidth = Globals.Bounds.X;
         _graphics.PreferredBackBufferHeight = Globals.Bounds.Y;
@@ -55,6 +56,7 @@ public class Game1 : Game
         shopState = new ShopState();
 
         currentState = menuState;
+
 
         base.Initialize();
     }

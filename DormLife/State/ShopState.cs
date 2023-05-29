@@ -38,11 +38,11 @@ namespace DormLife.State
             _shootingBuff = new ShopComponent("5 tokens", ShopManager.GetShootingSpeedSpeedBuff, new(Globals.Bounds.X / 2 + 200, Globals.Bounds.Y / 2 + 110), "btn/btn-shotspeedbuff", ProjectileManager.ShootingBuffCount, ProjectileManager.ShootingBuffLimit);
 
             _trap = new ShopComponent("10 tokens", ShopManager.GetTrap, new(Globals.Bounds.X / 2 - 320, Globals.Bounds.Y / 2), "btn/btn-buytrap", TrapManager.currentHaveCount, TrapManager.Limit);
-            _turret = new ShopComponent("25 tokens", ShopManager.GetHpCake, new(Globals.Bounds.X / 2 - 320, Globals.Bounds.Y / 2 - 110), "btn/btn-buyturret");
+            _turret = new ShopComponent("25 tokens", ShopManager.GetTurret, new(Globals.Bounds.X / 2 - 320, Globals.Bounds.Y / 2 - 110), "btn/btn-buyturret");
 
-            scoreTrapCount = new("You have traps", new(Globals.Bounds.X - 420, Globals.Bounds.Y - 30), "scores/scoretrap");
-            scoreCakeHP = new("Cake HP", new(Globals.Bounds.X - 200, Globals.Bounds.Y - 30), "scores/cakehp", Cake.CakeHP);
-            scoreTokens = new("Tokens", new(Globals.Bounds.X - 300, Globals.Bounds.Y - 110), "scores/coin", 0);
+            scoreTrapCount = new("You have traps", new(Globals.Bounds.X - 420, Globals.Bounds.Y - 50), "scores/scoretrap");
+            scoreCakeHP = new("Cake HP", new(Globals.Bounds.X - 200, Globals.Bounds.Y - 50), "scores/cakehp", Cake.CakeHP);
+            scoreTokens = new("Tokens", new(Globals.Bounds.X - 320, Globals.Bounds.Y - 110), "scores/coin", 0);
         }
 
         public override void Update()

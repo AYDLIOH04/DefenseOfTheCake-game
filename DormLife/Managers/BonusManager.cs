@@ -66,11 +66,13 @@ namespace DormLife.Managers
                 {
                     if (bonus.Type == Bonus.BonusType.BottleHP)
                     {
+                        SoundManager.PlaySoundEffect("healbottle");
                         GiveHP(cake);
                     }
                     else
                     {
                         GiveULT();
+                        SoundManager.PlaySoundEffect("ultbottle");
                     }
 
                     bonus.IsTaken = true;

@@ -29,7 +29,7 @@ namespace DormLife.State
             _exitButton = new Button("Exit", new(Globals.Bounds.X - 70, 70), "btn/btn-exit");
             _exitButton.Clicked += StateManager.ExitGame;
 
-            _textureContent = new TextureContent(new(Globals.Bounds.X / 2 - 156, 320), "BackgroundContent/pause");
+            _textureContent = new TextureContent(new(Globals.Bounds.X / 2 - 156, 250), "BackgroundContent/pause");
         }
         public override void Update()
         {

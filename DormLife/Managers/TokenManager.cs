@@ -17,7 +17,6 @@ namespace DormLife.Managers
         private static Random _random;
         public static List<Token> Tokens;
 
-
         public static void Init()
         {
             _textureToken = Globals.Content.Load<Texture2D>("bonus/token");
@@ -25,9 +24,9 @@ namespace DormLife.Managers
             Tokens = new();
         }
 
-        public static void CreateBonus(Vector2 position)
+        public static void CreateToken(Vector2 position)
         {
-            var rnd = _random.Next(0, 6);
+            var rnd = _random.Next(0, 5);
 
             if (rnd == 1)
             {
@@ -40,6 +39,8 @@ namespace DormLife.Managers
         {
             foreach (var token in Tokens)
             {
+                token.Update();
+
                 if (token.CheckVectorCollision(player, 70))
                 {
                     ShopManager.IncrementTokens();
@@ -47,7 +48,7 @@ namespace DormLife.Managers
                 }
             }
 
-            Tokens.RemoveAll(bonus => bonus.IsTaken);
+            Tokens.RemoveAll(token => token.IsTaken);
         }
 
         public static void Draw()

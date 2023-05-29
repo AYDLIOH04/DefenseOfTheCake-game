@@ -24,7 +24,7 @@ namespace DormLife.Managers
         private static bool isGenerating = false;
         private static Vector2 position;
 
-        public static void NewWaves()
+        public static void Init()
         {
             enemyTimer = 0;
             _spawnCount = -1;

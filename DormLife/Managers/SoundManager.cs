@@ -27,14 +27,18 @@ namespace DormLife.Managers
 
         private static Dictionary<string, SoundEffect> soundEffects = new();
 
+        public static bool isMusicEnabled { get; private set; }
+
         public static void LoadContent()
         {
+            isMusicEnabled = true;
+
             basedBackgroundMusic = Globals.Content.Load<Song>("Music/menu");
             gameBackgroundMusic = Globals.Content.Load<Song>("Music/game");
             shopBackgroundMusic = Globals.Content.Load<Song>("Music/shop");
 
             MediaPlayer.Volume = 0.1f;
-            SoundEffect.MasterVolume = 0.5f;
+            SoundEffect.MasterVolume = 0.3f;
 
             soundEffects.Add("shoot", Globals.Content.Load<SoundEffect>("Sounds/shootstart"));
             soundEffects.Add("nomissed", Globals.Content.Load<SoundEffect>("Sounds/shootend"));
@@ -52,14 +56,20 @@ namespace DormLife.Managers
         public static void PlayBasedBackgroundMusic()
         {
             MediaPlayer.Stop();
-            MediaPlayer.Volume = 0.1f;
+            if (isMusicEnabled)
+            {
+                MediaPlayer.Volume = 0.1f;
+            }
             MediaPlayer.Play(basedBackgroundMusic);
         }
 
         public static void PlayGameBackgroundMusic()
         {
             MediaPlayer.Stop();
-            MediaPlayer.Volume = 0.2f;
+            if (isMusicEnabled)
+            {
+                MediaPlayer.Volume = 0.2f;
+            }
             MediaPlayer.Play(gameBackgroundMusic);
         }
 
@@ -84,8 +94,26 @@ namespace DormLife.Managers
         {
             if (pausedMusic != null)
             {
-                MediaPlayer.Volume = 0.2f;
+                if (isMusicEnabled)
+                {
+                    MediaPlayer.Volume = 0.2f;
+                }
                 MediaPlayer.Play(pausedMusic, pausedMusicPosition);
+            }
+        }
+
+        public static void ToggleMusic()
+        {
+            if (isMusicEnabled)
+            {
+                isMusicEnabled = !isMusicEnabled;
+                MediaPlayer.Volume = 0;
+
+            }
+            else
+            {
+                isMusicEnabled = !isMusicEnabled;
+                MediaPlayer.Volume = 0.1f;
             }
         }
 

@@ -15,6 +15,7 @@ namespace DormLife.State
 
         private Button _newGameButton;
         private Button _exitButton;
+        public static MusicButton musicButton;
 
         private TextureContent _textureContent;
 
@@ -29,12 +30,15 @@ namespace DormLife.State
             _exitButton = new Button("Exit", new(Globals.Bounds.X - 70, 70), "btn/btn-exit");
             _exitButton.Clicked += StateManager.ExitGame;
 
+            musicButton = new MusicButton(new(20, 20));
+
             _textureContent = new TextureContent(new(Globals.Bounds.X / 2 - 250, 20), "BackgroundContent/menu");
         }
 
         public override void Update()
         {
             _exitButton.Update();
+            musicButton.Update();
             _newGameButton.Update();
         }
 
@@ -43,6 +47,7 @@ namespace DormLife.State
             graphicsDevice.Clear(Color.LightSkyBlue);
 
             _exitButton.Draw();
+            musicButton.Draw();
             _newGameButton.Draw();
 
             _textureContent.Draw();

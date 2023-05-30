@@ -11,9 +11,11 @@ namespace DormLife.GameObjects
 {
     public class Wall : Sprite
     {
-        public Wall(Texture2D texture, Vector2 position, float speed = 0)
+        public bool IsHorizontal { get; }
+        public Wall(Texture2D texture, Vector2 position, bool isHorizontal, float speed = 0)
         : base(texture, position, speed)
         {
+            IsHorizontal = isHorizontal;
         }
     }
 }

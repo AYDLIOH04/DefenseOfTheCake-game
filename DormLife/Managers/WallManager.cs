@@ -44,8 +44,8 @@ namespace DormLife.Managers
 
         private static Vector2 SetPositionVertical()
         {
-            float x = _random.Next(100, (int)w - 100);
-            float y = _random.Next(100, (int)h - 100);
+            float x = _random.Next(200, (int)w - 200);
+            float y = _random.Next(200, (int)h - 200);
 
             if (x > (w / 2 - 200) && x < (w / 2 + 200)
                 && y > (h / 2 - 200) && y < (h / 2 + 200))
@@ -59,9 +59,9 @@ namespace DormLife.Managers
             var numTexture = _random.Next(0, 2);
 
             if (numTexture == 0)
-                Walls.Add(new(_textureGorizontal, SetPositionGorizontal()));
+                Walls.Add(new(_textureGorizontal, SetPositionGorizontal(), true));
             else
-                Walls.Add(new(_textureVertical, SetPositionVertical()));
+                Walls.Add(new(_textureVertical, SetPositionVertical(), false));
         }
 
         public static void AddWall()
@@ -71,7 +71,7 @@ namespace DormLife.Managers
 
         public static void GenerateWalls()
         {
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 3; i++)
             {
                 AddWall();
 

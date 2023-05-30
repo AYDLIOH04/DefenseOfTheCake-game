@@ -36,6 +36,7 @@ namespace DormLife.State
             _continueGameButton.Update();
             _menuButton.Update();
             _exitButton.Update();
+            MenuState.musicButton.Update();
         }
 
         public override void Draw(GraphicsDevice graphicsDevice)
@@ -45,6 +46,8 @@ namespace DormLife.State
             _continueGameButton.Draw();
             _menuButton.Draw();
             _exitButton.Draw();
+            MenuState.musicButton.Draw();
+
 
             _textureContent.Draw();
         }

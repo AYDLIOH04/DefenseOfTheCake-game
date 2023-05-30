@@ -109,6 +109,12 @@
 /processorParam:TextureFormat=Color
 /build:../../../../../Desktop/DOTC sprites/token.png;bonus/token.png
 
+#begin ../../../../../Downloads/cakedamage.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:../../../../../Downloads/cakedamage.wav;Sounds/cakedamage.wav
+
 #begin arms/melee_arm.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -313,6 +319,30 @@
 /processorParam:TextureFormat=Color
 /build:btn/btn-speedbuff.png
 
+#begin btn/musicminus.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:btn/musicminus.png
+
+#begin btn/musicplus.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:btn/musicplus.png
+
 #begin button.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -404,12 +434,6 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Sounds/buff.wav
-
-#begin Sounds/cakedamage.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Sounds/cakedamage.wav
 
 #begin Sounds/catchtrap.wav
 /importer:WavImporter

@@ -81,8 +81,7 @@ namespace DormLife.Managers
 
         public static void GoToMenu(object sender = null, EventArgs e = null)
         {
-            SoundManager.PlayBasedBackgroundMusic();
-            Game1.currentState = Game1.menuState;       
+            Game1.currentState = Game1.menuState;         
         }
         public static void GoToShop(object sender = null, EventArgs e = null)
         {

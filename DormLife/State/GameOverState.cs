@@ -20,10 +20,10 @@ namespace DormLife.State
 
         public GameOverState()
         {
-            _restartGameButton = new Button("Restart Game", new(Globals.Bounds.X / 2, Globals.Bounds.Y / 2 + 30), "btn/btn-newgame");
+            _restartGameButton = new Button("Restart Game", new(Globals.Bounds.X / 2, Globals.Bounds.Y / 2 + 100), "btn/btn-newgame");
             _restartGameButton.Clicked += StateManager.CreateGame;
 
-            _menuButton = new Button("Menu", new(Globals.Bounds.X / 2, Globals.Bounds.Y / 2 - 80), "btn/btn-menu");
+            _menuButton = new Button("Menu", new(Globals.Bounds.X / 2, Globals.Bounds.Y / 2), "btn/btn-menu");
             _menuButton.Clicked += StateManager.GoToMenu;
 
             _exitButton = new Button("Exit", new(Globals.Bounds.X - 70, 70), "btn/btn-exit");
@@ -37,6 +37,8 @@ namespace DormLife.State
             _restartGameButton.Update();
             _menuButton.Update();
             _exitButton.Update();
+            MenuState.musicButton.Update();
+
         }
         public override void Draw(GraphicsDevice graphicsDevice)
         {
@@ -45,6 +47,7 @@ namespace DormLife.State
             _restartGameButton.Draw();
             _menuButton.Draw();
             _exitButton.Draw();
+            MenuState.musicButton.Draw();
 
             _textureContent.Draw();
         }

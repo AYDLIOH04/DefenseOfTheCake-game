@@ -34,7 +34,6 @@ namespace DormLife.Sprites
         public void Update(Cake cake, List<Wall> walls, List<Enemy> enemies)
         {
             
-
             bool isCollidingWithWall = false;
             foreach (var wall in walls)
             {

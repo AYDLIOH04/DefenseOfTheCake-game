@@ -34,7 +34,7 @@ public class Game1 : Game
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
-        //_graphics.IsFullScreen = true;
+        _graphics.IsFullScreen = true;
 
         _gameRef = this;
     }
@@ -42,8 +42,8 @@ public class Game1 : Game
     protected override void Initialize()
     {
 
-        //Globals.Bounds = new(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
-        Globals.Bounds = new(1500, 975);
+        Globals.Bounds = new(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
+        //Globals.Bounds = new(1500, 975);
         _graphics.PreferredBackBufferWidth = Globals.Bounds.X;
         _graphics.PreferredBackBufferHeight = Globals.Bounds.Y;
         _graphics.ApplyChanges();

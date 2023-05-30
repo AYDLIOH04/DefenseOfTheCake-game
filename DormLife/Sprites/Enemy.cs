@@ -33,7 +33,7 @@ namespace DormLife.Sprites
 
         public void Update(Cake cake, List<Wall> walls, List<Enemy> enemies)
         {
-
+            // Обход других врагов
             foreach (Enemy otherEnemy in enemies)
             {
                 if (otherEnemy != this && CheckRectangleCollision(otherEnemy))
@@ -43,28 +43,40 @@ namespace DormLife.Sprites
                 }
             }
 
+            // Проверка столкновения со стенами
+            bool isCollidingWithWall = false;
             foreach (var wall in walls)
             {
-                if (CheckVectorCollision(wall, 50))
+                if (CheckRectangleCollision(wall))
                 {
-                    var toPlayer = cake.position - position;
-                    rotation = (float)Math.Atan2(toPlayer.Y, toPlayer.X);
-
-
-                    var obstacleAvoidanceDir = new Vector2(-toPlayer.Y, toPlayer.X);
-                    obstacleAvoidanceDir.Normalize();
-
-                    position += obstacleAvoidanceDir * speed * Globals.TotalSeconds;
-                    return; 
+                    isCollidingWithWall = true;
+                    break;
                 }
             }
 
-            var toCake = cake.position - position;
-            rotation = (float)Math.Atan2(toCake.Y, toCake.X);
+            if (isCollidingWithWall)
+            {
+                // Враг столкнулся со стеной
+                Vector2 toPlayer = cake.position - position;
+                rotation = (float)Math.Atan2(toPlayer.Y, toPlayer.X);
 
-            toCake.Normalize();
-            position += toCake * speed * Globals.TotalSeconds;
+                // Вычисление направления для обхода препятствия
+                Vector2 obstacleAvoidanceDir = new Vector2(-toPlayer.Y, toPlayer.X);
+                obstacleAvoidanceDir.Normalize();
+
+                position += obstacleAvoidanceDir * speed * Globals.TotalSeconds;
+            }
+            else
+            {
+                // Враг двигается в сторону тортика
+                Vector2 toCake = cake.position - position;
+                rotation = (float)Math.Atan2(toCake.Y, toCake.X);
+
+                toCake.Normalize();
+                position += toCake * speed * Globals.TotalSeconds;
+            }
         }
+
 
     }
 }

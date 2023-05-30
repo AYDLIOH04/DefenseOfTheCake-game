@@ -16,9 +16,6 @@ namespace DormLife.Managers
         private static Texture2D _textureVertical;
         private static Random _random;
 
-        private static Vector2 _lastPositionGor = Vector2.Zero;
-        private static Vector2 _lastPositionVer = Vector2.Zero;
-
         private static float w = Globals.Bounds.X;
         private static float h = Globals.Bounds.Y;
 
@@ -26,8 +23,8 @@ namespace DormLife.Managers
 
         public static void Init()
         {
-            _textureGorizontal = Globals.Content.Load<Texture2D>("walls/gorizontal_wall");
-            _textureVertical = Globals.Content.Load<Texture2D>("walls/vertical_wall");
+            _textureGorizontal = Globals.Content.Load<Texture2D>("walls/big-gor-wall");
+            _textureVertical = Globals.Content.Load<Texture2D>("walls/big-vert-wall");
             _random = new();
 
             Walls = new();
@@ -35,52 +32,26 @@ namespace DormLife.Managers
 
         private static Vector2 SetPositionGorizontal()
         {
-            float y = 0;
-            float x = 0;
+            float x = _random.Next(100, (int)w - 100);
+            float y = _random.Next(100, (int)h - 100);
 
-            if (_lastPositionGor == Vector2.Zero)
-            {
-                x = _random.Next(100, (int)w - 100);
-                y = _random.Next(100, (int)h - 100);
-                if (x > (w / 2 - 200) && x < (w / 2 + 200)
-                 && y > (h / 2 - 200) && y < (h / 2 + 200))
-                    return SetPositionGorizontal();
-                _lastPositionGor = new Vector2(x, y);
-            } 
-            else
-            {
-                x = _lastPositionGor.X + 80;
-                y = _lastPositionGor.Y;
-                _lastPositionGor = Vector2.Zero;
-            }
+            if (x > (w / 2 - 200) && x < (w / 2 + 200)
+                && y > (h / 2 - 200) && y < (h / 2 + 200))
+                return SetPositionGorizontal();
 
-            Vector2 pos = new Vector2(x, y);
-            return pos;
+            return new Vector2(x, y);
         }
 
         private static Vector2 SetPositionVertical()
         {
-            float y = 0;
-            float x = 0;
+            float x = _random.Next(100, (int)w - 100);
+            float y = _random.Next(100, (int)h - 100);
 
-            if (_lastPositionVer == Vector2.Zero)
-            {
-                x = _random.Next(100, (int)w - 100);
-                y = _random.Next(100, (int)h - 100);
-                if (x > (w / 2 - 200) && x < (w / 2 + 200)
-                 && y > (h / 2 - 200) && y < (h / 2 + 200))
-                    return SetPositionGorizontal();
-                _lastPositionVer = new Vector2(x, y);
-            }
-            else
-            {
-                x = _lastPositionVer.X;
-                y = _lastPositionVer.Y + 80;
-                _lastPositionVer = Vector2.Zero;
-            }
+            if (x > (w / 2 - 200) && x < (w / 2 + 200)
+                && y > (h / 2 - 200) && y < (h / 2 + 200))
+                return SetPositionGorizontal();
 
-            Vector2 pos = new Vector2(x, y);
-            return pos;
+            return new Vector2(x, y);
         }
 
         private static void RandomWallGenerate()
@@ -100,7 +71,7 @@ namespace DormLife.Managers
 
         public static void GenerateWalls()
         {
-            for (int i = 0; i < 12; i++)
+            for (int i = 0; i < 4; i++)
             {
                 AddWall();
 

@@ -627,6 +627,18 @@
 /processorParam:TextureFormat=Color
 /build:walls/gorizontal_wall.png
 
+#begin walls/gorwall.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:walls/gorwall.png
+
 #begin walls/vertical_wall.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -638,4 +650,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:walls/vertical_wall.png
+
+#begin walls/vertwall.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:walls/vertwall.png
 

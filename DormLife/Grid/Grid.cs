@@ -17,7 +17,6 @@ namespace DormLife.Grid
             this.width = width;
             this.height = height;
 
-            // Инициализируем все клетки сетки
             cells = new Cell[width, height];
             for (int x = 0; x < width; x++)
             {
@@ -33,7 +32,6 @@ namespace DormLife.Grid
 
         public Cell GetCell(int x, int y)
         {
-            // Проверяем валидность координат
             if (x < 0 || x >= width || y < 0 || y >= height)
                 return null;
 

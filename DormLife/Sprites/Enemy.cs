@@ -65,8 +65,59 @@ namespace DormLife.Sprites
         private bool isArg = false;
         private Turret lastAgrTurret;
 
+        private int octant = 0;
+
+        public void TochHoriz(Wall wall)
+        {
+            if (IsTouchingLeft(wall) || IsTouchingRight(wall))
+            {
+                if (octant == 1 || octant == 3)
+                {
+                    position += new Vector2(0, 1) * speed * Globals.TotalSeconds;
+                }
+                else if (octant == 2 || octant == 4)
+                {
+                    position += new Vector2(0, -1) * speed * Globals.TotalSeconds;
+                }
+            }
+        }
+
+        public void TochVert(Wall wall)
+        {
+            if (IsTouchingTop(wall) || IsTouchingBottom(wall))
+            {
+                if (octant == 1 || octant == 2)
+                {
+                    position += new Vector2(1, 0) * speed * Globals.TotalSeconds;
+                }
+                else if (octant == 3 || octant == 4)
+                {
+                    position += new Vector2(-1, 0) * speed * Globals.TotalSeconds;
+                }
+            }
+        }
+
+
+
         public void Update(Cake cake, List<Wall> walls, List<Enemy> enemies, List<Turret> turrets)
         {
+            if (position.X < cake.position.X && position.Y < cake.position.Y)
+            {
+                octant = 1;
+            } 
+            else if (position.X < cake.position.X && position.Y > cake.position.Y)
+            {
+                octant = 2;
+            }
+            else if (position.X > cake.position.X && position.Y < cake.position.Y)
+            {
+                octant = 3;
+            }
+            else if (position.X > cake.position.X && position.Y > cake.position.Y)
+            {
+                octant = 4;
+            }
+
             if (lastAgrTurret != null && lastAgrTurret.HP <= 0)
             {
                 isArg = false;
@@ -88,7 +139,7 @@ namespace DormLife.Sprites
             {
                 foreach (var turret in turrets)
                 {
-                    if (!isArg && CheckVectorCollision(turret, 200) && turret.HP > 0)
+                    if (!isArg && CheckVectorCollision(turret, 120) && turret.HP > 0)
                     {
                         lastAgrTurret = turret;
                         isArg = true;
@@ -98,27 +149,73 @@ namespace DormLife.Sprites
             }
 
 
-            bool isCollidingWithWall = false;
+            Vector2 toCake = cake.position - position;
+
+            var countHor = false;
+            var countVert = false;
+            var isCollision = false;
+
             foreach (var wall in walls)
             {
                 if (CheckRectangleCollision(wall))
                 {
-                    isCollidingWithWall = true;
-                    break;
+                    if (wall.IsHorizontal && !countVert)
+                    {
+                        if (Math.Abs(wall.position.X - cake.position.X) < 100)
+                        {
+                            if (Math.Abs(position.X - (wall.position.X + wall.Rectangle.X))
+                                < Math.Abs(position.X - (wall.position.X - wall.Rectangle.X)))
+                            {
+                                position += new Vector2(1, 0) * speed * Globals.TotalSeconds;
+                            }
+                            else
+                            {
+                                position += new Vector2(-1, 0) * speed * Globals.TotalSeconds;
+                            }
+                        }
+                        else if (wall.position.X < cake.position.X)
+                        {
+                            position += new Vector2(1, 0) * speed * Globals.TotalSeconds;
+                        }
+                        else
+                        {
+                            position += new Vector2(-1, 0) * speed * Globals.TotalSeconds;
+                        }
+
+                        countHor = true;
+                    }
+                    else if (!countHor)
+                    {
+                        if (Math.Abs(wall.position.Y - cake.position.Y) < 100)
+                        {
+
+                            if (Math.Abs(position.Y - (wall.position.Y + wall.Rectangle.Y))
+                                < Math.Abs(position.Y - (wall.position.Y - wall.Rectangle.Y)))
+                            {
+                                position += new Vector2(0, 1) * speed * Globals.TotalSeconds;
+                            }
+                            else
+                            {
+                                position += new Vector2(0, -1) * speed * Globals.TotalSeconds;
+                            }
+                        }
+                        else if (wall.position.Y < cake.position.Y)
+                        {
+                            position += new Vector2(0, 1) * speed * Globals.TotalSeconds;
+                        }
+                        else
+                        {
+                            position += new Vector2(0, -1) * speed * Globals.TotalSeconds;
+                        }
+
+                        countVert = true;
+                    }
+
+                    isCollision = true;
                 }
             }
 
-            Vector2 toCake = cake.position - position;
-            rotation = (float)Math.Atan2(toCake.Y, toCake.X);
-
-            if (isCollidingWithWall)
-            {
-                Vector2 obstacleAvoidanceDir = new Vector2(-toCake.Y, toCake.X);
-                obstacleAvoidanceDir.Normalize();
-
-                position += obstacleAvoidanceDir * speed * Globals.TotalSeconds;
-            }
-            else
+            if (!isCollision)
             {
                 foreach (Enemy otherEnemy in enemies)
                 {
@@ -128,10 +225,12 @@ namespace DormLife.Sprites
                         position += awayFromOtherEnemy * speed * Globals.TotalSeconds;
                     }
                 }
-                // Враг двигается в сторону тортика
+
                 toCake.Normalize();
                 position += toCake * speed * Globals.TotalSeconds;
             }
+
+            rotation = (float)Math.Atan2(toCake.Y, toCake.X);
         }
     }
 }

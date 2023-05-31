@@ -51,33 +51,66 @@ namespace DormLife.Sprites
             return (position - otherSprite.position).Length() < diff;
         }
 
-        protected bool IsTouchingLeft(Sprite sprite, Vector2 Velocity)
+        public bool IsTouchingLeft(Sprite sprite, Vector2? Velocity = null)
         {
-            return this.Rectangle.Right + 5 * Velocity.X > sprite.Rectangle.Left &&
-              this.Rectangle.Left < sprite.Rectangle.Left &&
-              this.Rectangle.Bottom > sprite.Rectangle.Top &&
-              this.Rectangle.Top < sprite.Rectangle.Bottom;
+            if (Velocity == null)
+            {
+                return this.Rectangle.Right + speed > sprite.Rectangle.Left &&
+                this.Rectangle.Left < sprite.Rectangle.Left &&
+                this.Rectangle.Bottom > sprite.Rectangle.Top &&
+                this.Rectangle.Top < sprite.Rectangle.Bottom;
+            }
+
+            return this.Rectangle.Right + 5 * Velocity.Value.X > sprite.Rectangle.Left &&
+            this.Rectangle.Left < sprite.Rectangle.Left &&
+            this.Rectangle.Bottom > sprite.Rectangle.Top &&
+            this.Rectangle.Top < sprite.Rectangle.Bottom;
+
         }
 
-        protected bool IsTouchingRight(Sprite sprite, Vector2 Velocity)
+        public bool IsTouchingRight(Sprite sprite, Vector2? Velocity = null)
         {
-            return this.Rectangle.Left + 5 * Velocity.X < sprite.Rectangle.Right &&
-              this.Rectangle.Right > sprite.Rectangle.Right &&
-              this.Rectangle.Bottom > sprite.Rectangle.Top &&
-              this.Rectangle.Top < sprite.Rectangle.Bottom;
+            if (Velocity == null)
+            {
+                return this.Rectangle.Left + speed < sprite.Rectangle.Right &&
+                this.Rectangle.Right > sprite.Rectangle.Right &&
+                this.Rectangle.Bottom > sprite.Rectangle.Top &&
+                this.Rectangle.Top < sprite.Rectangle.Bottom;
+            }
+
+            return this.Rectangle.Left + 5 * Velocity.Value.X < sprite.Rectangle.Right &&
+            this.Rectangle.Right > sprite.Rectangle.Right &&
+            this.Rectangle.Bottom > sprite.Rectangle.Top &&
+            this.Rectangle.Top < sprite.Rectangle.Bottom;
         }
 
-        protected bool IsTouchingTop(Sprite sprite, Vector2 Velocity)
+        public bool IsTouchingTop(Sprite sprite, Vector2? Velocity = null)
         {
-            return this.Rectangle.Bottom + 5 * Velocity.Y > sprite.Rectangle.Top &&
+            if (Velocity == null)
+            {
+                return this.Rectangle.Bottom + speed > sprite.Rectangle.Top &&
+                this.Rectangle.Top < sprite.Rectangle.Top &&
+                this.Rectangle.Right > sprite.Rectangle.Left &&
+                this.Rectangle.Left < sprite.Rectangle.Right;
+            }
+
+            return this.Rectangle.Bottom + 5 * Velocity.Value.Y > sprite.Rectangle.Top &&
               this.Rectangle.Top < sprite.Rectangle.Top &&
               this.Rectangle.Right > sprite.Rectangle.Left &&
               this.Rectangle.Left < sprite.Rectangle.Right;
         }
 
-        protected bool IsTouchingBottom(Sprite sprite, Vector2 Velocity)
+        public bool IsTouchingBottom(Sprite sprite, Vector2? Velocity = null)
         {
-            return this.Rectangle.Top + 5 * Velocity.Y < sprite.Rectangle.Bottom &&
+            if (Velocity == null)
+            {
+                return this.Rectangle.Top + speed < sprite.Rectangle.Bottom &&
+                this.Rectangle.Bottom > sprite.Rectangle.Bottom &&
+                this.Rectangle.Right > sprite.Rectangle.Left &&
+                this.Rectangle.Left < sprite.Rectangle.Right;
+            }
+
+            return this.Rectangle.Top + 5 * Velocity.Value.Y < sprite.Rectangle.Bottom &&
               this.Rectangle.Bottom > sprite.Rectangle.Bottom &&
               this.Rectangle.Right > sprite.Rectangle.Left &&
               this.Rectangle.Left < sprite.Rectangle.Right;

@@ -147,8 +147,13 @@ namespace DormLife.Managers
             ProjectileManager.DeleteTiles();
             WallManager.DeleteWalls();
 
+            /*
             for (int i = 0; i < Math.Min((_waveLevel / 5) + 1, 4); i++)
                 WallManager.GenerateWalls();
+
+            */
+
+            WallManager.GenerateMap();
 
 
             AdditionalObjectsGenerator();

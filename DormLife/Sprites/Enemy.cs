@@ -61,9 +61,43 @@ namespace DormLife.Sprites
             }
         }
 
-        public void Update(Cake cake, List<Wall> walls, List<Enemy> enemies)
+
+        private bool isArg = false;
+        private Turret lastAgrTurret;
+
+        public void Update(Cake cake, List<Wall> walls, List<Enemy> enemies, List<Turret> turrets)
         {
-            
+            if (lastAgrTurret != null && lastAgrTurret.HP <= 0)
+            {
+                isArg = false;
+                lastAgrTurret = null;
+            }
+
+            if (isArg && lastAgrTurret != null && lastAgrTurret.HP > 0)
+            {
+                Vector2 toTurret = lastAgrTurret.position - position;
+
+                rotation = (float)Math.Atan2(toTurret.Y, toTurret.X);
+                toTurret.Normalize();
+                position += toTurret * speed * Globals.TotalSeconds;
+
+                return;
+            }
+
+            if (turrets.Count > 0)
+            {
+                foreach (var turret in turrets)
+                {
+                    if (!isArg && CheckVectorCollision(turret, 200) && turret.HP > 0)
+                    {
+                        lastAgrTurret = turret;
+                        isArg = true;
+                        break;
+                    }
+                }
+            }
+
+
             bool isCollidingWithWall = false;
             foreach (var wall in walls)
             {

@@ -16,35 +16,63 @@ namespace DormLife.GameObjects
         private float _eventTimer;
         private float _shootingDelay;
 
-        private TimeSpan _creationTime;
-        private float _lifeTime = 25f;
-        public bool IsTimeOver { get; private set; }
+        public TimeSpan damageTime;
 
+        private float _hpTimer;
+        private float _healTimer = 10f;
+        private float _healDelay = 0.6f;
+
+
+        public float MaxHP { get; private set; }
+        public float HP { get; private set; }
         public Turret(Texture2D texture, Vector2 position, float speed = 0)
         : base(texture, position, speed)
         {
             _eventTimer = 0;
             _shootingDelay = 0.5f;
 
-            IsTimeOver = false;
-            _creationTime = Globals.GameTime.TotalGameTime;
+            HP = 50;
+            MaxHP = 50;
+        }
+
+        public void PassiveHeal()
+        {
+            if ((Globals.GameTime.TotalGameTime - damageTime).TotalSeconds >= _healTimer)
+            {
+                if (HP < 50)
+                {
+                    _hpTimer += Globals.TotalSeconds;
+
+
+                    if (_hpTimer > _healDelay)
+                    {
+                        HP += 5;
+                        _hpTimer = 0;
+                    }
+                }
+                if (HP > 50)
+                {
+                    HP = MaxHP;
+                }
+            }
+        }
+
+        public void TakeDamage(int dmg)
+        {
+            HP -= dmg;
+            damageTime = Globals.GameTime.TotalGameTime;
         }
 
         public void Update(List<Enemy> enemies)
         {
             _eventTimer += Globals.TotalSeconds;
 
-            if ((Globals.GameTime.TotalGameTime - _creationTime).TotalSeconds >= _lifeTime)
-            {
-                IsTimeOver = true;
-            }
+            PassiveHeal();
 
             foreach (var enemy in enemies)
-            {
+            {                                                               
                 if (CheckVectorCollision(enemy, 500))
                 {
-                    
-
                     if (_eventTimer > _shootingDelay)
                     {
                         Vector2 toEnemy = enemy.position - position;
@@ -58,11 +86,19 @@ namespace DormLife.GameObjects
                             Speed = 600,
                         };
 
-                        ProjectileManager.AddProjectile(pd);
+                        ProjectileManager.AddTurretProjectile(pd);
                         _eventTimer = 0;
                     }
                 }
             }
+        }
+
+        public Turret Clone()
+        {
+            return new Turret(texture, new(position.X + texture.Width / 2, position.Y + texture.Height / 2))
+            {
+                HP = this.HP
+            };
         }
     }
 }

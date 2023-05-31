@@ -18,11 +18,15 @@ namespace DormLife.Managers
         public static int currentHaveCount;
         public readonly static int Limit = 5;
 
+        private static SpriteFont _font;
+
 
         public static void Init()
         {
             _textureTurret = Globals.Content.Load<Texture2D>("sprites/turret");
             Turrets = new();
+
+            _font = Globals.Content.Load<SpriteFont>("Font");
 
             currentHaveCount = 0;
         }
@@ -37,14 +41,14 @@ namespace DormLife.Managers
 
         public static void Update(List<Enemy> enemies)
         {
-            foreach (var turret in  Turrets)
+            foreach (var turret in Turrets)
             {
                 turret.Update(enemies);
             }
 
             Turrets.RemoveAll(turret =>
             {
-                if (turret.IsTimeOver)
+                if (turret.HP <= 0)
                 {
                     SoundManager.PlaySoundEffect("trapexp");
                     return true;
@@ -59,6 +63,7 @@ namespace DormLife.Managers
             foreach (var turret in Turrets)
             {
                 turret.Draw();
+                Globals.SpriteBatch.DrawString(_font, $"{turret.HP}", new(turret.Rectangle.X + 25, turret.Rectangle.Y - 25), Color.White);
             }
         }
     }

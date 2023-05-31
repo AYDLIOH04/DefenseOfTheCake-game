@@ -18,6 +18,8 @@ namespace DormLife.Managers
         public static int currentHaveCount;
         public readonly static int Limit = 5;
 
+        private static SpriteFont _font;
+
 
         public static void Init()
         {
@@ -25,6 +27,8 @@ namespace DormLife.Managers
             Traps = new();
 
             currentHaveCount = 0;
+
+            _font = Globals.Content.Load<SpriteFont>("Font");
         }
 
         public static void AddTrap(Vector2 position, float rotation)
@@ -54,6 +58,8 @@ namespace DormLife.Managers
             foreach (var trap in Traps)
             {
                 trap.Draw();
+                Globals.SpriteBatch.DrawString(_font, $"{trap.HP}", new(trap.Rectangle.X + 25, trap.Rectangle.Y - 25), Color.White);
+
             }
         }
     }

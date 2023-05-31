@@ -16,6 +16,10 @@ namespace DormLife.State
         private Button _menuButton;
         private Button _exitButton;
 
+        private Score _scoreKills;
+        private Score _scoreWave;
+
+
         private TextureContent _textureContent;
 
         public GameOverState()
@@ -30,6 +34,10 @@ namespace DormLife.State
             _exitButton.Clicked += StateManager.ExitGame;
 
             _textureContent = new TextureContent(new(Globals.Bounds.X / 2 - 250, 250), "BackgroundContent/gameover");
+
+            _scoreKills = new Score("Kills", new(Globals.Bounds.X / 2 - 120, Globals.Bounds.Y / 2 - 100));
+            _scoreWave = new Score("Score", new(Globals.Bounds.X / 2 + 30, Globals.Bounds.Y / 2 - 100));
+
         }
 
         public override void Update()
@@ -38,6 +46,9 @@ namespace DormLife.State
             _menuButton.Update();
             _exitButton.Update();
             MenuState.musicButton.Update();
+
+            _scoreKills.SetScore(GameState.scoreEnemyKills.GetScore);
+            _scoreWave.SetScore(GameState.scoreWave.GetScore);
 
         }
         public override void Draw(GraphicsDevice graphicsDevice)
@@ -48,6 +59,9 @@ namespace DormLife.State
             _menuButton.Draw();
             _exitButton.Draw();
             MenuState.musicButton.Draw();
+
+            _scoreKills.Draw();
+            _scoreWave.Draw();
 
             _textureContent.Draw();
         }

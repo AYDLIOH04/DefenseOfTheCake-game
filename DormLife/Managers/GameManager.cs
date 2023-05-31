@@ -45,7 +45,7 @@ namespace DormLife.Managers
 
             WaveManager.GenerateWave();
             ProjectileManager.Update(EnemyManager.Enemies, WallManager.Walls, cake);
-            EnemyManager.Update(cake, WallManager.Walls, TrapManager.Traps);
+            EnemyManager.Update(cake, WallManager.Walls, TrapManager.Traps, TurretManager.Turrets);
             TrapManager.Update();
             BonusManager.Update(player, cake);
             TokenManager.Update(player);

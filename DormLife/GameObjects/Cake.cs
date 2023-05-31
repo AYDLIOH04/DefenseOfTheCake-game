@@ -37,7 +37,7 @@ namespace DormLife.GameObjects
         public Cake(Texture2D texture, Vector2 position, float speed = 0)
         : base(texture, position, speed)
         {
-            HP = 100;
+            HP = 1;
             CakeHP = HP;
         }
     }

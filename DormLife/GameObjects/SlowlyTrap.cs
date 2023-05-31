@@ -12,7 +12,7 @@ namespace DormLife.GameObjects
     public class SlowlyTrap : Sprite
     {
         private TimeSpan _creationTime;
-        private float _lifeTime = 30f;
+        private float _lifeTime = 45f;
         public bool IsTimeOver { get; private set; }
 
 

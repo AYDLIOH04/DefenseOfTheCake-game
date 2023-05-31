@@ -111,10 +111,21 @@ namespace DormLife.Managers
         }
         #endregion
 
-        public static void Update(Cake cake, List<Wall> walls, List<Trap> traps)
+        public static void Update(Cake cake, List<Wall> walls, List<Trap> traps, List<Turret> turrets)
         {
             foreach (var enemy in Enemies)
             {
+                enemy.Update(cake, walls, Enemies, turrets);
+
+                foreach (var turret in turrets)
+                {
+                    if (enemy.CheckVectorCollision(turret, 30))
+                    {
+                        turret.TakeDamage(enemy.Damage);
+                        enemy.TakeDamage(100);
+                    }
+                }
+
                 foreach (var trap in traps)
                 {
                     if (trap.CheckRectangleCollision(enemy))
@@ -130,9 +141,6 @@ namespace DormLife.Managers
                     cake.TakeDamage(enemy.Damage);
                     SoundManager.PlaySoundEffect("cakedamage");
                 }
-
-                enemy.Update(cake, walls, Enemies);
-
             }
 
             Enemies.RemoveAll(enemy =>

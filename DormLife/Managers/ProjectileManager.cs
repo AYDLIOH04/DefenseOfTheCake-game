@@ -79,6 +79,12 @@ namespace DormLife.Managers
             GameState.scoreUltCount.SetScore(CountUlt);
         }
 
+        public static void AddTurretProjectile(ProjectileData data)
+        {
+            Projectiles.Add(new(_texture, data, _damage));
+            SoundManager.PlaySoundEffect("shoot");
+        }
+
         public static void AddProjectile(ProjectileData data)
         {
             data.Speed += _shootingSpeed;

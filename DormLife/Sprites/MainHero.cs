@@ -17,7 +17,7 @@ namespace DormLife.Sprites
     {
         private float _eventTimer;
         private float _shootingDelay;
-        private float _trapDelay;
+        private float _spawnDelay;
 
         private bool _isShooting;
 
@@ -26,7 +26,7 @@ namespace DormLife.Sprites
         {
             _eventTimer = 0;
             _shootingDelay = 0.3f;
-            _trapDelay = 0.3f;
+            _spawnDelay = 0.3f;
             _isShooting = false;
 
         }
@@ -36,16 +36,48 @@ namespace DormLife.Sprites
              _shootingDelay -= 0.04f;
         }
 
+        
         private void CreateTrap()
         {
             KeyboardState keyboardState = Keyboard.GetState();
 
-            if (_eventTimer > _trapDelay && keyboardState.IsKeyDown(Keys.Space))
+            if (_eventTimer > _spawnDelay && keyboardState.IsKeyDown(Keys.C))
             {
                 if (TrapManager.currentHaveCount > 0)
                 {
                     GameState.scoreTrapCount.DecrementScore(1);
                     TrapManager.AddTrap(new(position.X + texture.Width / 2, position.Y + texture.Height / 2), rotation);
+                }
+                _eventTimer = 0;
+            }
+        }
+
+        private void CreateSlowlyTrap()
+        {
+            KeyboardState keyboardState = Keyboard.GetState();
+
+            if (_eventTimer > _spawnDelay && keyboardState.IsKeyDown(Keys.X))
+            {
+                if (SlowlyTrapManager.currentHaveCount > 0)
+                {
+                    GameState.scoreSlowlyTrapCount.DecrementScore(1);
+                    SlowlyTrapManager.AddSlowlyTrap(new(position.X + texture.Width / 2, position.Y + texture.Height / 2), rotation);
+                }
+                _eventTimer = 0;
+            }
+        }
+
+
+        private void CreateTurret()
+        {
+            KeyboardState keyboardState = Keyboard.GetState();
+
+            if (_eventTimer > _spawnDelay && keyboardState.IsKeyDown(Keys.Z))
+            {
+                if (TurretManager.currentHaveCount > 0)
+                {
+                    GameState.scoreTurretCount.DecrementScore(1);
+                    TurretManager.AddTurret(new(position.X + texture.Width / 2, position.Y + texture.Height / 2), rotation);
                 }
                 _eventTimer = 0;
             }
@@ -142,6 +174,8 @@ namespace DormLife.Sprites
         {
             _eventTimer += Globals.TotalSeconds;
             CreateTrap();
+            CreateTurret();
+            CreateSlowlyTrap();
             Move(walls, cake);
             Fire();
             FireUlt();

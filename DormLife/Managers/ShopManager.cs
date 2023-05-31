@@ -23,7 +23,28 @@ namespace DormLife.Managers
 
         public static void GetTurret(object sender = null, EventArgs e = null)
         {
-            SoundManager.PlaySoundEffect("moneyspend");
+            if (Tokens >= 25)
+            {
+                if (TurretManager.currentHaveCount + TurretManager.Turrets.Count < TurretManager.Limit)
+                {
+                    SoundManager.PlaySoundEffect("moneyspend");
+                    TurretManager.currentHaveCount++;
+                    Tokens -= 25;
+                }
+            }
+        }
+
+        public static void GetSlowlyTrap(object sender = null, EventArgs e = null)
+        {
+            if (Tokens >= 5)
+            {
+                if (SlowlyTrapManager.currentHaveCount + SlowlyTrapManager.SlowlyTraps.Count < SlowlyTrapManager.Limit)
+                {
+                    SoundManager.PlaySoundEffect("moneyspend");
+                    SlowlyTrapManager.currentHaveCount++;
+                    Tokens -= 5;
+                }
+            }
         }
 
         public static void GetTrap(object sender = null, EventArgs e = null)

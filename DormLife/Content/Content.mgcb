@@ -151,6 +151,18 @@
 /processorParam:TextureFormat=Color
 /build:BackgroundContent/gameover.png
 
+#begin bonus/damagespeedbuff.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:bonus/damagespeedbuff.png
+
 #begin bonus/hp.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -307,6 +319,18 @@
 /processorParam:TextureFormat=Color
 /build:btn/btn-shotspeedbuff.png
 
+#begin btn/btn-slowlytrap.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:btn/btn-slowlytrap.png
+
 #begin btn/btn-speedbuff.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -429,6 +453,30 @@
 /processorParam:TextureFormat=Color
 /build:scores/scoretrap.png
 
+#begin scores/slowlytrapmini.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:scores/slowlytrapmini.png
+
+#begin scores/turretmini.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:scores/turretmini.png
+
 #begin Sounds/buff.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -507,6 +555,18 @@
 /processorParam:TextureFormat=Color
 /build:sprites/cake.png
 
+#begin sprites/slowlytrap.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:sprites/slowlytrap.png
+
 #begin sprites/trap.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -518,6 +578,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:sprites/trap.png
+
+#begin sprites/turret.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:sprites/turret.png
 
 #begin walls/big-gor-wall.png
 /importer:TextureImporter

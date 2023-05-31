@@ -17,18 +17,48 @@ namespace DormLife.Sprites
         public int Damage;
         public bool Buff;
 
+        private float lastSpeed;
+        private bool isSlowly;
+
+
 
         public Enemy(Texture2D texture, Vector2 position, float speed, int hp, int damage) : base(texture, position, speed)
         {
             this.speed = speed;
+            lastSpeed = speed;
             HP = hp;
             Damage = damage;
             Buff = false;
+            isSlowly = false;
         }
 
         public void TakeDamage(int dmg)
         {
             HP -= dmg;
+        }
+
+        public void ChangeSpeed(bool makeSlowly)
+        {
+            if (makeSlowly && !isSlowly)
+            {
+                if (speed > 60)
+                {
+                    lastSpeed = speed;
+                    speed -= (speed - 17);
+                }
+                else if (speed > 35)
+                {
+                    lastSpeed = speed;
+                    speed -= 30;
+                }
+
+                isSlowly = true;
+            }
+            else if (!makeSlowly && isSlowly)
+            {
+                speed = lastSpeed;
+                isSlowly = false;
+            }
         }
 
         public void Update(Cake cake, List<Wall> walls, List<Enemy> enemies)

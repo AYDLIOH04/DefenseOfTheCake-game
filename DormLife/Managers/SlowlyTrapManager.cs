@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace DormLife.Managers
 {
-    public class TurretManager
+    public class SlowlyTrapManager
     {
-        private static Texture2D _textureTurret;
-        public static List<Turret> Turrets;
+        private static Texture2D _textureSlowlyTrap;
+        public static List<SlowlyTrap> SlowlyTraps;
 
         public static int currentHaveCount;
         public readonly static int Limit = 5;
@@ -21,30 +21,30 @@ namespace DormLife.Managers
 
         public static void Init()
         {
-            _textureTurret = Globals.Content.Load<Texture2D>("sprites/turret");
-            Turrets = new();
+            _textureSlowlyTrap = Globals.Content.Load<Texture2D>("sprites/slowlytrap");
+            SlowlyTraps = new();
 
             currentHaveCount = 0;
         }
 
-        public static void AddTurret(Vector2 position, float rotation)
+        public static void AddSlowlyTrap(Vector2 position, float rotation)
         {
             SoundManager.PlaySoundEffect("trapspawn");
             currentHaveCount--;
-            Turrets.Add(new(_textureTurret, position, rotation));
+            SlowlyTraps.Add(new(_textureSlowlyTrap, position, rotation));
         }
 
 
         public static void Update(List<Enemy> enemies)
         {
-            foreach (var turret in  Turrets)
+            foreach (var trap in SlowlyTraps)
             {
-                turret.Update(enemies);
+                trap.Update(enemies);
             }
 
-            Turrets.RemoveAll(turret =>
+            SlowlyTraps.RemoveAll(trap =>
             {
-                if (turret.IsTimeOver)
+                if (trap.IsTimeOver)
                 {
                     SoundManager.PlaySoundEffect("trapexp");
                     return true;
@@ -56,9 +56,9 @@ namespace DormLife.Managers
 
         public static void Draw()
         {
-            foreach (var turret in Turrets)
+            foreach (var trap in SlowlyTraps)
             {
-                turret.Draw();
+                trap.Draw();
             }
         }
     }

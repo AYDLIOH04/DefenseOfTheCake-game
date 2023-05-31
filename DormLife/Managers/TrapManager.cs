@@ -16,7 +16,7 @@ namespace DormLife.Managers
         public static List<Trap> Traps;
 
         public static int currentHaveCount;
-        public readonly static int Limit = 10;
+        public readonly static int Limit = 5;
 
 
         public static void Init()

@@ -28,8 +28,9 @@ namespace DormLife.Managers
             WallManager.Init();
             ShopManager.Init();
             TrapManager.Init();
+            TurretManager.Init();
+            SlowlyTrapManager.Init();
             #endregion
-
 
             cake = new(Globals.Content.Load<Texture2D>("sprites/cake"), new(Globals.Bounds.X / 2, Globals.Bounds.Y / 2));
             player = new(Globals.Content.Load<Texture2D>("sprites/player"), new(cake.position.X - 200, cake.position.Y), 300);
@@ -48,6 +49,9 @@ namespace DormLife.Managers
             TrapManager.Update();
             BonusManager.Update(player, cake);
             TokenManager.Update(player);
+            TurretManager.Update(EnemyManager.Enemies);
+            SlowlyTrapManager.Update(EnemyManager.Enemies);
+
         }
 
         public void Draw()
@@ -62,6 +66,8 @@ namespace DormLife.Managers
             EnemyManager.Draw();
             WallManager.Draw();
             TrapManager.Draw();
+            TurretManager.Draw();
+            SlowlyTrapManager.Draw();
             #endregion
 
             if (ProjectileManager.IsUlt)
@@ -72,6 +78,16 @@ namespace DormLife.Managers
             if (TrapManager.currentHaveCount > 0)
             {
                 GameState.scoreTrapCount.Draw();
+            }
+
+            if (TurretManager.currentHaveCount > 0)
+            {
+                GameState.scoreTurretCount.Draw();
+            }
+
+            if (SlowlyTrapManager.currentHaveCount > 0)
+            {
+                GameState.scoreSlowlyTrapCount.Draw();
             }
         }
     }

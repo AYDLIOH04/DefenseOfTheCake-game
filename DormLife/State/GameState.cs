@@ -21,8 +21,11 @@ namespace DormLife.State
         public static Score scoreCakeHP;
         public static Score scoreEnemyKills;
         public static Score scoreTokens;
-        public static Score scoreUltCount;                         
+        public static Score scoreUltCount;    
+        
         public static Score scoreTrapCount;
+        public static Score scoreTurretCount;
+        public static Score scoreSlowlyTrapCount;
         #endregion
 
         private static Button _shopButton;
@@ -39,8 +42,10 @@ namespace DormLife.State
             scoreCakeHP = new("Cake HP", new(Globals.Bounds.X - 200, Globals.Bounds.Y - 50), "scores/cakehp", gameManager.cake.HP);
             scoreTokens = new("Tokens", new(Globals.Bounds.X - 320, Globals.Bounds.Y - 110), "scores/coin");
             scoreUltCount = new("Ultimatum Projectiles", new(Globals.Bounds.X - 320, Globals.Bounds.Y - 50), "arms/ult", 5);
-            scoreTrapCount = new("You have traps", new(Globals.Bounds.X - 420, Globals.Bounds.Y - 50), "scores/scoretrap");
 
+            scoreTrapCount = new("You have traps", new(Globals.Bounds.X - 420, Globals.Bounds.Y - 50), "scores/scoretrap");
+            scoreTurretCount = new("You have turrets", new(Globals.Bounds.X - 620, Globals.Bounds.Y - 50), "scores/turretmini");
+            scoreSlowlyTrapCount = new("You have slowly traps", new(Globals.Bounds.X - 520, Globals.Bounds.Y - 50), "scores/slowlytrapmini");
 
             _shopButton = new Button("Shop", new(Globals.Bounds.X - 150, Globals.Bounds.Y - 100), "btn/btn-shop");
             _shopButton.Clicked += StateManager.GoToShop;
@@ -55,6 +60,8 @@ namespace DormLife.State
             scoreCakeHP.SetScore(gameManager.cake.HP);
             scoreTokens.SetScore(ShopManager.Tokens);
             scoreTrapCount.SetScore(TrapManager.currentHaveCount);
+            scoreTurretCount.SetScore(TurretManager.currentHaveCount);
+            scoreSlowlyTrapCount.SetScore(SlowlyTrapManager.currentHaveCount);
             #endregion
 
             _shopButton.Update();

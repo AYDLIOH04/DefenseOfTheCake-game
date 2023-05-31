@@ -30,60 +30,6 @@ namespace DormLife.Managers
             Walls = new();
         }
 
-        /*
-        private static Vector2 SetPositionGorizontal()
-        {
-            float x = _random.Next(100, (int)w - 100);
-            float y = _random.Next(100, (int)h - 100);
-
-            if (x > (w / 2 - 200) && x < (w / 2 + 200)
-                && y > (h / 2 - 200) && y < (h / 2 + 200))
-                return SetPositionGorizontal();
-
-            return new Vector2(x, y);
-        }
-
-        private static Vector2 SetPositionVertical()
-        {
-            float x = _random.Next(200, (int)w - 200);
-            float y = _random.Next(200, (int)h - 200);
-
-            if (x > (w / 2 - 200) && x < (w / 2 + 200)
-                && y > (h / 2 - 200) && y < (h / 2 + 200))
-                return SetPositionGorizontal();
-
-            return new Vector2(x, y);
-        }
-
-        private static void RandomWallGenerate()
-        {
-            var numTexture = _random.Next(0, 2);
-
-            if (numTexture == 0)
-                Walls.Add(new(_textureGorizontal, SetPositionGorizontal(), true));
-            else
-                Walls.Add(new(_textureVertical, SetPositionVertical(), false));
-        }
-
-
-        public static void AddWall()
-        {
-            RandomWallGenerate();
-        }
-
-        public static void GenerateWalls()
-        {
-            for (int i = 0; i < 2; i++)
-            {
-                AddWall();
-
-                if (GameState.gameManager.player.CheckRectangleCollision(Walls[Walls.Count - 1]))
-                    Walls.RemoveAt(Walls.Count - 1);
-            }
-        }
-
-        */
-
 
         public static void AddWall(Texture2D texture, Vector2 position, bool isHorizontal)
         {

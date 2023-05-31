@@ -92,13 +92,5 @@ namespace DormLife.GameObjects
                 }
             }
         }
-
-        public Turret Clone()
-        {
-            return new Turret(texture, new(position.X + texture.Width / 2, position.Y + texture.Height / 2))
-            {
-                HP = this.HP
-            };
-        }
     }
 }

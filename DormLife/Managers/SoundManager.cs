@@ -38,6 +38,7 @@ namespace DormLife.Managers
             shopBackgroundMusic = Globals.Content.Load<Song>("Music/shop");
 
             MediaPlayer.Volume = 0.1f;
+            MediaPlayer.IsRepeating = true;
             SoundEffect.MasterVolume = 0.3f;
 
             soundEffects.Add("shoot", Globals.Content.Load<SoundEffect>("Sounds/shootstart"));

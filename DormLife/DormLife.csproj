@@ -25,7 +25,6 @@
   <ItemGroup>
     <Folder Include="Content\Music\" />
     <Folder Include="Content\walls\" />
-    <Folder Include="Grid\" />
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />

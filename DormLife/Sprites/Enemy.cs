@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
@@ -62,12 +63,9 @@ namespace DormLife.Sprites
         }
 
 
-        private bool isArg = false;
-        private Turret lastAgrTurret;
+        
 
-        private int octant = 0;
-
-        public void TochHoriz(Wall wall)
+        private void IsTouchingHorizontalWall(Wall wall)
         {
             if (IsTouchingLeft(wall) || IsTouchingRight(wall))
             {
@@ -82,7 +80,7 @@ namespace DormLife.Sprites
             }
         }
 
-        public void TochVert(Wall wall)
+        private void IsTouchingVerticalWall(Wall wall)
         {
             if (IsTouchingTop(wall) || IsTouchingBottom(wall))
             {
@@ -98,13 +96,17 @@ namespace DormLife.Sprites
         }
 
 
+        private bool isArg = false;
+        private Turret lastAgrTurret;
 
-        public void Update(Cake cake, List<Wall> walls, List<Enemy> enemies, List<Turret> turrets)
+        private int octant = 0;
+
+        private void GetOctant(Cake cake)
         {
             if (position.X < cake.position.X && position.Y < cake.position.Y)
             {
                 octant = 1;
-            } 
+            }
             else if (position.X < cake.position.X && position.Y > cake.position.Y)
             {
                 octant = 2;
@@ -117,7 +119,10 @@ namespace DormLife.Sprites
             {
                 octant = 4;
             }
+        }
 
+        private void AgrToTurret(List<Turret> turrets)
+        {
             if (lastAgrTurret != null && lastAgrTurret.HP <= 0)
             {
                 isArg = false;
@@ -147,13 +152,14 @@ namespace DormLife.Sprites
                     }
                 }
             }
+        }
 
-
-            Vector2 toCake = cake.position - position;
-
+        private bool IsCollisionWalls(List<Wall> walls, Cake cake)
+        {
+            var isCollision = false;
             var countHor = false;
             var countVert = false;
-            var isCollision = false;
+
 
             foreach (var wall in walls)
             {
@@ -215,19 +221,36 @@ namespace DormLife.Sprites
                 }
             }
 
+            return isCollision;
+        }
+
+        private void IsNotCollisionWalls(List<Enemy> enemies, Vector2 toCake)
+        {
+            foreach (Enemy otherEnemy in enemies)
+            {
+                if (otherEnemy != this && CheckRectangleCollision(otherEnemy))
+                {
+                    Vector2 awayFromOtherEnemy = Vector2.Normalize(position - otherEnemy.position);
+                    position += awayFromOtherEnemy * speed * Globals.TotalSeconds;
+                }
+            }
+
+            toCake.Normalize();
+            position += toCake * speed * Globals.TotalSeconds;
+        }
+
+
+        public void Update(Cake cake, List<Wall> walls, List<Enemy> enemies, List<Turret> turrets)
+        {
+            GetOctant(cake);
+            AgrToTurret(turrets);
+            var isCollision = IsCollisionWalls(walls, cake);
+
+            Vector2 toCake = cake.position - position;
+
             if (!isCollision)
             {
-                foreach (Enemy otherEnemy in enemies)
-                {
-                    if (otherEnemy != this && CheckRectangleCollision(otherEnemy))
-                    {
-                        Vector2 awayFromOtherEnemy = Vector2.Normalize(position - otherEnemy.position);
-                        position += awayFromOtherEnemy * speed * Globals.TotalSeconds;
-                    }
-                }
-
-                toCake.Normalize();
-                position += toCake * speed * Globals.TotalSeconds;
+                IsNotCollisionWalls(enemies, toCake);
             }
 
             rotation = (float)Math.Atan2(toCake.Y, toCake.X);

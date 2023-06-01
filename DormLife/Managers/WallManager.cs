@@ -86,13 +86,13 @@ namespace DormLife.Managers
             AddWall(_textureVertical, new(Globals.Bounds.X - 200, Globals.Bounds.Y - 100), false);
 
 
-            AddWall(_textureGorizontal, new(Globals.Bounds.X / 2 - 200, Globals.Bounds.Y / 2 - 230), true);
-            AddWall(_textureVertical, new(Globals.Bounds.X / 2 - 470, Globals.Bounds.Y / 2 + 70), false);
-            AddWall(_textureGorizontal, new(Globals.Bounds.X / 2 - 200, Globals.Bounds.Y / 2 + 230), true);
+            AddWall(_textureGorizontal, new(Globals.Bounds.X / 2 - 230, Globals.Bounds.Y / 2 - 200), true);
+            AddWall(_textureVertical, new(Globals.Bounds.X / 2 - 530, Globals.Bounds.Y / 2 + 70), false);
+            AddWall(_textureGorizontal, new(Globals.Bounds.X / 2 - 200, Globals.Bounds.Y / 2 + 250), true);
 
-            AddWall(_textureGorizontal, new(Globals.Bounds.X / 2 + 250, Globals.Bounds.Y / 2 - 230), true);
-            AddWall(_textureVertical, new(Globals.Bounds.X / 2 + 250, Globals.Bounds.Y / 2 + 70), false);
-            AddWall(_textureGorizontal, new(Globals.Bounds.X / 2 + 250, Globals.Bounds.Y / 2 + 230), true);
+            AddWall(_textureGorizontal, new(Globals.Bounds.X / 2 + 280, Globals.Bounds.Y / 2 - 200), true);
+            AddWall(_textureVertical, new(Globals.Bounds.X / 2 + 310, Globals.Bounds.Y / 2 + 70), false);
+            AddWall(_textureGorizontal, new(Globals.Bounds.X / 2 + 250, Globals.Bounds.Y / 2 + 250), true);
         }
 
         public static void GenerateFourthMap()

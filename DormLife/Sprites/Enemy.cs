@@ -21,7 +21,9 @@ namespace DormLife.Sprites
         private float lastSpeed;
         private bool isSlowly;
 
-
+        private bool isArg = false;
+        private Turret lastAgrTurret;
+        private int octant = 0;
 
         public Enemy(Texture2D texture, Vector2 position, float speed, int hp, int damage) : base(texture, position, speed)
         {
@@ -63,8 +65,7 @@ namespace DormLife.Sprites
         }
 
 
-        
-
+        #region Update Helper-Methods
         private void IsTouchingHorizontalWall(Wall wall)
         {
             if (IsTouchingLeft(wall) || IsTouchingRight(wall))
@@ -95,12 +96,6 @@ namespace DormLife.Sprites
             }
         }
 
-
-        private bool isArg = false;
-        private Turret lastAgrTurret;
-
-        private int octant = 0;
-
         private void GetOctant(Cake cake)
         {
             if (position.X < cake.position.X && position.Y < cake.position.Y)
@@ -123,23 +118,6 @@ namespace DormLife.Sprites
 
         private void AgrToTurret(List<Turret> turrets)
         {
-            if (lastAgrTurret != null && lastAgrTurret.HP <= 0)
-            {
-                isArg = false;
-                lastAgrTurret = null;
-            }
-
-            if (isArg && lastAgrTurret != null && lastAgrTurret.HP > 0)
-            {
-                Vector2 toTurret = lastAgrTurret.position - position;
-
-                rotation = (float)Math.Atan2(toTurret.Y, toTurret.X);
-                toTurret.Normalize();
-                position += toTurret * speed * Globals.TotalSeconds;
-
-                return;
-            }
-
             if (turrets.Count > 0)
             {
                 foreach (var turret in turrets)
@@ -238,12 +216,31 @@ namespace DormLife.Sprites
             toCake.Normalize();
             position += toCake * speed * Globals.TotalSeconds;
         }
-
+        #endregion
 
         public void Update(Cake cake, List<Wall> walls, List<Enemy> enemies, List<Turret> turrets)
         {
             GetOctant(cake);
+
+            if (lastAgrTurret != null && lastAgrTurret.HP <= 0)
+            {
+                isArg = false;
+                lastAgrTurret = null;
+            }
+
+            if (isArg && lastAgrTurret != null && lastAgrTurret.HP > 0)
+            {
+                Vector2 toTurret = lastAgrTurret.position - position;
+
+                rotation = (float)Math.Atan2(toTurret.Y, toTurret.X);
+                toTurret.Normalize();
+                position += toTurret * speed * Globals.TotalSeconds;
+
+                return;
+            }
+
             AgrToTurret(turrets);
+
             var isCollision = IsCollisionWalls(walls, cake);
 
             Vector2 toCake = cake.position - position;

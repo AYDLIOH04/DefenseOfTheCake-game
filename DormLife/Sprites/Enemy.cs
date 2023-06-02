@@ -122,7 +122,7 @@ namespace DormLife.Sprites
             {
                 foreach (var turret in turrets)
                 {
-                    if (!isArg && CheckVectorCollision(turret, 120) && turret.HP > 0)
+                    if (!isArg && CheckVectorCollision(turret, 175) && turret.HP > 0)
                     {
                         lastAgrTurret = turret;
                         isArg = true;

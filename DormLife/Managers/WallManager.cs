@@ -36,89 +36,116 @@ namespace DormLife.Managers
             Walls.Add(new(texture, position, isHorizontal));
         }
 
+        public static void AddHorizontalWall(Vector2 position)
+        {
+            AddWall(_textureGorizontal, position, true);
+        }
+        public static void AddVerticalWall(Vector2 position)
+        {
+            AddWall(_textureVertical, position, false);
+        }
+
+
         public static void GenerateFirstMap()
         {
-            AddWall(_textureGorizontal, new(470, 200), true);
-            AddWall(_textureVertical, new(170, 470), false);
+            AddHorizontalWall(new(470, 200));
+            AddVerticalWall(new(170, 470));
 
-            AddWall(_textureGorizontal, new(Globals.Bounds.X / 2, 150), true);
-            AddWall(_textureGorizontal, new(Globals.Bounds.X - 300, 150), true);
+            AddHorizontalWall(new(Globals.Bounds.X / 2, 150));
+            AddHorizontalWall(new(Globals.Bounds.X - 300, 150));
 
-            AddWall(_textureVertical, new(Globals.Bounds.X - 400, 520), false);
+            AddVerticalWall(new(Globals.Bounds.X - 400, 520));
 
-            AddWall(_textureGorizontal, new(400, Globals.Bounds.Y - 100), true);
-            AddWall(_textureVertical, new(100, Globals.Bounds.Y - 100), false);
+            AddHorizontalWall(new(400, Globals.Bounds.Y - 100));
+            AddVerticalWall(new(100, Globals.Bounds.Y - 100));
 
-            AddWall(_textureGorizontal, new(Globals.Bounds.X - 530, Globals.Bounds.Y - 150), true);
-            AddWall(_textureVertical, new(Globals.Bounds.X - 500, Globals.Bounds.Y - 150), false);
+            AddHorizontalWall(new(Globals.Bounds.X - 530, Globals.Bounds.Y - 150));
+            AddVerticalWall(new(Globals.Bounds.X - 500, Globals.Bounds.Y - 150));
 
-            AddWall(_textureGorizontal, new(Globals.Bounds.X / 2, Globals.Bounds.Y - 200), true);
+            AddHorizontalWall(new(Globals.Bounds.X / 2, Globals.Bounds.Y - 200));
 
         }
 
         public static void GenerateSecondMap()
         {
-            AddWall(_textureVertical, new(200, 370), false);
-            AddWall(_textureVertical, new(200, Globals.Bounds.Y - 100), false);
-            AddWall(_textureVertical, new(290, Globals.Bounds.Y / 2 + 150), false);
+            AddVerticalWall(new(200, 370));
+            AddVerticalWall(new(200, Globals.Bounds.Y - 100));
+            AddVerticalWall(new(290, Globals.Bounds.Y / 2 + 150));
 
-            AddWall(_textureVertical, new(Globals.Bounds.X - 200, 370), false);
-            AddWall(_textureVertical, new(Globals.Bounds.X - 200, Globals.Bounds.Y - 100), false);
-            AddWall(_textureVertical, new(Globals.Bounds.X - 290, Globals.Bounds.Y / 2 + 150), false);
+            AddVerticalWall(new(Globals.Bounds.X - 200, 370));
+            AddVerticalWall(new(Globals.Bounds.X - 200, Globals.Bounds.Y - 100));
+            AddVerticalWall(new(Globals.Bounds.X - 290, Globals.Bounds.Y / 2 + 150));
 
-            AddWall(_textureGorizontal, new(700, 130), true);
-            AddWall(_textureGorizontal, new(Globals.Bounds.X / 2 + 150, 120), true);
-            AddWall(_textureGorizontal, new(Globals.Bounds.X - 400, 130), true);
+            AddHorizontalWall(new(700, 130));
+            AddHorizontalWall(new(Globals.Bounds.X / 2 + 150, 120));
+            AddHorizontalWall(new(Globals.Bounds.X - 400, 130));
 
-            AddWall(_textureGorizontal, new(700, Globals.Bounds.Y - 130), true);
-            AddWall(_textureGorizontal, new(Globals.Bounds.X / 2 + 150, Globals.Bounds.Y - 120), true);
-            AddWall(_textureGorizontal, new(Globals.Bounds.X - 400, Globals.Bounds.Y - 130), true);
-
+            AddHorizontalWall(new(700, Globals.Bounds.Y - 130));
+            AddHorizontalWall(new(Globals.Bounds.X / 2 + 150, Globals.Bounds.Y - 120));
+            AddHorizontalWall(new(Globals.Bounds.X - 400, Globals.Bounds.Y - 130));
         }
 
         public static void GenerateThirdMap()
         {
-            AddWall(_textureGorizontal, new(400, 200), true);
-            AddWall(_textureGorizontal, new(Globals.Bounds.X - 300, 200), true);
+            AddHorizontalWall(new(400, 200));
+            AddHorizontalWall(new(Globals.Bounds.X - 300, 200));
 
-            AddWall(_textureVertical, new(200, Globals.Bounds.Y - 100), false);
-            AddWall(_textureVertical, new(Globals.Bounds.X - 450, Globals.Bounds.Y / 2 + 170), false);
-            AddWall(_textureVertical, new(Globals.Bounds.X - 200, Globals.Bounds.Y - 100), false);
+            AddVerticalWall(new(200, Globals.Bounds.Y - 100));
+            AddVerticalWall(new(Globals.Bounds.X - 450, Globals.Bounds.Y / 2 + 170));
+            AddVerticalWall(new(Globals.Bounds.X - 200, Globals.Bounds.Y - 100));
 
 
-            AddWall(_textureGorizontal, new(Globals.Bounds.X / 2 - 230, Globals.Bounds.Y / 2 - 200), true);
-            AddWall(_textureVertical, new(Globals.Bounds.X / 2 - 530, Globals.Bounds.Y / 2 + 70), false);
-            AddWall(_textureGorizontal, new(Globals.Bounds.X / 2 - 200, Globals.Bounds.Y / 2 + 250), true);
+            AddHorizontalWall(new(Globals.Bounds.X / 2 - 230, Globals.Bounds.Y / 2 - 200));
+            AddVerticalWall(new(Globals.Bounds.X / 2 - 530, Globals.Bounds.Y / 2 + 70));
+            AddHorizontalWall(new(Globals.Bounds.X / 2 - 200, Globals.Bounds.Y / 2 + 250));
 
-            AddWall(_textureGorizontal, new(Globals.Bounds.X / 2 + 280, Globals.Bounds.Y / 2 - 200), true);
-            AddWall(_textureVertical, new(Globals.Bounds.X / 2 + 310, Globals.Bounds.Y / 2 + 70), false);
-            AddWall(_textureGorizontal, new(Globals.Bounds.X / 2 + 250, Globals.Bounds.Y / 2 + 250), true);
+            AddHorizontalWall(new(Globals.Bounds.X / 2 + 280, Globals.Bounds.Y / 2 - 200));
+            AddVerticalWall(new(Globals.Bounds.X / 2 + 310, Globals.Bounds.Y / 2 + 70));
+            AddHorizontalWall(new(Globals.Bounds.X / 2 + 250, Globals.Bounds.Y / 2 + 250));
         }
 
         public static void GenerateFourthMap()
         {
-            AddWall(_textureGorizontal, new(450, 120), true);
-            AddWall(_textureGorizontal, new(Globals.Bounds.X / 2 - 50, 120), true);
-            AddWall(_textureGorizontal, new(Globals.Bounds.X / 2 + 365, 120), true);
-            AddWall(_textureGorizontal, new(Globals.Bounds.X - 150, 120), true);
+            AddHorizontalWall(new(450, 120));
+            AddHorizontalWall(new(Globals.Bounds.X / 2 - 50, 120));
+            AddHorizontalWall(new(Globals.Bounds.X / 2 + 365, 120));
+            AddHorizontalWall(new(Globals.Bounds.X - 150, 120));
 
-            AddWall(_textureGorizontal, new(Globals.Bounds.X / 2 - 180, 230), true);
-            AddWall(_textureGorizontal, new(Globals.Bounds.X / 2 + 445, 230), true);
+            AddHorizontalWall(new(Globals.Bounds.X / 2 - 180, 230));
+            AddHorizontalWall(new(Globals.Bounds.X / 2 + 445, 230));
 
-            AddWall(_textureVertical, new(180, Globals.Bounds.Y / 2), false);
-            AddWall(_textureVertical, new(180, Globals.Bounds.Y / 2 + 400), false);
+            AddVerticalWall(new(180, Globals.Bounds.Y / 2));
+            AddVerticalWall(new(180, Globals.Bounds.Y / 2 + 400));
 
-            AddWall(_textureVertical, new(Globals.Bounds.X - 180, Globals.Bounds.Y / 2), false);
-            AddWall(_textureVertical, new(Globals.Bounds.X - 180, Globals.Bounds.Y / 2 + 400), false);
+            AddVerticalWall(new(Globals.Bounds.X - 180, Globals.Bounds.Y / 2));
+            AddVerticalWall(new(Globals.Bounds.X - 180, Globals.Bounds.Y / 2 + 400));
 
-            AddWall(_textureGorizontal, new(Globals.Bounds.X / 2 - 50, Globals.Bounds.Y -  120), true);
-            AddWall(_textureGorizontal, new(Globals.Bounds.X / 2 + 350, Globals.Bounds.Y - 120), true);
+            AddHorizontalWall(new(Globals.Bounds.X / 2 - 50, Globals.Bounds.Y -  120));
+            AddHorizontalWall(new(Globals.Bounds.X / 2 + 350, Globals.Bounds.Y - 120));
         }
 
+        public static void GenerateFivethMap()
+        {
+            AddHorizontalWall(new(450, 120));
+            AddHorizontalWall(new(Globals.Bounds.X / 2 - 100, 120));
+            AddHorizontalWall(new(Globals.Bounds.X / 2 + 300, 120));
+
+            AddHorizontalWall(new(650, Globals.Bounds.Y - 120));
+            AddHorizontalWall(new(Globals.Bounds.X / 2 + 100, Globals.Bounds.Y - 120));
+            AddHorizontalWall(new(Globals.Bounds.X / 2 + 500, Globals.Bounds.Y - 120));
+
+            AddVerticalWall(new(250, Globals.Bounds.Y / 2));
+            AddVerticalWall(new(250, Globals.Bounds.Y / 2 + 380));
+
+            AddVerticalWall(new(Globals.Bounds.X / 2 + 380, Globals.Bounds.Y / 2));
+            AddVerticalWall(new(Globals.Bounds.X / 2 + 600, Globals.Bounds.Y / 2));
+
+            AddVerticalWall(new(Globals.Bounds.X / 2 + 500, Globals.Bounds.Y / 2 + 220));
+        }
 
         public static void GenerateMap()
         {
-            var rndMap = _random.Next(0, 4);
+            var rndMap = _random.Next(0, 5);
             if (rndMap == 0)
             {
                 GenerateFirstMap();
@@ -131,9 +158,13 @@ namespace DormLife.Managers
             {
                 GenerateThirdMap();
             } 
-            else
+            else if (rndMap == 3)
             {
                 GenerateFourthMap();
+            }
+            else
+            {
+                GenerateFivethMap();
             }
         }
 

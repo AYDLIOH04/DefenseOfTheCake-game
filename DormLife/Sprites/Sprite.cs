@@ -18,7 +18,7 @@ namespace DormLife.Sprites
         public float speed;
         public float rotation;
 
-        public Rectangle Rectangle
+        public virtual Rectangle Rectangle
         {
             get
             {

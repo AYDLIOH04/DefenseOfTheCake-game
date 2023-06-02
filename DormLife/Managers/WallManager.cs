@@ -54,7 +54,7 @@ namespace DormLife.Managers
             AddHorizontalWall(new(Globals.Bounds.X / 2, 150));
             AddHorizontalWall(new(Globals.Bounds.X - 300, 150));
 
-            AddVerticalWall(new(Globals.Bounds.X - 400, 520));
+            AddVerticalWall(new(Globals.Bounds.X - 350, 550));
 
             AddHorizontalWall(new(400, Globals.Bounds.Y - 100));
             AddVerticalWall(new(100, Globals.Bounds.Y - 100));
@@ -70,11 +70,11 @@ namespace DormLife.Managers
         {
             AddVerticalWall(new(200, 370));
             AddVerticalWall(new(200, Globals.Bounds.Y - 100));
-            AddVerticalWall(new(290, Globals.Bounds.Y / 2 + 150));
+            AddVerticalWall(new(350, Globals.Bounds.Y / 2 + 150));
 
             AddVerticalWall(new(Globals.Bounds.X - 200, 370));
             AddVerticalWall(new(Globals.Bounds.X - 200, Globals.Bounds.Y - 100));
-            AddVerticalWall(new(Globals.Bounds.X - 290, Globals.Bounds.Y / 2 + 150));
+            AddVerticalWall(new(Globals.Bounds.X - 350, Globals.Bounds.Y / 2 + 150));
 
             AddHorizontalWall(new(700, 130));
             AddHorizontalWall(new(Globals.Bounds.X / 2 + 150, 120));
@@ -107,38 +107,38 @@ namespace DormLife.Managers
         public static void GenerateFourthMap()
         {
             AddHorizontalWall(new(450, 120));
-            AddHorizontalWall(new(Globals.Bounds.X / 2 - 50, 120));
-            AddHorizontalWall(new(Globals.Bounds.X / 2 + 365, 120));
+            AddHorizontalWall(new(Globals.Bounds.X / 2 - 80, 120));
+            AddHorizontalWall(new(Globals.Bounds.X / 2 + 395, 120));
             AddHorizontalWall(new(Globals.Bounds.X - 150, 120));
 
             AddHorizontalWall(new(Globals.Bounds.X / 2 - 180, 230));
             AddHorizontalWall(new(Globals.Bounds.X / 2 + 445, 230));
 
-            AddVerticalWall(new(180, Globals.Bounds.Y / 2));
-            AddVerticalWall(new(180, Globals.Bounds.Y / 2 + 400));
+            AddVerticalWall(new(180, Globals.Bounds.Y / 2 + 20));
+            AddVerticalWall(new(180, Globals.Bounds.Y / 2 + 430));
 
-            AddVerticalWall(new(Globals.Bounds.X - 180, Globals.Bounds.Y / 2));
-            AddVerticalWall(new(Globals.Bounds.X - 180, Globals.Bounds.Y / 2 + 400));
+            AddVerticalWall(new(Globals.Bounds.X - 180, Globals.Bounds.Y / 2 + 20));
+            AddVerticalWall(new(Globals.Bounds.X - 180, Globals.Bounds.Y / 2 + 430));
 
-            AddHorizontalWall(new(Globals.Bounds.X / 2 - 50, Globals.Bounds.Y -  120));
-            AddHorizontalWall(new(Globals.Bounds.X / 2 + 350, Globals.Bounds.Y - 120));
+            AddHorizontalWall(new(Globals.Bounds.X / 2 - 80, Globals.Bounds.Y -  120));
+            AddHorizontalWall(new(Globals.Bounds.X / 2 + 380, Globals.Bounds.Y - 120));
         }
 
         public static void GenerateFivethMap()
         {
             AddHorizontalWall(new(450, 120));
             AddHorizontalWall(new(Globals.Bounds.X / 2 - 100, 120));
-            AddHorizontalWall(new(Globals.Bounds.X / 2 + 300, 120));
+            AddHorizontalWall(new(Globals.Bounds.X / 2 + 350, 120));
 
             AddHorizontalWall(new(650, Globals.Bounds.Y - 120));
             AddHorizontalWall(new(Globals.Bounds.X / 2 + 100, Globals.Bounds.Y - 120));
-            AddHorizontalWall(new(Globals.Bounds.X / 2 + 500, Globals.Bounds.Y - 120));
+            AddHorizontalWall(new(Globals.Bounds.X / 2 + 540, Globals.Bounds.Y - 120));
 
             AddVerticalWall(new(250, Globals.Bounds.Y / 2));
-            AddVerticalWall(new(250, Globals.Bounds.Y / 2 + 380));
+            AddVerticalWall(new(250, Globals.Bounds.Y / 2 + 420));
 
-            AddVerticalWall(new(Globals.Bounds.X / 2 + 380, Globals.Bounds.Y / 2));
-            AddVerticalWall(new(Globals.Bounds.X / 2 + 600, Globals.Bounds.Y / 2));
+            AddVerticalWall(new(Globals.Bounds.X / 2 + 350, Globals.Bounds.Y / 2));
+            AddVerticalWall(new(Globals.Bounds.X / 2 + 650, Globals.Bounds.Y / 2));
 
             AddVerticalWall(new(Globals.Bounds.X / 2 + 500, Globals.Bounds.Y / 2 + 220));
         }
@@ -148,19 +148,19 @@ namespace DormLife.Managers
             var rndMap = _random.Next(0, 5);
             if (rndMap == 0)
             {
-                GenerateFirstMap();
+                GenerateFivethMap();
             } 
             else if (rndMap == 1)
             {
-                GenerateSecondMap();
+                GenerateFivethMap();
             } 
             else if (rndMap == 2)
             {
-                GenerateThirdMap();
+                GenerateFivethMap();
             } 
             else if (rndMap == 3)
             {
-                GenerateFourthMap();
+                GenerateFivethMap();
             }
             else
             {

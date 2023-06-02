@@ -35,6 +35,15 @@ namespace DormLife.Sprites
             isSlowly = false;
         }
 
+        public override Rectangle Rectangle
+        {
+            get
+            {
+                return new Rectangle((int)position.X - texture.Width / 2 - 5, (int)position.Y - texture.Height / 2 - 5, texture.Width + 10, texture.Height + 10);
+            }
+        }
+
+
         public void TakeDamage(int dmg)
         {
             HP -= dmg;

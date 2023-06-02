@@ -148,19 +148,19 @@ namespace DormLife.Managers
             var rndMap = _random.Next(0, 5);
             if (rndMap == 0)
             {
-                GenerateFivethMap();
+                GenerateFirstMap();
             } 
             else if (rndMap == 1)
             {
-                GenerateFivethMap();
+                GenerateSecondMap();
             } 
             else if (rndMap == 2)
             {
-                GenerateFivethMap();
+                GenerateThirdMap();
             } 
             else if (rndMap == 3)
             {
-                GenerateFivethMap();
+                GenerateFourthMap();
             }
             else
             {

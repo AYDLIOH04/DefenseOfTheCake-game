@@ -39,9 +39,7 @@ namespace DormLife.Sprites
         
         private void CreateTrap()
         {
-            KeyboardState keyboardState = Keyboard.GetState();
-
-            if (_eventTimer > _spawnDelay && InputManager.IsZKeyPressed)
+            if (_eventTimer > _spawnDelay && InputManager.IsCKeyPressed)
             {
                 if (TrapManager.currentHaveCount > 0)
                 {
@@ -54,8 +52,6 @@ namespace DormLife.Sprites
 
         private void CreateSlowlyTrap()
         {
-            KeyboardState keyboardState = Keyboard.GetState();
-
             if (_eventTimer > _spawnDelay && InputManager.IsXKeyPressed)
             {
                 if (SlowlyTrapManager.currentHaveCount > 0)
@@ -70,9 +66,7 @@ namespace DormLife.Sprites
 
         private void CreateTurret()
         {
-            KeyboardState keyboardState = Keyboard.GetState();
-
-            if (_eventTimer > _spawnDelay && InputManager.IsCKeyPressed)
+            if (_eventTimer > _spawnDelay && InputManager.IsZKeyPressed)
             {
                 if (TurretManager.currentHaveCount > 0)
                 {

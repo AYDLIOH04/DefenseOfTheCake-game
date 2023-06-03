@@ -166,20 +166,23 @@ namespace DormLife.Sprites
                             {
                                 position += new Vector2(-1, 0) * speed * Globals.TotalSeconds;
                                 rotation = MathHelper.ToRadians(-180f);
-
                             }
                         }
                         else if (wall.position.X < cake.position.X)
                         {
                             position += new Vector2(1, 0) * speed * Globals.TotalSeconds;
                             rotation = MathHelper.ToRadians(0f);
-
                         }
                         else
                         {
                             position += new Vector2(-1, 0) * speed * Globals.TotalSeconds;
                             rotation = MathHelper.ToRadians(-180f);
+                        }
 
+                        if (IsTouchingRight(wall) || IsTouchingLeft(wall))
+                        {
+                            Vector2 toCake = cake.position - position;
+                            rotation = (float)Math.Atan2(toCake.Y, toCake.X);
                         }
 
                         countHor = true;
@@ -199,7 +202,6 @@ namespace DormLife.Sprites
                             {
                                 position += new Vector2(0, -1) * speed * Globals.TotalSeconds;
                                 rotation = MathHelper.ToRadians(-90f);
-
                             }
                         }
                         else if (wall.position.Y < cake.position.Y)
@@ -211,6 +213,12 @@ namespace DormLife.Sprites
                         {
                             position += new Vector2(0, -1) * speed * Globals.TotalSeconds;
                             rotation = MathHelper.ToRadians(-90f);
+                        }
+
+                        if (IsTouchingTop(wall) || IsTouchingBottom(wall))
+                        {
+                            Vector2 toCake = cake.position - position;
+                            rotation = (float)Math.Atan2(toCake.Y, toCake.X);
                         }
 
                         countVert = true;
@@ -241,6 +249,9 @@ namespace DormLife.Sprites
 
         public void Update(Cake cake, List<Wall> walls, List<Enemy> enemies, List<Turret> turrets)
         {
+            Vector2 toCake = cake.position - position;
+            rotation = (float)Math.Atan2(toCake.Y, toCake.X);
+
             GetOctant(cake);
 
             if (lastAgrTurret != null && lastAgrTurret.HP <= 0)
@@ -264,15 +275,12 @@ namespace DormLife.Sprites
 
             var isCollision = IsCollisionWalls(walls, cake);
 
-            Vector2 toCake = cake.position - position;
 
             if (!isCollision)
             {
                 IsNotCollisionWalls(enemies, toCake);
                 rotation = (float)Math.Atan2(toCake.Y, toCake.X);
-
             }
-
         }
     }
 }

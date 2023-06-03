@@ -160,19 +160,26 @@ namespace DormLife.Sprites
                                 < Math.Abs(position.X - (wall.position.X - wall.Rectangle.X)))
                             {
                                 position += new Vector2(1, 0) * speed * Globals.TotalSeconds;
+                                rotation = MathHelper.ToRadians(0f);
                             }
                             else
                             {
                                 position += new Vector2(-1, 0) * speed * Globals.TotalSeconds;
+                                rotation = MathHelper.ToRadians(-180f);
+
                             }
                         }
                         else if (wall.position.X < cake.position.X)
                         {
                             position += new Vector2(1, 0) * speed * Globals.TotalSeconds;
+                            rotation = MathHelper.ToRadians(0f);
+
                         }
                         else
                         {
                             position += new Vector2(-1, 0) * speed * Globals.TotalSeconds;
+                            rotation = MathHelper.ToRadians(-180f);
+
                         }
 
                         countHor = true;
@@ -186,19 +193,24 @@ namespace DormLife.Sprites
                                 < Math.Abs(position.Y - (wall.position.Y - wall.Rectangle.Y)))
                             {
                                 position += new Vector2(0, 1) * speed * Globals.TotalSeconds;
+                                rotation = MathHelper.ToRadians(90f);
                             }
                             else
                             {
                                 position += new Vector2(0, -1) * speed * Globals.TotalSeconds;
+                                rotation = MathHelper.ToRadians(-90f);
+
                             }
                         }
                         else if (wall.position.Y < cake.position.Y)
                         {
                             position += new Vector2(0, 1) * speed * Globals.TotalSeconds;
+                            rotation = MathHelper.ToRadians(90f);
                         }
                         else
                         {
                             position += new Vector2(0, -1) * speed * Globals.TotalSeconds;
+                            rotation = MathHelper.ToRadians(-90f);
                         }
 
                         countVert = true;
@@ -257,9 +269,10 @@ namespace DormLife.Sprites
             if (!isCollision)
             {
                 IsNotCollisionWalls(enemies, toCake);
+                rotation = (float)Math.Atan2(toCake.Y, toCake.X);
+
             }
 
-            rotation = (float)Math.Atan2(toCake.Y, toCake.X);
         }
     }
 }

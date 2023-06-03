@@ -24,6 +24,10 @@ namespace DormLife.Managers
         public static bool MouseLeftDown { get; private set; }
         public static bool MouseRightDown { get; private set; }
 
+        public static bool IsZKeyPressed => Keyboard.GetState().IsKeyDown(Keys.Z);
+        public static bool IsXKeyPressed => Keyboard.GetState().IsKeyDown(Keys.X);
+        public static bool IsCKeyPressed => Keyboard.GetState().IsKeyDown(Keys.C);
+
 
         public static void Update()
         {

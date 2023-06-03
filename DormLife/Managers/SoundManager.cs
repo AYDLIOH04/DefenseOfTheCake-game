@@ -39,7 +39,7 @@ namespace DormLife.Managers
 
             MediaPlayer.Volume = 0.1f;
             MediaPlayer.IsRepeating = true;
-            SoundEffect.MasterVolume = 0.3f;
+            SoundEffect.MasterVolume = 0.2f;
 
             soundEffects.Add("shoot", Globals.Content.Load<SoundEffect>("Sounds/shootstart"));
             soundEffects.Add("nomissed", Globals.Content.Load<SoundEffect>("Sounds/shootend"));

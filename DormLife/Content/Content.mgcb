@@ -13,108 +13,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin ../../../../../Desktop/DOTC sprites/hardmonster.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../../Desktop/DOTC sprites/hardmonster.png;sprites/hardmonster.png
-
-#begin ../../../../../Desktop/DOTC sprites/kills.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../../Desktop/DOTC sprites/kills.png;scores/kills.png
-
-#begin ../../../../../Desktop/DOTC sprites/menu.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../../Desktop/DOTC sprites/menu.png;BackgroundContent/menu.png
-
-#begin ../../../../../Desktop/DOTC sprites/monster.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../../Desktop/DOTC sprites/monster.png;sprites/monster.png
-
-#begin ../../../../../Desktop/DOTC sprites/pause.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../../Desktop/DOTC sprites/pause.png;BackgroundContent/pause.png
-
-#begin ../../../../../Desktop/DOTC sprites/player.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../../Desktop/DOTC sprites/player.png;sprites/player.png
-
-#begin ../../../../../Desktop/DOTC sprites/range_arm.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../../Desktop/DOTC sprites/range_arm.png;arms/range_arm.png
-
-#begin ../../../../../Desktop/DOTC sprites/token.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../../Desktop/DOTC sprites/token.png;bonus/token.png
-
-#begin ../../../../../Downloads/cakedamage.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:../../../../../Downloads/cakedamage.wav;Sounds/cakedamage.wav
-
 #begin arms/melee_arm.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -126,6 +24,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:arms/melee_arm.png
+
+#begin arms/range_arm.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:arms/range_arm.png
 
 #begin arms/ult.png
 /importer:TextureImporter
@@ -151,6 +61,30 @@
 /processorParam:TextureFormat=Color
 /build:BackgroundContent/gameover.png
 
+#begin BackgroundContent/menu.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BackgroundContent/menu.png
+
+#begin BackgroundContent/pause.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BackgroundContent/pause.png
+
 #begin bonus/damagespeedbuff.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -174,6 +108,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:bonus/hp.png
+
+#begin bonus/token.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:bonus/token.png
 
 #begin bonus/ult.png
 /importer:TextureImporter
@@ -393,11 +339,11 @@
 /processorParam:TextureFormat=Compressed
 /build:Font.spritefont
 
-#begin Music/game1.mp3
+#begin Music/game.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
 /processorParam:Quality=Best
-/build:Music/game1.mp3;Music/game.mp3
+/build:Music/game.mp3
 
 #begin Music/gameover.mp3
 /importer:Mp3Importer
@@ -441,6 +387,18 @@
 /processorParam:TextureFormat=Color
 /build:scores/coin.png
 
+#begin scores/kills.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:scores/kills.png
+
 #begin scores/scoretrap.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -482,6 +440,12 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Sounds/buff.wav
+
+#begin Sounds/cakedamage.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/cakedamage.wav
 
 #begin Sounds/catchtrap.wav
 /importer:WavImporter
@@ -554,6 +518,42 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:sprites/cake.png
+
+#begin sprites/hardmonster.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:sprites/hardmonster.png
+
+#begin sprites/monster.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:sprites/monster.png
+
+#begin sprites/player.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:sprites/player.png
 
 #begin sprites/slowlytrap.png
 /importer:TextureImporter
